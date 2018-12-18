@@ -3,6 +3,6 @@ import * as ReactDOM from "react-dom";
 import { Home } from "./components/Home";
 
 ReactDOM.render(
-  <Home />,
+  <Home isProd={PRODUCTION.toString()}/>,
   document.getElementById("root")
 );
