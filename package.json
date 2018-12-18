@@ -1,0 +1,43 @@
+{
+  "name": "snakecalender",
+  "version": "1.0.0",
+  "description": "Improve.",
+  "main": "index.tsx",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development",
+    "build": "webpack --mode production",
+    "lint": "tslint --project tsconfig.json 'src/**/*.{ts,tsx}'",
+    "lint-fix": "tslint --project tsconfig.json 'src/**/*.{ts,tsx}' --fix",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MLNProjects/SnakeCalender.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MLNProjects/SnakeCalender/issues"
+  },
+  "homepage": "https://github.com/MLNProjects/SnakeCalender#readme",
+  "devDependencies": {
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-redux": "^6.0.11",
+    "awesome-typescript-loader": "^5.2.1",
+    "html-webpack-plugin": "^3.2.0",
+    "source-map-loader": "^0.2.4",
+    "tslint": "^5.12.0",
+    "tslint-config-standard": "^8.0.1",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-redux": "^6.0.0"
+  }
+}
