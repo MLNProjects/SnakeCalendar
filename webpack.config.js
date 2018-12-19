@@ -1,6 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require("webpack");
 const path = require("path");
+const glob = require("glob");
+
+function getAllFiles(srcDir, extension) {
+  return glob.sync(`${srcDir}/**/*${extension}`);
+}
 
 module.exports = (env, argv) => {
 
@@ -25,7 +30,16 @@ module.exports = (env, argv) => {
     },
 
     module: {
-        rules: [
+          rules: [
+            {
+              test: /\.scss$/,
+              use: [
+                "style-loader",
+                "css-loader?modules", // translates CSS into CommonJS
+                // "typings-for-css-modules-loader?modules",
+                "sass-loader" // compiles Sass to CSS, using Node Sass by default
+              ]
+            },
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             {
               test: /\.tsx?$/,

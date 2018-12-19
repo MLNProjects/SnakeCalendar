@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Home } from "./components/Home";
+import { LandingPage } from "./pages/LandingPage/landingPage";
 
 ReactDOM.render(
-  <Home isProd={PRODUCTION.toString()}/>,
+  <LandingPage/>,
   document.getElementById("root")
 );
