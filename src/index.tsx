@@ -4,8 +4,8 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { HashRouter, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage/landingPage";
-import { SignUp } from "./pages/SignUp/SignUp";
-import { SignIn } from "./pages/SignIn/SignIn";
+import { SignUp } from "./pages/SignUp/signUp";
+import { SignIn } from "./pages/SignIn/signIn";
 
 ReactDOM.render(
   <Provider store = {store}>
