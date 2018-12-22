@@ -1,6 +1,7 @@
 interface IHeaderScss {
   header: string;
-  signup: string;
+  headerItem: string;
+  signInSignUpWrappper: string;
 }
 
 declare const styles: IHeaderScss;

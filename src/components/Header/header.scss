@@ -1,9 +1,14 @@
 #header{
-  height: 20%;
+  height: 10%;
   width: 100%;
-  background-color: red;
+  position: absolute;
 }
 
-#signup{
-  background-color: blue;
+.signInSignUpWrappper{
+  float: right;
+}
+
+.headerItem{
+  display: inline-block;
+  padding: 15px 20px 15px 20px;
 }
