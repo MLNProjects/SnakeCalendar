@@ -1,8 +1,3 @@
-interface IHeaderScss {
-  header: string;
-  headerItem: string;
-  signInSignUpWrappper: string;
-}
-
-declare const styles: IHeaderScss;
-export default styles;
+export const header: string;
+export const signInSignUpWrappper: string;
+export const headerItem: string;

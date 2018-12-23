@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from "./quickSnakeCreator.scss";
+import * as styles from "./quickSnakeCreator.scss";
 
 // State is never set so we use the '{}' type.
 export class QuickSnakeCreator extends React.Component<{}, {}> {

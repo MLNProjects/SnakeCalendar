@@ -1,11 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require("webpack");
 const path = require("path");
-const glob = require("glob");
-
-function getAllFiles(srcDir, extension) {
-  return glob.sync(`${srcDir}/**/*${extension}`);
-}
 
 module.exports = (env, argv) => {
 
@@ -35,7 +30,7 @@ module.exports = (env, argv) => {
               test: /\.scss$/,
               use: [
                 "style-loader",
-                "css-loader?modules", // translates CSS into CommonJS
+                'typings-for-css-modules-loader?modules&namedExport&sass',
                 // "typings-for-css-modules-loader?modules",
                 "sass-loader" // compiles Sass to CSS, using Node Sass by default
               ]
@@ -62,7 +57,7 @@ module.exports = (env, argv) => {
       })
     ],
     devServer: {
-
+      disableHostCheck: true
     }
   }
 };
