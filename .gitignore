@@ -1,21 +1,43 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist/
+
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+node_modules
+bower_components
 
-# testing
-/coverage
+# IDEs and editors
+.idea
+.project
+.classpath
+.c9
+*.launch
+.settings
+*.sublime-workspace
+*.orig
+.vscode
+*.iml
 
-# production
-/build
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 # misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+/package-lock.json
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+#System Files
+.DS_Store
+Thumbs.db
+target
+
