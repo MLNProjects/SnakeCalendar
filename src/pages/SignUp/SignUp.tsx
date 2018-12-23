@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { Form } from "../basePages/Form/Form";
-import * as styles from "./SignUp.scss";
+import * as styles from "./signUp.scss";
 
 // State is never set so we use the '{}' type.
 export class SignUp extends React.Component<{}, {}> {
@@ -21,7 +21,7 @@ export class SignUp extends React.Component<{}, {}> {
         <input>
         </input>
         <button>Submit</button>
-        <div className={styles.signIn}>
+        <div className={styles.navDiv}>
             <p>Already a member?</p>
             <Link to="/signIn">Sign In</Link>
           </div>

@@ -15,7 +15,7 @@ export class SignIn extends React.Component<{}, {}> {
           <input>
           </input>
           <button>Submit</button>
-          <div className={styles.signUp}>
+          <div className={styles.navDiv}>
             <p>New to this service?</p>
             <Link to="/signUp">Sign Up</Link>
           </div>
