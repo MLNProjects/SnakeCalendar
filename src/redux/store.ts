@@ -1,4 +1,5 @@
 import { createStore } from "redux";
+import Logger from "../helpers/Logger";
 
 interface InitialStateInterface {
   loggedIn: boolean;
@@ -12,7 +13,6 @@ const initialState: InitialStateInterface = {loggedIn: false, loggedInUser: ""};
 function myReducer(state = initialState, action: any) {
   switch (action.type) {
     case 'LOG_IN':
-      console.log(`Login in user: ${action.username}`);
       return Object.assign({}, state, {
         loggedIn: true,
         loggedInUser: action.username
@@ -35,5 +35,5 @@ let store = createStore(myReducer, initialState)
 // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
 // However it can also be handy to persist the current state in the localStorage.
 
-store.subscribe(() => console.log(store.getState()))
+store.subscribe(() => Logger.stateChange(store.getState()))
 export default store;
