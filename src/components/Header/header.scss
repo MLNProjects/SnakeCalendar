@@ -1,14 +1,23 @@
 #header{
   height: 10%;
   width: 100%;
+  display: block;
   position: absolute;
 }
 
-.signInSignUpWrappper{
+.headerItemsWrapper{
   float: right;
 }
 
 .headerItem{
   display: inline-block;
   padding: 15px 20px 15px 20px;
+}
+
+#username{
+  color: grey;
+}
+
+#logout{
+  color: black;
 }

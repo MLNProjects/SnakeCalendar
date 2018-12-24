@@ -5,6 +5,12 @@ interface IRequestHeader {
   [key: string]: string;
 }
 
+interface ILoginResponseSuccess {
+  username: string;
+  uid: string;
+  token: string;
+}
+
 class HttpClient {
   private token = () => localStorage.getItem("sessionToken") || "";
   private defaultHeaders = () => {
@@ -17,11 +23,23 @@ class HttpClient {
     // return ajaxGet(url, { ...this.defaultHeaders, headers });
   }
 
-  public post(url: string, body?: any, headers: IRequestHeader = {}) {
-    // return ajaxPost(url, body, { ...this.defaultHeaders(), headers });
+  public post(username: string, password: string, type: string) {
+    // return ajaxPost(url, { ...this.defaultHeaders(), headers });
+    return new Promise<ILoginResponseSuccess>(function(resolve, reject){
+      if(type === "login"){
+        for (let user in users){
+          if(users[user].username === username && users[user].password === password){
+            let loggedInUser = {...users[user]};
+            delete loggedInUser.password;
+            resolve(loggedInUser);
+          }
+        }
+        reject({error: "No user found"});
+      }
+    })
   }
 
-  public delete(url: string, headers: IRequestHeader = {}) {
+  public delete(username: string, password: string, type: string) {
     // return ajaxDelete(url, { ...this.defaultHeaders(), headers });
   }
 

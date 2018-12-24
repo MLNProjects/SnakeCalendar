@@ -1,29 +1,26 @@
 import { createStore } from "redux";
 
-interface PersonInterface {
-  name?: string;
-  age?: number;
-  gender?: string;
-}
-
 interface InitialStateInterface {
-  person?: PersonInterface
+  loggedIn: boolean;
+  loggedInUser: string;
 }
 
 // const initialState: InitialStateInterface = {};
-const initialState: PersonInterface = {};
+const initialState: InitialStateInterface = {loggedIn: false, loggedInUser: ""};
 
 
 function myReducer(state = initialState, action: any) {
   switch (action.type) {
-    case 'CHANGE_NAME':
-      console.log("Changing name");
+    case 'LOG_IN':
+      console.log(`Login in user: ${action.username}`);
       return Object.assign({}, state, {
-        name: action.name
+        loggedIn: true,
+        loggedInUser: action.username
       })
-    case 'DELETE_NAME':
+    case 'LOG_OUT':
       return Object.assign({}, state, {
-        name: ""
+        loggedIn: false,
+        loggedInUser: ""
       })
     default:
       return state
