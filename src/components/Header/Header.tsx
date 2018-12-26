@@ -54,7 +54,7 @@ class Header extends React.Component<{loggedIn: boolean, user: string}, {}> {
 
   public render() {
     return (
-      <div className={styles.header}>
+      <div id={styles.header}>
         {this.getHeader()}
       </div>
     );

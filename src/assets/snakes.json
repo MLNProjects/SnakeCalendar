@@ -1,8 +1,45 @@
 [
   {
-    "username": "  ",
-    "password": "  ",
-    "uid": "abc",
-    "token": "fdfd"
+    "username": "lucas",
+    "snakes": [
+      {
+        "id": "ds8yhydsabd9",
+        "title": "gym",
+        "longestLife": 4,
+        "currentLength": 3,
+        "startDate":  1545260400000,
+        "history": [
+          {
+            "id": "jd789eitdgsa",
+            "startDate": 1545260400000,
+            "endDate": ""
+          },
+          {
+            "id": "dbsaytdia87ge",
+            "startDate": 1545260400000,
+            "endDate": 1545260400000
+          }
+        ]
+      },
+      {
+        "id": "ds8yhydsabd9",
+        "title": "NoF",
+        "longestLife": 4,
+        "currentLength": 3,
+        "startDate":  1545260400000,
+        "history": [
+          {
+            "id": "jd789eitdgsa",
+            "startDate": 1545260400000,
+            "endDate": ""
+          },
+          {
+            "id": "dbsaytdia87ge",
+            "startDate": 1545260400000,
+            "endDate": 1545260400000
+          }
+        ]
+      }
+    ]
   }
 ]
