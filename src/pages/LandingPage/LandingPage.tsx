@@ -1,6 +1,6 @@
 import * as React from "react";
 import Header from "../../components/Header/Header";
-import { QuickSnakeCreator} from "../../components/quickSnakeCreator/QuickSnakeCreator";
+import { QuickSnakeCreator} from "../../components/QuickSnakeCreator/QuickSnakeCreator";
 import * as styles from "./landingPage.scss";
 
 // State is never set so we use the '{}' type.
