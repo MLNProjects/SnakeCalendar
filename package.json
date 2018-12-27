@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/MLNProjects/SnakeCalender#readme",
   "devDependencies": {
-    "@types/node": "^10.12.17",
+    "@types/node": "^10.12.18",
     "@types/react": "^16.7.17",
     "@types/react-dom": "^16.0.11",
     "@types/react-redux": "^6.0.11",

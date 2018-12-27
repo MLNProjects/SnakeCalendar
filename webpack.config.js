@@ -10,6 +10,9 @@ module.exports = (env, argv) => {
   const outPath = path.join(__dirname, "./dist");
 
   return {
+    node: {
+      fs: 'empty'
+    },
     entry: "./src/index.tsx",
     output: {
         filename: "bundle.js",

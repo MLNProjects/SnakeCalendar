@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "../../components/Header/Header";
 import { SnakeCard } from "../../components/SnakeCard/SnakeCard";
+import { PrivateSnakeCreator } from "../../components/PrivateSnakeCreator/PrivateSnakeCreator";
 import * as styles from "./home.scss";
 import snakeClient from "../../http/snakes";
 
@@ -54,6 +55,7 @@ class Home extends React.Component<{loggedIn: boolean}, {snakes: {}[]}> {
         <Header/>
         <div id={styles.snakesWrapper}>
           {this.generateSnakeCards()}
+          <PrivateSnakeCreator/>
         </div>
       </div>
     );
