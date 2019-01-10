@@ -7,46 +7,54 @@ import { PrivateSnakeCreator } from "../../components/PrivateSnakeCreator/Privat
 import * as styles from "./home.scss";
 import snakeClient from "../../http/snakes";
 
-function mapStateToProps(state: any){
+function mapStateToProps(state: any) {
   return {
     loggedIn: state.loggedIn
-  }
+  };
+}
+
+interface IHomeProps {
+  loggedIn: boolean;
+}
+
+interface IHomeState {
+  snakes: Array<{}>;
 }
 
 // State is never set so we use the '{}' type.
-class Home extends React.Component<{loggedIn: boolean}, {snakes: {}[]}> {
+class Home extends React.Component<IHomeProps, IHomeState> {
 
-  constructor(props: {loggedIn: boolean}){
+  constructor(props: {loggedIn: boolean}) {
     super(props);
     this.state = {
       snakes: []
     };
-    this.fetchSnakes = this.fetchSnakes.bind(this);
-    this.generateSnakeCards = this.generateSnakeCards.bind(this);
+    // this.fetchSnakes = this.fetchSnakes.bind(this);
+    // this.generateSnakeCards = this.generateSnakeCards.bind(this);
   }
 
-  fetchSnakes(){
-    snakeClient.get()
-    .then((fetchedSnakes) => this.setState({...this.state, snakes: fetchedSnakes}))
+  public fetchSnakes() {
+    // snakeClient.get()
+    // .then((fetchedSnakes) => this.setState({...this.state, snakes: fetchedSnakes}))
   }
 
-  generateSnakeCards(){
-    let snakesArray = [];
-    for (let i = 0; i < this.state.snakes.length; i++){
+  public generateSnakeCards() {
+    const snakesArray = [];
+    for (let i = 0; i < this.state.snakes.length; i++) {
       snakesArray.push(<SnakeCard key={"snake" + i} snake={this.state.snakes[i]}/>);
     }
     return snakesArray;
   }
 
-  componentDidMount(){
+  public componentDidMount() {
     this.fetchSnakes();
   }
 
   public render() {
 
     let redirectToLandinPage;
-    if(!this.props.loggedIn){
-      redirectToLandinPage = <Redirect to="/"/>
+    if (!this.props.loggedIn) {
+      redirectToLandinPage = <Redirect to="/"/>;
     }
 
     return (
@@ -62,4 +70,4 @@ class Home extends React.Component<{loggedIn: boolean}, {snakes: {}[]}> {
   }
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(Home);

@@ -5,11 +5,12 @@ import * as styles from "./privateSnakeCreator.scss";
 export class PrivateSnakeCreator extends React.Component<{}, {}> {
   public render() {
     return (
-      <div className= {styles.wrapper}>
-        <div className = {styles.inputWrapper}>
+      <div className={styles.wrapper}>
+        <div className={styles.inputWrapper}>
           Create a private snake
           <input className={styles.input}>
           </input>
+
         </div>
       </div>
     );

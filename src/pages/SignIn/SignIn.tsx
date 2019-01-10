@@ -14,13 +14,13 @@ interface ISignInState {
 
 const mapStateToProps = function(state: any) {
   return {
-    loggedIn: state.loggedIn,
-  }
-}
+    loggedIn: state.loggedIn
+  };
+};
 
 // State is never set so we use the '{}' type.
 class SignIn extends React.Component<{loggedIn: boolean}, ISignInState> {
-  constructor(props: any){
+  constructor(props: any) {
     super(props),
     this.state = {
       username: "",
@@ -29,36 +29,36 @@ class SignIn extends React.Component<{loggedIn: boolean}, ISignInState> {
     },
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-}
+  }
 
-handleChange(event: any) {
-  let newState: ISignInState = {...this.state, [event.target.name]: event.target.value, invalidCredentials: false};
+  public handleChange(event: any) {
+  const newState: ISignInState = { ...this.state, [event.target.name]: event.target.value, invalidCredentials: false };
   this.setState(newState);
 }
 
-handleSubmit() {
-  auth.login(this.state.username, this.state.password)
-  .then(loginResponse =>{
-    store.dispatch({
-      type: "LOG_IN",
-      username: loginResponse.username
-    });
-  })
-  .catch(e => {
-    let newState: ISignInState = {...this.state, invalidCredentials: true};
-    this.setState(newState);
-  })
+  public handleSubmit() {
+  // auth.login(this.state.username, this.state.password)
+  // .then(loginResponse =>{
+  //   store.dispatch({
+  //     type: "LOG_IN",
+  //     username: loginResponse.username
+  //   });
+  // })
+  // .catch(e => {
+  //   let newState: ISignInState = {...this.state, invalidCredentials: true};
+  //   this.setState(newState);
+  // })
 }
 
   public render() {
 
     let invalidCredentialsMessage;
-    if(this.state.invalidCredentials){
-      invalidCredentialsMessage = <div className={styles.invalidCredentialsMessage}>Wrong username or password</div>
+    if (this.state.invalidCredentials) {
+      invalidCredentialsMessage = <div className={styles.invalidCredentialsMessage}>Wrong username or password</div>;
     }
     let redirectToHome;
-    if(this.props.loggedIn){
-      redirectToHome = <Redirect to="/home"/>
+    if (this.props.loggedIn) {
+      redirectToHome = <Redirect to="/home"/>;
     }
 
     return (
@@ -78,4 +78,4 @@ handleSubmit() {
   }
 }
 
-export default connect(mapStateToProps)(SignIn)
+export default connect(mapStateToProps)(SignIn);

@@ -5,13 +5,13 @@ import * as styles from "./quickSnakeCreator.scss";
 export class QuickSnakeCreator extends React.Component<{}, {}> {
   public render() {
     return (
-      <div className= {styles.wrapper}>
-        <div className = {styles.inputWrapper}>
+      <div className={styles.wrapper}>
+        <div className={styles.inputWrapper}>
           Create a public snake
           <input className={styles.input}>
           </input>
         </div>
-        <div className = {styles.inputWrapper}>
+        <div className={styles.inputWrapper}>
           Enter a public snake
           <input className={styles.input}>
           </input>

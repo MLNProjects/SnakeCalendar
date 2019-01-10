@@ -4,51 +4,55 @@ import { connect } from "react-redux";
 import store from "../../redux/store";
 import * as styles from "./header.scss";
 
-function mapStateToProps(state: any){
+function mapStateToProps(state: any) {
   return {
     loggedIn: state.loggedIn,
     user: state.loggedInUser
-  }
+  };
+}
+
+interface IHeaderProps {
+  loggedIn: boolean;
+  user: string;
 }
 
 // State is never set so we use the '{}' type.
-class Header extends React.Component<{loggedIn: boolean, user: string}, {}> {
-  constructor(props: any){
-    super(props),
-    this.getHeader = this.getHeader.bind(this);
-    this.logout = this.logout.bind(this);
-}
+class Header extends React.Component<IHeaderProps, {}> {
+  // constructor(props: any) {
+  //   super(props),
+  //   this.getHeader = this.getHeader.bind(this);
+  //   this.logout = this.logout.bind(this);
+  // }
 
-  logout(){
+  private logout() {
     store.dispatch({
       type: "LOG_OUT"
-    })
+    });
   }
 
-  getHeader(){
-    if(!this.props.loggedIn){
+  private getHeader() {
+    if (!this.props.loggedIn) {
       return (
         <div className={styles.headerItemsWrapper}>
-          <div id="SignUp" className = {styles.headerItem}>
+          <div id="SignUp" className={styles.headerItem}>
             <Link to="/signUp">Sign Up</Link>
           </div>
-          <div id="SignIn" className = {styles.headerItem}>
+          <div id="SignIn" className={styles.headerItem}>
             <Link to="/signIn">Sign In</Link>
           </div>
         </div>
-      )
-    }
-    else{
+      );
+    } else {
       return(
         <div className={styles.headerItemsWrapper}>
-          <div id={styles.username} className = {styles.headerItem}>
+          <div id={styles.username} className={styles.headerItem}>
             {this.props.user}
           </div>
-          <div id={styles.logout} className = {styles.headerItem} onClick={this.logout}>
+          <div id={styles.logout} className={styles.headerItem} onClick={this.logout}>
             Logout
           </div>
         </div>
-      )
+      );
     }
   }
 
@@ -61,4 +65,4 @@ class Header extends React.Component<{loggedIn: boolean, user: string}, {}> {
   }
 }
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps)(Header);

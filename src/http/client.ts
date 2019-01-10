@@ -1,5 +1,6 @@
 const users = require("../assets/users");
 const snakes = require("../assets/snakes");
+import axios from "axios";
 
 interface IRequestHeader {
   [key: string]: string;
@@ -12,39 +13,35 @@ interface ILoginResponseSuccess {
 }
 
 class HttpClient {
-  private token = () => localStorage.getItem("sessionToken") || "";
-  private defaultHeaders = () => {
-    return {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${this.token()}`
-    };
-  }
-  public get(url: string, headers: IRequestHeader = {}) {
-    // return ajaxGet(url, { ...this.defaultHeaders, headers });
+
+  private baseUrl = "https://snakecalender.firebaseio.com";
+
+  public get(url: string, user: string) {
+    return axios.get(`${this.baseUrl}/users/${user}/${url}`);
   }
 
-  public post(username: string, password: string, type: string) {
-    // return ajaxPost(url, { ...this.defaultHeaders(), headers });
-    return new Promise<ILoginResponseSuccess>(function(resolve, reject){
-      if(type === "login"){
-        for (let user in users){
-          if(users[user].username === username && users[user].password === password){
-            let loggedInUser = {...users[user]};
-            delete loggedInUser.password;
-            resolve(loggedInUser);
-          }
-        }
-        reject({error: "No user found"});
-      }
-    })
+  public post(url: string, user: string, body: any) {
+    return axios.post(`${this.baseUrl}/users/${user}/${url}`, body);
+    // return new Promise<ILoginResponseSuccess>(function(resolve, reject){
+    //   if(type === "login"){
+    //     for (let user in users){
+    //       if(users[user].username === username && users[user].password === password){
+    //         let loggedInUser = {...users[user]};
+    //         delete loggedInUser.password;
+    //         resolve(loggedInUser);
+    //       }
+    //     }
+    //     reject({error: "No user found"});
+    //   }
+    // })
   }
 
-  public delete(username: string, password: string, type: string) {
-    // return ajaxDelete(url, { ...this.defaultHeaders(), headers });
+  public delete(url: string) {
+    return axios.post(`${this.baseUrl}${url}`);
   }
 
-  public put(url: string, body?: any, headers: IRequestHeader = {}) {
-    // return ajaxPut(url, body, { ...this.defaultHeaders(), headers });
+  public put(url: string, body: any) {
+    return axios.post(`${this.baseUrl}${url}`, body);
   }
 }
 

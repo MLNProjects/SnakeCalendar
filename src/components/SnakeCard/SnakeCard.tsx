@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Col, Card, CardTitle} from "react-materialize";
+import { Col, Card, CardTitle } from "react-materialize";
 import * as styles from "./snakeCard.scss";
 // @ts-ignore
 import img from "../../assets/snakeuu.png";
