@@ -7,22 +7,22 @@ const snakes = require("../assets/snakes");
 class Snakes {
   public get() {
     return httpClient.get("snakes.json", "lucas");
-  //  let user = store.getState().loggedInUser;
-  //  return new Promise<{}[]>(function(resolve, reject){
-  //    for(let i = 0; i < snakes.length; i++){
-  //       if(snakes[i].username === user){
-  //         setTimeout(() => resolve(snakes[i].snakes), 1000);
-  //         break;
-  //       }
-  //       if((snakes.length - 1)  === i){
-  //         reject("No snakes found for user")
-  //       }
-  //    }
-  //  })
+    //  let user = store.getState().loggedInUser;
+    //  return new Promise<{}[]>(function(resolve, reject){
+    //    for(let i = 0; i < snakes.length; i++){
+    //       if(snakes[i].username === user){
+    //         setTimeout(() => resolve(snakes[i].snakes), 1000);
+    //         break;
+    //       }
+    //       if((snakes.length - 1)  === i){
+    //         reject("No snakes found for user")
+    //       }
+    //    }
+    //  })
   }
 
   public create(title: string) {
-    return httpClient.post("snakes.json", "lucas", { title });
+    return null; // httpClient.post("snakes.json", "lucas", { title });
     // let user = store.getState().loggedInUser;
     // return new Promise<void>(function(resolve, reject){
     //   for(let i = 0; i < snakes.length; i++){
@@ -61,7 +61,7 @@ class Snakes {
         if (snakes[i].username === user) {
           for (const j = 0; j < snakes[i].snakes.length; i++) {
             if (snakes[i].snakes[j].title === title) {
-              snakes[i].snakes.splice(j, (j + 1));
+              snakes[i].snakes.splice(j, j + 1);
               break;
             }
           }
@@ -69,7 +69,7 @@ class Snakes {
           setTimeout(() => resolve(), 1000);
           break;
         }
-        if ((snakes.length - 1)  === i) {
+        if (snakes.length - 1 === i) {
           reject("Could not find user");
         }
       }

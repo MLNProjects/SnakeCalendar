@@ -43,12 +43,16 @@ class Header extends React.Component<IHeaderProps, {}> {
         </div>
       );
     } else {
-      return(
+      return (
         <div className={styles.headerItemsWrapper}>
           <div id={styles.username} className={styles.headerItem}>
             {this.props.user}
           </div>
-          <div id={styles.logout} className={styles.headerItem} onClick={this.logout}>
+          <div
+            id={styles.logout}
+            className={styles.headerItem}
+            onClick={this.logout}
+          >
             Logout
           </div>
         </div>
@@ -57,11 +61,7 @@ class Header extends React.Component<IHeaderProps, {}> {
   }
 
   public render() {
-    return (
-      <div id={styles.header}>
-        {this.getHeader()}
-      </div>
-    );
+    return <div id={styles.header}>{this.getHeader()}</div>;
   }
 }
 

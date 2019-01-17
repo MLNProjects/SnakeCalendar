@@ -3,6 +3,12 @@ const users = require("../assets/users");
 const snakes = require("../assets/snakes");
 
 class Auth {
+  /**
+   * signUp
+   */
+  public signUp(body: any) {
+    return httpClient.post(`users/${body.username}.json`, body);
+  }
   // public login(username: string, password: string) {
   //   return httpClient.post(username, password, "login")
   // }

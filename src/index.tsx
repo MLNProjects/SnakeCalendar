@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { HashRouter, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage/LandingPage";
-import { SignUp } from "./pages/SignUp/SignUp";
+import SignUp from "./pages/SignUp/SignUp";
 import Home from "./pages/Home/Home";
 import SignIn from "./pages/SignIn/SignIn";
 
