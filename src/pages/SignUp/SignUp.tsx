@@ -6,6 +6,7 @@ import { Input, Button } from "react-materialize";
 import authClient from "../../http/auth";
 import store from "../../redux/store";
 import { connect } from "react-redux";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 interface ISignUpState {
   username: string;
@@ -13,6 +14,7 @@ interface ISignUpState {
   password2: string;
   email: string;
   displayPasswordMismatchError: boolean;
+  loading: boolean;
 }
 
 interface ISignUpProps {
@@ -32,11 +34,13 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
     password: "",
     password2: "",
     email: "",
-    displayPasswordMismatchError: false
+    displayPasswordMismatchError: false,
+    loading: false
   };
 
   private signUpHandler = () => {
     if (this.state.password === this.state.password2) {
+      this.setState({ loading: true });
       authClient
         .signUp({
           username: this.state.username,
@@ -48,6 +52,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
             type: "LOG_IN",
             username: this.state.username
           });
+          this.setState({ loading: false });
         });
     } else {
       const newState: ISignUpState = {
@@ -85,6 +90,13 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
       redirect = <Redirect to="/home" />;
     }
     return redirect;
+  };
+  private spinnerHandler = () => {
+    let spinner;
+    if (this.state.loading) {
+      spinner = <Spinner />;
+    }
+    return spinner;
   };
 
   public render() {
@@ -128,6 +140,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
             <p>Already a member?</p>
             <Link to="/signIn">Sign In</Link>
           </div>
+          {this.spinnerHandler()}
         </Form>
       </>
     );
