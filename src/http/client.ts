@@ -1,5 +1,3 @@
-const users = require("../assets/users");
-const snakes = require("../assets/snakes");
 import axios from "axios";
 
 interface IRequestHeader {
@@ -15,8 +13,8 @@ interface ILoginResponseSuccess {
 class HttpClient {
   private baseUrl = "https://snakecalender.firebaseio.com";
 
-  public get(url: string, user: string) {
-    return axios.get(`${this.baseUrl}/users/${user}/${url}`);
+  public get(url: string) {
+    return axios.get(`${this.baseUrl}/${url}`);
   }
 
   public post(url: string, body: any) {

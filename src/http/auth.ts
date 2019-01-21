@@ -1,17 +1,23 @@
 import httpClient from "./client";
-const users = require("../assets/users");
-const snakes = require("../assets/snakes");
 
 class Auth {
-  /**
-   * signUp
-   */
+
   public signUp(body: any) {
     return httpClient.post(`users/${body.username}.json`, body);
   }
-  // public login(username: string, password: string) {
-  //   return httpClient.post(username, password, "login")
-  // }
+  public login(username: string, password: string) {
+    return httpClient.get(`/users/${username}.json`)
+    .then((response) => {
+      let userInfo;
+      for (const i in response.data) {
+        if (Object.hasOwnProperty(i)) {
+          userInfo = response.data[i];
+          break;
+        }
+      }
+      return userInfo.password === password;
+    });
+  }
 
   // public logout(username: string, password: string) {
   //   return httpClient.delete(username, password, "logout")

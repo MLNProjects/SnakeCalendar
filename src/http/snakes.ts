@@ -6,7 +6,7 @@ const snakes = require("../assets/snakes");
 
 class Snakes {
   public get() {
-    return httpClient.get("snakes.json", "lucas");
+    return null;
     //  let user = store.getState().loggedInUser;
     //  return new Promise<{}[]>(function(resolve, reject){
     //    for(let i = 0; i < snakes.length; i++){

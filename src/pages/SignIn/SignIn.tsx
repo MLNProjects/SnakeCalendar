@@ -13,49 +13,58 @@ interface ISignInState {
   invalidCredentials: boolean;
 }
 
-const mapStateToProps = function(state: any) {
+interface ISignInProps {
+  loggedIn: boolean;
+}
+const mapStateToProps = (state: any) => {
   return {
     loggedIn: state.loggedIn
   };
 };
 
-// State is never set so we use the '{}' type.
-class SignIn extends React.Component<{ loggedIn: boolean }, ISignInState> {
-  constructor(props: any) {
-    super(props),
-      (this.state = {
-        username: "",
-        password: "",
-        invalidCredentials: false
-      }),
-      (this.handleChange = this.handleChange.bind(this));
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+class SignIn extends React.Component<ISignInProps, ISignInState> {
+  public state = {
+    username: "",
+    password: "",
+    invalidCredentials: false
+  };
 
-  public handleChange(event: any) {
+  public handleChange = (event: any) => {
     const newState: ISignInState = {
       ...this.state,
       [event.target.name]: event.target.value,
       invalidCredentials: false
     };
     this.setState(newState);
-  }
+  };
 
-  public handleSubmit() {
-    // auth.login(this.state.username, this.state.password)
-    // .then(loginResponse =>{
-    //   store.dispatch({
-    //     type: "LOG_IN",
-    //     username: loginResponse.username
-    //   });
-    // })
-    // .catch(e => {
-    //   let newState: ISignInState = {...this.state, invalidCredentials: true};
-    //   this.setState(newState);
-    // })
-  }
+  public handleSubmit = () => {
+    auth.login(this.state.username, this.state.password).then(isLoggedIn => {
+      console.log(isLoggedIn);
+      if (isLoggedIn) {
+        store.dispatch({
+          type: "LOG_IN",
+          username: this.state.username
+        });
+      } else {
+        const newState: ISignInState = {
+          ...this.state,
+          invalidCredentials: true
+        };
+        this.setState(newState);
+      }
+    });
+  };
 
-  public render() {
+  private redirectToHome = () => {
+    let redirect;
+    if (this.props.loggedIn) {
+      redirect = <Redirect to="/home" />;
+    }
+    return redirect;
+  };
+
+  private invalidCredentialsMessage = () => {
     let invalidCredentialsMessage;
     if (this.state.invalidCredentials) {
       invalidCredentialsMessage = (
@@ -64,14 +73,13 @@ class SignIn extends React.Component<{ loggedIn: boolean }, ISignInState> {
         </div>
       );
     }
-    let redirectToHome;
-    if (this.props.loggedIn) {
-      redirectToHome = <Redirect to="/home" />;
-    }
+    return invalidCredentialsMessage;
+  };
 
+  public render() {
     return (
       <Form>
-        {redirectToHome}
+        {this.redirectToHome()}
         Username{" "}
         <Input
           type="text"
@@ -79,7 +87,7 @@ class SignIn extends React.Component<{ loggedIn: boolean }, ISignInState> {
           value={this.state.username}
           onChange={this.handleChange}
         />
-        {invalidCredentialsMessage}
+        {this.invalidCredentialsMessage()}
         Password{" "}
         <Input
           type="text"
@@ -87,7 +95,7 @@ class SignIn extends React.Component<{ loggedIn: boolean }, ISignInState> {
           value={this.state.password}
           onChange={this.handleChange}
         />
-        {invalidCredentialsMessage}
+        {this.invalidCredentialsMessage()}
         <Button onClick={this.handleSubmit} type="button">
           Log in
         </Button>

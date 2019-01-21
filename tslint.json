@@ -13,7 +13,7 @@
     "member-ordering": false,
     "jsx-no-lambda": true,
     "jsx-boolean-value": false,
-    "semicolon": [true, "always"],
+    "semicolon": [true, "always", "ignore-bound-class-methods"],
     "max-classes-per-file": false,
     "arrow-parens": false,
     "jsx-no-multiline-js": false

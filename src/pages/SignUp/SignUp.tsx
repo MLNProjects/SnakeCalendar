@@ -21,7 +21,7 @@ interface ISignUpProps {
   loggedIn: boolean;
 }
 
-const mapStateToProps = function(state: any) {
+const mapStateToProps = (state: any) => {
   return {
     loggedIn: state.loggedIn
   };
@@ -29,7 +29,7 @@ const mapStateToProps = function(state: any) {
 
 // State is never set so we use the '{}' type.
 class SignUp extends React.Component<ISignUpProps, ISignUpState> {
-  state = {
+  public state = {
     username: "",
     password: "",
     password2: "",
@@ -48,11 +48,11 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
           email: this.state.email
         })
         .then(res => {
+          this.setState({ loading: false });
           store.dispatch({
             type: "LOG_IN",
             username: this.state.username
           });
-          this.setState({ loading: false });
         });
     } else {
       const newState: ISignUpState = {
@@ -72,7 +72,6 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
           ? false
           : this.state.displayPasswordMismatchError
     };
-    console.log(newState.displayPasswordMismatchError);
     this.setState(newState);
   };
 
