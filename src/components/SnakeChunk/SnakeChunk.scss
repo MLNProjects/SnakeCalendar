@@ -1,0 +1,30 @@
+.SnakeChunk {
+  display: inline-block;
+  border: 1px solid #111;
+  box-shadow: 1px 1px #ccc;
+  padding: 8px;
+  margin: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.Body {
+  background-color: green;
+}
+.Body:hover {
+  background-color: lightgreen;
+}
+
+.Head {
+  background-color: red;
+}
+.Head:hover {
+  background-color: salmon;
+}
+
+.Tail {
+  background-color: yellow;
+}
+.Tail:hover {
+  background-color: lightyellow;
+}

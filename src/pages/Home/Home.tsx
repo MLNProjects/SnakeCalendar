@@ -60,7 +60,6 @@ class Home extends React.Component<IHomeProps, IHomeState> {
     return (
       <div id={styles.homeWrapper}>
         {redirectToLandinPage}
-        <Header/>
         <div id={styles.snakesWrapper}>
           {this.generateSnakeCards()}
           <PrivateSnakeCreator/>

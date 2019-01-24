@@ -42,10 +42,11 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
     auth.login(this.state.username, this.state.password).then(isLoggedIn => {
       console.log(isLoggedIn);
       if (isLoggedIn) {
-        store.dispatch({
-          type: "LOG_IN",
-          username: this.state.username
-        });
+        
+          store.dispatch({
+            type: "LOG_IN",
+            username: this.state.username
+          });
       } else {
         const newState: ISignInState = {
           ...this.state,
@@ -90,7 +91,7 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
         {this.invalidCredentialsMessage()}
         Password{" "}
         <Input
-          type="text"
+          type="password"
           name="password"
           value={this.state.password}
           onChange={this.handleChange}

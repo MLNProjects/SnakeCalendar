@@ -7,7 +7,10 @@ interface InitialStateInterface {
 }
 
 // const initialState: InitialStateInterface = {};
-const initialState: InitialStateInterface = { loggedIn: false, loggedInUser: "" };
+const initialState: InitialStateInterface = {
+  loggedIn: true,
+  loggedInUser: ""
+};
 
 function myReducer(state = initialState, action: any) {
   switch (action.type) {

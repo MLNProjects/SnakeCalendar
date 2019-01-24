@@ -13,9 +13,8 @@ export class LandingPage extends React.Component<{}, {}> {
     // .then((res) => console.log(JSON.stringify(res.data)));
     return (
       <div id={styles.landingPageWrapper}>
-        <Header/>
-        <QuickSnakeCreator/>
-        </div>
+        <QuickSnakeCreator />
+      </div>
     );
   }
 }

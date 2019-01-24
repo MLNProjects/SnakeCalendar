@@ -7,10 +7,8 @@ export class PrivateSnakeCreator extends React.Component<{}, {}> {
     return (
       <div className={styles.wrapper}>
         <div className={styles.inputWrapper}>
-          Create a private snake
-          <input className={styles.input}>
-          </input>
-
+          Create a private snakes
+          <input className={styles.input} />
         </div>
       </div>
     );
