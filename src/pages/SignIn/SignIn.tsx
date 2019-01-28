@@ -6,6 +6,7 @@ import auth from "../../http/auth";
 import { Form } from "../basePages/Form/Form";
 import * as styles from "./signIn.scss";
 import { Input, Button } from "react-materialize";
+import * as actions from "../../redux/actions/index";
 
 interface ISignInState {
   username: string;
@@ -16,11 +17,6 @@ interface ISignInState {
 interface ISignInProps {
   loggedIn: boolean;
 }
-const mapStateToProps = (state: any) => {
-  return {
-    loggedIn: state.loggedIn
-  };
-};
 
 class SignIn extends React.Component<ISignInProps, ISignInState> {
   public state = {
@@ -42,11 +38,10 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
     auth.login(this.state.username, this.state.password).then(isLoggedIn => {
       console.log(isLoggedIn);
       if (isLoggedIn) {
-        
-          store.dispatch({
-            type: "LOG_IN",
-            username: this.state.username
-          });
+        store.dispatch({
+          type: "LOG_IN",
+          username: this.state.username
+        });
       } else {
         const newState: ISignInState = {
           ...this.state,
@@ -108,5 +103,11 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {
+    loggedIn: state.loggedIn
+  };
+};
 
 export default connect(mapStateToProps)(SignIn);

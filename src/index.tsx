@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store from "./redux/store2";
 import { HashRouter, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage/LandingPage";
 import SignUp from "./pages/SignUp/SignUp";
