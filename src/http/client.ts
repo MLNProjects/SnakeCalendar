@@ -11,14 +11,13 @@ interface ILoginResponseSuccess {
 }
 
 class HttpClient {
-  private baseUrl = "https://snakecalender.firebaseio.com";
 
   public get(url: string) {
-    return axios.get(`${this.baseUrl}/${url}`);
+    return axios.get(url);
   }
 
   public post(url: string, body: any) {
-    return axios.post(`${this.baseUrl}/${url}`, body);
+    return axios.post(url, body);
   }
 
   // public delete(url: string) {

@@ -7,6 +7,7 @@ import authClient from "../../http/auth";
 import store from "../../redux/store";
 import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import * as actions from "../../redux/actions/index";
 
 interface ISignUpState {
   username: string;
@@ -19,11 +20,18 @@ interface ISignUpState {
 
 interface ISignUpProps {
   loggedIn: boolean;
+  onSignUp: any;
 }
 
 const mapStateToProps = (state: any) => {
   return {
     loggedIn: state.loggedIn
+  };
+};
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onSignUp: (email: string, password: string) =>
+      dispatch(actions.auth(email, password, "signUp"))
   };
 };
 
@@ -41,19 +49,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
   private signUpHandler = () => {
     if (this.state.password === this.state.password2) {
       this.setState({ loading: true });
-      authClient
-        .signUp({
-          username: this.state.username,
-          password: this.state.password,
-          email: this.state.email
-        })
-        .then(res => {
-          this.setState({ loading: false });
-          store.dispatch({
-            type: "LOG_IN",
-            username: this.state.username
-          });
-        });
+      this.props.onSignUp(this.state.email, this.state.password);
     } else {
       const newState: ISignUpState = {
         ...this.state,
@@ -146,4 +142,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
   }
 }
 
-export default connect(mapStateToProps)(SignUp);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);

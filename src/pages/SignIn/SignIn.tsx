@@ -35,21 +35,21 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
   };
 
   public handleSubmit = () => {
-    auth.login(this.state.username, this.state.password).then(isLoggedIn => {
-      console.log(isLoggedIn);
-      if (isLoggedIn) {
-        store.dispatch({
-          type: "LOG_IN",
-          username: this.state.username
-        });
-      } else {
-        const newState: ISignInState = {
-          ...this.state,
-          invalidCredentials: true
-        };
-        this.setState(newState);
-      }
-    });
+    // auth.login(this.state.username, this.state.password).then(isLoggedIn => {
+    //   console.log(isLoggedIn);
+    //   if (isLoggedIn) {
+    //     store.dispatch({
+    //       type: "LOG_IN",
+    //       username: this.state.username
+    //     });
+    //   } else {
+    //     const newState: ISignInState = {
+    //       ...this.state,
+    //       invalidCredentials: true
+    //     };
+    //     this.setState(newState);
+    //   }
+    // });
   };
 
   private redirectToHome = () => {
