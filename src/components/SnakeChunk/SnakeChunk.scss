@@ -5,26 +5,30 @@
   padding: 8px;
   margin: 8px;
   overflow: hidden;
-  cursor: pointer;
+}
+
+.SnakeChunk:hover {
+  box-shadow: 4px 4px orange;
 }
 
 .Body {
-  background-color: green;
+  background-color: lightgrey;
 }
 .Body:hover {
-  background-color: lightgreen;
+  box-shadow:  orange;
+
 }
 
 .Head {
-  background-color: red;
+  background-color: lightgoldenrodyellow;
 }
 .Head:hover {
-  background-color: salmon;
+  background-color: orangered
 }
 
 .Tail {
-  background-color: yellow;
+  background-color:  lightgoldenrodyellow;
 }
 .Tail:hover {
-  background-color: lightyellow;
+  background-color:orangered;
 }
