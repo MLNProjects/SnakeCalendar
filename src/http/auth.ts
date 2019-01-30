@@ -14,8 +14,18 @@ class Auth {
 
     return httpClient.post(baseUrl, authData);
   }
-  public login(username: string, password: string) {
-    return;
+
+  public login(email: string, password: string) {
+    const baseUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/" +
+    "verifyPassword?key=" + "AIzaSyCyMmgE2hbIVmSJSjZKMkGCs0jn4tHMRJo";
+
+    const authData = {
+      email,
+      password,
+      returnSecureToken: true
+    };
+
+    return httpClient.post(baseUrl, authData);
   }
 
   // public logout(username: string, password: string) {

@@ -26,14 +26,26 @@ export const authFail = (error: string) => {
 export const auth = (email: string, password: string, type: string) => {
   return (dispatch: any) => {
     dispatch(authStart());
-    authClient
-      .signUp(email, password)
-      .then(res => {
-        authSuccess(res.data.idToken, res.data.localId);
-        console.log("SIGNED UP!", res);
-      })
-      .catch(err => {
-        authFail(err.response.data.error);
-      });
+    if (type === "signUp") {
+      authClient
+        .signUp(email, password)
+        .then(res => {
+          dispatch(authSuccess(res.data.idToken, res.data.localId));
+          console.log("SIGNED UP!", res);
+        })
+        .catch(err => {
+          dispatch(authFail(err.response.data.error));
+        });
+    } else if (type === "login") {
+      authClient
+        .login(email, password)
+        .then(res => {
+          dispatch(authSuccess(res.data.idToken, res.data.localId));
+          console.log("LOGGED IN");
+        })
+        .catch(err => {
+          dispatch(authFail(err.response.data.error));
+        });
+    }
   };
 };

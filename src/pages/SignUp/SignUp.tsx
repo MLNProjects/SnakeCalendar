@@ -15,17 +15,18 @@ interface ISignUpState {
   password2: string;
   email: string;
   displayPasswordMismatchError: boolean;
-  loading: boolean;
 }
 
 interface ISignUpProps {
-  loggedIn: boolean;
+  loading: boolean;
   onSignUp: any;
+  token: string;
 }
 
 const mapStateToProps = (state: any) => {
   return {
-    loggedIn: state.loggedIn
+    loading: state.auth.loading,
+    token: state.auth.token
   };
 };
 const mapDispatchToProps = (dispatch: any) => {
@@ -48,7 +49,6 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
 
   private signUpHandler = () => {
     if (this.state.password === this.state.password2) {
-      this.setState({ loading: true });
       this.props.onSignUp(this.state.email, this.state.password);
     } else {
       const newState: ISignUpState = {
@@ -81,14 +81,14 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
 
   private redirectToHome = () => {
     let redirect;
-    if (this.props.loggedIn) {
+    if (this.props.token !== "") {
       redirect = <Redirect to="/home" />;
     }
     return redirect;
   };
   private spinnerHandler = () => {
     let spinner;
-    if (this.state.loading) {
+    if (this.props.loading) {
       spinner = <Spinner />;
     }
     return spinner;

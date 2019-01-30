@@ -7,20 +7,36 @@ import { Form } from "../basePages/Form/Form";
 import * as styles from "./signIn.scss";
 import { Input, Button } from "react-materialize";
 import * as actions from "../../redux/actions/index";
+import { string } from "prop-types";
 
 interface ISignInState {
-  username: string;
+  email: string;
   password: string;
   invalidCredentials: boolean;
 }
 
 interface ISignInProps {
-  loggedIn: boolean;
+  token: string;
+  onAuth: any;
+  loading: boolean;
 }
+
+const mapStateToProps = (state: any) => {
+  return {
+    token: state.auth.token,
+    loading: state.auth.loading
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onAuth: (email: string, password: string) => dispatch(actions.auth(email, password, "login"))
+  };
+};
 
 class SignIn extends React.Component<ISignInProps, ISignInState> {
   public state = {
-    username: "",
+    email: "",
     password: "",
     invalidCredentials: false
   };
@@ -35,26 +51,12 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
   };
 
   public handleSubmit = () => {
-    // auth.login(this.state.username, this.state.password).then(isLoggedIn => {
-    //   console.log(isLoggedIn);
-    //   if (isLoggedIn) {
-    //     store.dispatch({
-    //       type: "LOG_IN",
-    //       username: this.state.username
-    //     });
-    //   } else {
-    //     const newState: ISignInState = {
-    //       ...this.state,
-    //       invalidCredentials: true
-    //     };
-    //     this.setState(newState);
-    //   }
-    // });
+    this.props.onAuth(this.state.email, this.state.password);
   };
 
   private redirectToHome = () => {
     let redirect;
-    if (this.props.loggedIn) {
+    if (this.props.token !== "") {
       redirect = <Redirect to="/home" />;
     }
     return redirect;
@@ -76,11 +78,11 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
     return (
       <Form>
         {this.redirectToHome()}
-        Username{" "}
+        E-Mail{" "}
         <Input
-          type="text"
-          name="username"
-          value={this.state.username}
+          type="email"
+          name="email"
+          value={this.state.email}
           onChange={this.handleChange}
         />
         {this.invalidCredentialsMessage()}
@@ -93,7 +95,7 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
         />
         {this.invalidCredentialsMessage()}
         <Button onClick={this.handleSubmit} type="button">
-          Log in
+          Log in!
         </Button>
         <div className={styles.navDiv}>
           <p>New to this service?</p>
@@ -104,10 +106,4 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
   }
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    loggedIn: state.loggedIn
-  };
-};
-
-export default connect(mapStateToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
