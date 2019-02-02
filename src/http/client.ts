@@ -11,7 +11,6 @@ interface ILoginResponseSuccess {
 }
 
 class HttpClient {
-
   public get(url: string) {
     return axios.get(url);
   }

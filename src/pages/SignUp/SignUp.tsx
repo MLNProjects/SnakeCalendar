@@ -3,8 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import { Form } from "../basePages/Form/Form";
 import * as styles from "./signUp.scss";
 import { Input, Button } from "react-materialize";
-import authClient from "../../http/auth";
-import store from "../../redux/store";
 import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import * as actions from "../../redux/actions/index";
@@ -21,18 +19,21 @@ interface ISignUpProps {
   loading: boolean;
   onSignUp: any;
   token: string;
+  error: string;
 }
 
 const mapStateToProps = (state: any) => {
   return {
     loading: state.auth.loading,
-    token: state.auth.token
+    token: state.auth.token,
+    error: state.auth.error
   };
 };
+
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onSignUp: (email: string, password: string) =>
-      dispatch(actions.auth(email, password, "signUp"))
+    onSignUp: (email: string, password: string, userName: string) =>
+      dispatch(actions.signUp(email, password, userName))
   };
 };
 
@@ -43,13 +44,16 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
     password: "",
     password2: "",
     email: "",
-    displayPasswordMismatchError: false,
-    loading: false
+    displayPasswordMismatchError: false
   };
 
   private signUpHandler = () => {
     if (this.state.password === this.state.password2) {
-      this.props.onSignUp(this.state.email, this.state.password);
+      this.props.onSignUp(
+        this.state.email,
+        this.state.password,
+        this.state.username
+      );
     } else {
       const newState: ISignUpState = {
         ...this.state,
@@ -92,6 +96,13 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
       spinner = <Spinner />;
     }
     return spinner;
+  };
+  private errorHandler = () => {
+    let error;
+    if (this.props.error !== "") {
+      error = <p style={{ color: "red" }}>{this.props.error}</p>;
+    }
+    return error;
   };
 
   public render() {
@@ -136,6 +147,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
             <Link to="/signIn">Sign In</Link>
           </div>
           {this.spinnerHandler()}
+          {this.errorHandler()}
         </Form>
       </>
     );

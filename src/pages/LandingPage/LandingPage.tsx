@@ -1,10 +1,11 @@
 import * as React from "react";
-import Header from "../../components/Header/Header";
 import { QuickSnakeCreator } from "../../components/QuickSnakeCreator/QuickSnakeCreator";
 import * as styles from "./landingPage.scss";
-import snakes from "../../http/snakes";
+import * as actions from "../../redux/actions/index";
+import { connect } from "tls";
+
 // State is never set so we use the '{}' type.
-export class LandingPage extends React.Component<{}, {}> {
+class LandingPage extends React.Component<{}, {}> {
   public render() {
     // snakes.create("lololo")
     // .then((res) => console.log(JSON.stringify(res)));
@@ -18,3 +19,5 @@ export class LandingPage extends React.Component<{}, {}> {
     );
   }
 }
+
+export default LandingPage;
