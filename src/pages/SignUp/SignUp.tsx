@@ -2,10 +2,11 @@ import * as React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Form } from "../basePages/Form/Form";
 import * as styles from "./signUp.scss";
-import { Input, Button } from "react-materialize";
+import { Input, Button, CardPanel } from "react-materialize";
 import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import * as actions from "../../redux/actions/index";
+import ErrorMessage from "../../components/UI/ErrorMessage/ErrorMessage";
 
 interface ISignUpState {
   username: string;
@@ -75,14 +76,6 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
     this.setState(newState);
   };
 
-  private displayError = () => {
-    let domElement;
-    if (this.state.displayPasswordMismatchError) {
-      domElement = <h1>Passwords mismatch</h1>;
-    }
-    return domElement;
-  };
-
   private redirectToHome = () => {
     let redirect;
     if (this.props.token !== "") {
@@ -90,6 +83,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
     }
     return redirect;
   };
+
   private spinnerHandler = () => {
     let spinner;
     if (this.props.loading) {
@@ -97,10 +91,15 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
     }
     return spinner;
   };
+
   private errorHandler = () => {
     let error;
+    if (this.state.displayPasswordMismatchError) {
+      error = <ErrorMessage error="PASSWORD_MISMATCH" />;
+      return error;
+    }
     if (this.props.error !== "") {
-      error = <p style={{ color: "red" }}>{this.props.error}</p>;
+      error = <ErrorMessage error={this.props.error} />;
     }
     return error;
   };
@@ -114,14 +113,14 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
             onChange={this.onChangeHandler}
             value={this.state.email}
             name="email"
-            placeholder="E-mail"
+            label="E-Mail"
           />
 
           <Input
             onChange={this.onChangeHandler}
             value={this.state.username}
             name="username"
-            placeholder="Username"
+            label="Username"
           />
 
           <Input
@@ -129,7 +128,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
             value={this.state.password}
             type="password"
             name="password"
-            placeholder="Password"
+            label="Password"
           />
 
           <Input
@@ -137,11 +136,10 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
             value={this.state.password2}
             type="password"
             name="password2"
-            placeholder="Confirm password"
+            label="Confirm password"
           />
 
           <Button onClick={this.signUpHandler}>Submit</Button>
-          {this.displayError()}
           <div className={styles.navDiv}>
             <p>Already a member?</p>
             <Link to="/signIn">Sign In</Link>

@@ -104,6 +104,7 @@ export const signUp = (email: string, password: string, userName: string) => {
               userName
             );
             dispatch(authSuccess(res.data.idToken, res.data.localId));
+            dispatch(checkAuthTimeout(res.data.expiresIn));
             console.log(res2);
           })
           .catch();
@@ -130,6 +131,11 @@ export const checkLocalState = () => {
         const username = localStorage.getItem("username");
         dispatch(updateProfile(username || ""));
         dispatch(authSuccess(token || "", userId || ""));
+        dispatch(
+          checkAuthTimeout(
+            (expirationDate.getTime() - new Date().getTime()) / 1000
+          )
+        );
       }
     }
   };

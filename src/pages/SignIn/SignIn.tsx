@@ -3,9 +3,10 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Form } from "../basePages/Form/Form";
 import * as styles from "./signIn.scss";
-import { Input, Button } from "react-materialize";
+import { Input, Button, CardPanel } from "react-materialize";
 import * as actions from "../../redux/actions/index";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import ErrorMessage from "../../components/UI/ErrorMessage/ErrorMessage";
 
 interface ISignInState {
   email: string;
@@ -70,7 +71,7 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
   private errorHandler = () => {
     let error;
     if (this.props.error !== "") {
-      error = <p style={{ color: "red" }}>{this.props.error}</p>;
+      error = <ErrorMessage error={this.props.error} />;
     }
     return error;
   };
@@ -78,19 +79,19 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
     return (
       <Form>
         {this.redirectToHome()}
-        E-Mail{" "}
         <Input
           type="email"
           name="email"
           value={this.state.email}
           onChange={this.handleChange}
+          label="E-Mail"
         />
-        Password{" "}
         <Input
           type="password"
           name="password"
           value={this.state.password}
           onChange={this.handleChange}
+          label="Password"
         />
         <Button onClick={this.handleSubmit} type="button">
           Log in!
