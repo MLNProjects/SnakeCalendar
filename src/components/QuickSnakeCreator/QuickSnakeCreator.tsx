@@ -12,7 +12,7 @@ export class QuickSnakeCreator extends React.Component<{}, {}> {
           <Input className={styles.input} />
         </div>
         <div className={styles.inputWrapper}>
-          Enter a public snake
+          Search a public snake
           <Input className={styles.input} />
         </div>
       </div>

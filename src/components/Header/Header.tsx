@@ -1,53 +1,52 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import store from "../../redux/store";
 import * as styles from "./header.scss";
+import * as actions from "../../redux/actions/index";
+import { Chip } from "react-materialize";
 
-function mapStateToProps(state: any) {
+const mapStateToProps = (state: any) => {
   return {
-    loggedIn: state.loggedIn,
-    user: state.loggedInUser
+    username: state.auth.username
   };
-}
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onLogout: () => dispatch(actions.logout())
+  };
+};
 
 interface IHeaderProps {
-  loggedIn: boolean;
-  user: string;
+  username: string;
+  onLogout: any;
 }
 
 // State is never set so we use the '{}' type.
 class Header extends React.Component<IHeaderProps, {}> {
-  // constructor(props: any) {
-  //   super(props),
-  //   this.getHeader = this.getHeader.bind(this);
-  //   this.logout = this.logout.bind(this);
-  // }
-
-  private logout() {
-    store.dispatch({
-      type: "LOG_OUT"
-    });
-  }
+  private logout = () => {
+    this.props.onLogout();
+  };
 
   private getHeader() {
-    if (!this.props.loggedIn) {
+    if (this.props.username === "") {
       return (
         <div className={styles.headerItemsWrapper}>
           <div id="SignUp" className={styles.headerItem}>
-            <Link to="/signUp">Sign Up</Link>
+            <Link to="/signUp" replace>Sign Up</Link>
           </div>
           <div id="SignIn" className={styles.headerItem}>
-            <Link to="/signIn">Sign In</Link>
+            <Link to="/signIn" replace>Sign In</Link>
           </div>
         </div>
       );
     } else {
       return (
         <div className={styles.headerItemsWrapper}>
-          <div id={styles.username} className={styles.headerItem}>
-            {this.props.user}
-          </div>
+          {/* <div id={styles.username} className={styles.headerItem}> */}
+          <Chip>{this.props.username}</Chip>
+
+          {/* </div> */}
           <div
             id={styles.logout}
             className={styles.headerItem}
@@ -65,4 +64,7 @@ class Header extends React.Component<IHeaderProps, {}> {
   }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

@@ -8,7 +8,7 @@ interface InitialStateInterface {
 
 // const initialState: InitialStateInterface = {};
 const initialState: InitialStateInterface = {
-  loggedIn: true,
+  loggedIn: false,
   loggedInUser: ""
 };
 
