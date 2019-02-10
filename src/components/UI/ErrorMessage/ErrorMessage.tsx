@@ -22,7 +22,7 @@ const ErrorMessage: React.SFC<IErrorMessageProps> = props => {
         "That password is too weak! It needs to be at least 6 characters long.";
       break;
     case "INVALID_EMAIL":
-      errorMessage = "No user account with this email :(";
+      errorMessage = "Woopsy daisy, no user account with this email :(";
       break;
     case "INVALID_PASSWORD":
       errorMessage = "Incorrect password :(";

@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./globals/globals.scss";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "./redux/actions/index";
@@ -26,11 +27,11 @@ const mapDispatchToProps = (dispatch: any) => {
 };
 
 class App extends React.Component<IAppProps, {}> {
-  componentDidMount() {
+  public componentDidMount() {
     this.props.onTryAutoLogin();
   }
 
-  render() {
+  public render() {
     let routes = (
       <Switch>
         <Route key={"/signUp"} path={"/signUp"} component={SignUp} />
@@ -53,16 +54,15 @@ class App extends React.Component<IAppProps, {}> {
             path={"/snake/:snakeId"}
             component={Calendar}
           />
-          <Route exact path={"/"} component={LandingPage} />
-          <Redirect to="/" />
+          <Redirect to="/home" />
         </Switch>
       );
     }
     return (
-      <div>
+      <>
         <Header />
         {routes}
-      </div>
+      </>
     );
   }
 }

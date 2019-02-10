@@ -1,16 +1,19 @@
-.wrapper{
+.wrapper {
   // transform: translate(-50%, -50%);
   position: absolute;
-  bottom: 2%;
+  bottom: 5%;
   right: 2%;
-  width: 200px;
+  height: 88px;
+  display: inline-block;
 }
 
-.input{
-  height: 2rem !important;
-  margin: auto !important;
+.input {
+  display: inline-block;
+  padding: 0px;
+  margin-right: 24px;
 }
 
-.inputWrapper{
-  margin: 5px;
+.error {
+  color: red;
+  margin-right: 10px;
 }

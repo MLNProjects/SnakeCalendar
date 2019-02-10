@@ -3,34 +3,32 @@ import SnakeChunk from "../SnakeChunk/SnakeChunk";
 import * as styles from "./Snake.scss";
 const snake: React.SFC = props => {
   const generateSnake = (snakeLength: number) => {
-    let snakeArray = [];
+    const snakeArray = [];
     snakeArray.push(generateSnakeTail());
     snakeArray.push(...generateSnakeBody(snakeLength));
     snakeArray.push(generateSnakeHead());
     return snakeArray;
-  }
+  };
 
   const generateSnakeTail = () => {
-    return <SnakeChunk type = {"Tail"} />
-  }
+    return <SnakeChunk type={"Tail"} />;
+  };
 
   const generateSnakeBody = (snakeLength: number) => {
-    let snakeBodyArray = [];
+    const snakeBodyArray = [];
     for (let i = 0; i < snakeLength; i++) {
-      snakeBodyArray.push(<SnakeChunk type = {"Body"} />);
+      snakeBodyArray.push(<SnakeChunk type={"Body"} />);
     }
     return snakeBodyArray;
-  }
+  };
 
   const generateSnakeHead = () => {
-    return <SnakeChunk type = {"Head"} />
-  }
+    return <SnakeChunk type={"Head"} />;
+  };
 
   return (
     <>
-      <div className={styles.Snake}>
-      {generateSnake(5)}
-      </div>
+      <div className={styles.Snake}>{generateSnake(5)}</div>
     </>
   );
 };

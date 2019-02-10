@@ -53,14 +53,6 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
     this.props.onAuth(this.state.email, this.state.password);
   };
 
-  private redirectToHome = () => {
-    let redirect;
-    if (this.props.token !== "") {
-      redirect = <Redirect to="/home" />;
-    }
-    return redirect;
-  };
-
   private spinnerHandler = () => {
     let spinner;
     if (this.props.loading) {
@@ -78,7 +70,6 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
   public render() {
     return (
       <Form>
-        {this.redirectToHome()}
         <Input
           type="email"
           name="email"
