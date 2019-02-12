@@ -5,13 +5,14 @@ import * as styles from "./snakeCard.scss";
 interface ISnakeCCardProps {
   // snake: { title?: string };
   styles: string;
+  title: string
 }
 // State is never set so we use the '{}' type.
 const SnakeCard: React.SFC<ISnakeCCardProps> = props => {
   return (
     <div className={styles.snakeCard}>
       <CardPanel className={props.styles}>
-        <span>This is a test card</span>
+        <span>{props.title}</span>
       </CardPanel>
     </div>
   );

@@ -43,3 +43,37 @@ export const createSnake = (
       });
   };
 };
+
+const getSnakesStart = () => {
+  return {
+    type: actionTypes.GET_SNAKES_START
+  };
+};
+
+const getSnakesSuccess = (snakes: Array<Object>) => {
+  return {
+    type: actionTypes.GET_SNAKES_SUCCESS,
+    snakes
+  };
+};
+
+export const getSnakes = (token: string, userId: string) => {
+  return (dispatch: any) => {
+    dispatch(getSnakesStart());
+    snakeClient
+      .get(token, userId)
+      .then(res => {
+        const fetchedSnakes = [];
+        for (let key in res.data) {
+          fetchedSnakes.push({
+            ...res.data[key],
+            id: key
+          });
+        }
+        dispatch(getSnakesSuccess(fetchedSnakes));
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  };
+};

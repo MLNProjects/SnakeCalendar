@@ -3,8 +3,12 @@ import store from "../redux/store";
 
 class Snakes {
   private baseURL = "https://snakecalender.firebaseio.com";
-  public get() {
-    return null;
+  public get(token: string, userId: string) {
+    const URL = `${
+      this.baseURL
+    }/snakes.json?auth=${token}&orderBy="userId"&equalTo"${userId}"`;
+
+    return httpClient.get(URL);
   }
 
   public create(token: string, userId: string, snakeName: string) {

@@ -4,17 +4,32 @@ import { connect } from "react-redux";
 import SnakeCard from "../../components/SnakeCard/SnakeCard";
 import PrivateSnakeCreator from "../../components/PrivateSnakeCreator/PrivateSnakeCreator";
 import * as styles from "./home.scss";
+import * as actions from "../../redux/actions/index";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
-function mapStateToProps(state: any) {
+const mapStateToProps = (state: any) => {
   return {
     token: state.auth.token,
-    username: state.auth.username
+    username: state.auth.username,
+    userId: state.auth.userId,
+    loading: state.snake.getSnakeLoading,
+    snakes: state.snake.snakes
   };
-}
+};
 
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getSnakes: (token: string, userId: string) =>
+      dispatch(actions.getSnakes(token, userId))
+  };
+};
 interface IHomeProps {
   token: string;
   username: string;
+  userId: string;
+  getSnakes: any;
+  loading: boolean;
+  snakes: any;
 }
 
 interface IHomeState {
@@ -25,6 +40,9 @@ interface IHomeState {
 class Home extends React.Component<IHomeProps, IHomeState> {
   public state = {
     bajs: "bajs"
+  };
+  componentDidMount = () => {
+    this.props.getSnakes(this.props.token, this.props.userId);
   };
 
   // public generateSnakeCards() {
@@ -38,21 +56,19 @@ class Home extends React.Component<IHomeProps, IHomeState> {
   // }
 
   public render() {
+    let allSnakes = <Spinner/>;
+    if (!this.props.loading) {
+      allSnakes = this.props.snakes.map((snake: any) => (
+        <SnakeCard styles="light-blue black-text" title={snake.snakeName} key={snake.id} />
+      ));
+    }
     return (
       <div id={styles.homeWrapper}>
         <div id={styles.snakesWrapper}>
           {/* {this.generateSnakeCards()} */}
-          <SnakeCard styles="light-blue black-text" />
-          <SnakeCard styles="lime black-text" />
-          <SnakeCard styles="light-green black-text" />
-          <SnakeCard styles="amber black-text" />
-          <SnakeCard styles="yellow black-text" />
-          <SnakeCard styles="grey black-text" />
-          <SnakeCard styles="purple lighten-4 black-text" />
-          <SnakeCard styles="indigo lighten-4 black-text" />
-          <SnakeCard styles="teal darken-4 white-text" />
-          <SnakeCard styles="blue-grey darken-1 white-text" />
 
+          {/* <SnakeCard styles="light-blue black-text" /> */}
+          {allSnakes}
           <PrivateSnakeCreator />
         </div>
       </div>
@@ -60,4 +76,7 @@ class Home extends React.Component<IHomeProps, IHomeState> {
   }
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
