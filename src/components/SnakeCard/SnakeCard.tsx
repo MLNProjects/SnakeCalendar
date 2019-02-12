@@ -5,14 +5,16 @@ import * as styles from "./snakeCard.scss";
 interface ISnakeCCardProps {
   // snake: { title?: string };
   styles: string;
-  title: string
+  title: string;
+  date: any;
 }
 // State is never set so we use the '{}' type.
 const SnakeCard: React.SFC<ISnakeCCardProps> = props => {
   return (
     <div className={styles.snakeCard}>
       <CardPanel className={props.styles}>
-        <span>{props.title}</span>
+        <span>{props.title}</span> <br />
+        <span>Created on: {props.date}</span>
       </CardPanel>
     </div>
   );

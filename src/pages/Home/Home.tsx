@@ -78,6 +78,7 @@ class Home extends React.Component<IHomeProps, IHomeState> {
             styles={colorArray[randomNumber]}
             title={snake.snakeName}
             key={snake.id}
+            date={new Date(snake.created).toDateString()}
           />
         );
       });
