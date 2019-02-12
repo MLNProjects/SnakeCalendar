@@ -56,18 +56,36 @@ class Home extends React.Component<IHomeProps, IHomeState> {
   // }
 
   public render() {
-    let allSnakes = <Spinner/>;
+    let allSnakes = <Spinner />;
     if (!this.props.loading) {
-      allSnakes = this.props.snakes.map((snake: any) => (
-        <SnakeCard styles="light-blue black-text" title={snake.snakeName} key={snake.id} />
-      ));
+      const colorArray = [
+        "yellow",
+        "blue",
+        "teal",
+        "cyan",
+        "light-blue",
+        "red",
+        "pink",
+        "purple",
+        "green",
+        "light-green"
+      ];
+
+      allSnakes = this.props.snakes.map((snake: any) => {
+        let randomNumber = Math.floor(Math.random() * colorArray.length);
+        return (
+          <SnakeCard
+            styles={colorArray[randomNumber]}
+            title={snake.snakeName}
+            key={snake.id}
+          />
+        );
+      });
     }
     return (
       <div id={styles.homeWrapper}>
         <div id={styles.snakesWrapper}>
           {/* {this.generateSnakeCards()} */}
-
-          {/* <SnakeCard styles="light-blue black-text" /> */}
           {allSnakes}
           <PrivateSnakeCreator />
         </div>
