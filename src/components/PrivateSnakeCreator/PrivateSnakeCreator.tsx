@@ -122,7 +122,6 @@ class PrivateSnakeCreator extends React.Component<
     return loading;
   };
   public render() {
-    console.log("IsINpid: " + this.state.isInputDisplayed);
     return (
       <div className={styles.wrapper}>
         {this.errorHandler()}

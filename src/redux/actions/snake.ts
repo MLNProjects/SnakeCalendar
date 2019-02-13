@@ -37,6 +37,7 @@ export const createSnake = (
       .create(token, userId, snakeName)
       .then(res => {
         dispatch(createSnakeSuccess());
+        dispatch(getSnakes(token, userId));
       })
       .catch(err => {
         dispatch(createSnakeFail(err.response.data.error));

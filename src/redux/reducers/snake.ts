@@ -3,13 +3,13 @@ import * as actionTypes from "../actions/actionTypes";
 interface InitialStateInterface {
   createSnakeLoading: boolean;
   createSnakeError: string;
-  getSnakeLoading: boolean;
+  getSnakesLoading: boolean;
   snakes: Array<Object>;
 }
 const initialState: InitialStateInterface = {
   createSnakeLoading: false,
   createSnakeError: "",
-  getSnakeLoading: false,
+  getSnakesLoading: false,
   snakes: []
 };
 

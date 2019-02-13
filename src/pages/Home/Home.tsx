@@ -12,7 +12,7 @@ const mapStateToProps = (state: any) => {
     token: state.auth.token,
     username: state.auth.username,
     userId: state.auth.userId,
-    loading: state.snake.getSnakeLoading,
+    loading: state.snake.getSnakesLoading,
     snakes: state.snake.snakes
   };
 };
@@ -36,7 +36,6 @@ interface IHomeState {
   bajs: string;
 }
 
-// State is never set so we use the '{}' type.
 class Home extends React.Component<IHomeProps, IHomeState> {
   public state = {
     bajs: "bajs"
@@ -44,16 +43,6 @@ class Home extends React.Component<IHomeProps, IHomeState> {
   componentDidMount = () => {
     this.props.getSnakes(this.props.token, this.props.userId);
   };
-
-  // public generateSnakeCards() {
-  //   const snakesArray = [];
-  //   for (let i = 0; i < this.state.snakes.length; i++) {
-  //     snakesArray.push(
-  //       <SnakeCard key={"snake" + i} snake={this.state.snakes[i]} />
-  //     );
-  //   }
-  //   return snakesArray;
-  // }
 
   public render() {
     let allSnakes = <Spinner />;
@@ -68,7 +57,17 @@ class Home extends React.Component<IHomeProps, IHomeState> {
         "pink",
         "purple",
         "green",
-        "light-green"
+        "light-green",
+        "deep-purple",
+        "indigo",
+        "lime",
+        "amber",
+        "orange",
+        "deep-orange",
+        "brown",
+        "grey",
+        "blue-grey",
+        "white"
       ];
 
       allSnakes = this.props.snakes.map((snake: any) => {
