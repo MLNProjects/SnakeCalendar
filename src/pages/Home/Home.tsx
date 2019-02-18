@@ -30,6 +30,7 @@ interface IHomeProps {
   getSnakes: any;
   loading: boolean;
   snakes: any;
+  history: any;
 }
 
 interface IHomeState {
@@ -73,12 +74,18 @@ class Home extends React.Component<IHomeProps, IHomeState> {
       allSnakes = this.props.snakes.map((snake: any) => {
         let randomNumber = Math.floor(Math.random() * colorArray.length);
         return (
-          <SnakeCard
-            styles={colorArray[randomNumber]}
-            title={snake.snakeName}
+          <div
+            style={{ display: "inline" }}
+            onClick={() => this.props.history.push("/snake/" + snake.id)}
             key={snake.id}
-            date={new Date(snake.created).toDateString()}
-          />
+          >
+            <SnakeCard
+              styles={snake.color || colorArray[randomNumber]}
+              title={snake.snakeName}
+              key={snake.id}
+              date={new Date(snake.created).toDateString()}
+            />
+          </div>
         );
       });
     }
