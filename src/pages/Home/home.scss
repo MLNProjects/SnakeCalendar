@@ -8,3 +8,14 @@
   height: 100%;
   width: 100%;
 }
+
+@keyframes zoomer{
+  0%{}
+  100%{filter:saturate(200%);}
+}
+
+.zoomable:hover{
+  animation-name : zoomer;
+  animation-duration: 0.5s;
+  animation-fill-mode:forwards;
+}

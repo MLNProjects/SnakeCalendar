@@ -75,6 +75,7 @@ class Home extends React.Component<IHomeProps, IHomeState> {
         let randomNumber = Math.floor(Math.random() * colorArray.length);
         return (
           <div
+            className={styles.zoomable}
             style={{ display: "inline" }}
             onClick={() => this.props.history.push("/snake/" + snake.id)}
             key={snake.id}
