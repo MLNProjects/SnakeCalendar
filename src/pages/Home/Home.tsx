@@ -77,7 +77,12 @@ class Home extends React.Component<IHomeProps, IHomeState> {
           <div
             className={styles.zoomable}
             style={{ display: "inline" }}
-            onClick={() => this.props.history.push("/snake/" + snake.id)}
+            onClick={() =>
+              this.props.history.push({
+                pathname: "/snake/" + snake.id,
+                state: { snake: snake }
+              })
+            }
             key={snake.id}
           >
             <SnakeCard
