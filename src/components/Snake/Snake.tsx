@@ -1,7 +1,11 @@
 import * as React from "react";
 import SnakeChunk from "../SnakeChunk/SnakeChunk";
 import * as styles from "./Snake.scss";
-const snake: React.SFC = props => {
+
+interface ISnakeProps {
+  snake: any;
+}
+const snake: React.SFC<ISnakeProps> = (props: any) => {
   const generateSnake = (snakeLength: number) => {
     const snakeArray = [];
     snakeArray.push(generateSnakeTail());
@@ -28,6 +32,12 @@ const snake: React.SFC = props => {
 
   return (
     <>
+      <div className={styles.Container}>
+        <h1>{props.snake.snakeName}</h1>
+        <h6>
+          This snake was created: {new Date(props.snake.created).toDateString()}
+        </h6>
+      </div>
       <div className={styles.Snake}>{generateSnake(5)}</div>
     </>
   );

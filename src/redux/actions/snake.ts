@@ -91,13 +91,13 @@ const getOneSnakeSuccess = (snake: Object) => {
     snake
   };
 };
+
 export const getOneSnake = (token: string, userId: string, snakeId: string) => {
   return (dispatch: any) => {
     dispatch(getOneSnakeStart());
     snakeClient
       .getOneSnake(token, userId, snakeId)
       .then(res => {
-        console.log(res.data);
         dispatch(getOneSnakeSuccess(res.data));
       })
       .catch(err => console.log(err.response));

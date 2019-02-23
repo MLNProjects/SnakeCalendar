@@ -1,6 +1,6 @@
 import * as React from "react";
-import "./globals/globals.scss";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import "./globals/globals.scss";
 import { connect } from "react-redux";
 import * as actions from "./redux/actions/index";
 import Header from "./components/Header/Header";
@@ -20,6 +20,7 @@ const mapStateToProps = (state: any) => {
     isAuthenticated: state.auth.token !== ""
   };
 };
+
 const mapDispatchToProps = (dispatch: any) => {
   return {
     onTryAutoLogin: () => dispatch(actions.checkLocalState())
@@ -45,6 +46,7 @@ class App extends React.Component<IAppProps, {}> {
         <Redirect to="/" />
       </Switch>
     );
+
     if (this.props.isAuthenticated) {
       routes = (
         <Switch>

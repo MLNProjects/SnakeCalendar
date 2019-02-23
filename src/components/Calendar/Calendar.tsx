@@ -1,15 +1,14 @@
 import * as React from "react";
-import { Row, Col, Button } from "react-materialize";
+import { connect } from "react-redux";
 import Snake from "../Snake/Snake";
 import * as styles from "./calendar.scss";
 import * as actions from "../../redux/actions/index";
-import { connect } from "react-redux";
 
-const mapStatetoProps = (state: any) => {
+const mapStateToProps = (state: any) => {
   return {
     token: state.auth.token,
     userId: state.auth.userId,
-    snake: state.snake.snake
+    snake: state.snake.oneSnake
   };
 };
 
@@ -23,35 +22,48 @@ const mapDispatchToProps = (dispatch: any) => {
 interface ICalendarProps {
   token: string;
   userId: string;
-  snake: Object;
   getOneSnake: any;
   location: any;
+  match: any;
+  snake: any;
+}
+interface ICalendarState {
+  bajs: string;
 }
 // State is never set so we use the '{}' type.
-class Calendar extends React.Component<ICalendarProps, {}> {
+class Calendar extends React.Component<ICalendarProps, ICalendarState> {
+  public state = {
+    bajs: "bajs"
+  };
   componentDidMount = () => {
-    if (this.props.location.state) {
+    if (this.props.token !== "") {
       this.props.getOneSnake(
         this.props.token,
         this.props.userId,
-        this.props.location.state.snake.id
+        this.props.match.params.snakeId
       );
-    } else {
-      console.log("Snake not found in props, so I fetch from server");
     }
   };
-
+  componentDidUpdate = (prevProps: any, prevState: any, snapshot: any) => {
+    if (prevProps.token !== this.props.token) {
+      this.props.getOneSnake(
+        this.props.token,
+        this.props.userId,
+        this.props.match.params.snakeId
+      );
+    }
+  };
   public render() {
     return (
       <>
-        {this.props.snake}
-        <Snake />
+        {/* <h1>{this.props.snake.snakeName}</h1> */}
+        <Snake snake={this.props.snake} />
       </>
     );
   }
 }
 
 export default connect(
-  mapStatetoProps,
+  mapStateToProps,
   mapDispatchToProps
 )(Calendar);

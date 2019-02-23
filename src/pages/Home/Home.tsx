@@ -22,6 +22,7 @@ const mapDispatchToProps = (dispatch: any) => {
       dispatch(actions.getSnakes(token, userId))
   };
 };
+
 interface IHomeProps {
   token: string;
   username: string;
@@ -97,7 +98,6 @@ class Home extends React.Component<IHomeProps, IHomeState> {
     return (
       <div id={styles.homeWrapper}>
         <div id={styles.snakesWrapper}>
-          {/* {this.generateSnakeCards()} */}
           {allSnakes}
           <PrivateSnakeCreator />
         </div>

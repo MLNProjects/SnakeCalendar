@@ -58,7 +58,8 @@ const getSnakesSuccess = (state: InitialStateInterface, action: any) => {
 
 const getOneSnakeStart = (state: InitialStateInterface, action: any) => {
   return Object.assign({}, state, {
-    getOneSnakeLoading: true
+    getOneSnakeLoading: true,
+    oneSnake: {}
   });
 };
 
