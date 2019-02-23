@@ -7,6 +7,13 @@ class Snakes {
     return httpClient.get(URL);
   }
 
+  public getOneSnake(token: string, userId: string, snakeId: string) {
+    const URL = `${
+      this.baseURL
+    }/users/${userId}/snakes/${snakeId}.json?auth=${token}`;
+    return httpClient.get(URL);
+  }
+
   public create(token: string, userId: string, snakeName: string) {
     const URL = `${this.baseURL}/users/${userId}/snakes.json?auth=${token}`;
     const colorArray = [
