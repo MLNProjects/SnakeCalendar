@@ -17,26 +17,9 @@ class Snakes {
   public create(token: string, userId: string, snakeName: string) {
     const URL = `${this.baseURL}/users/${userId}/snakes.json?auth=${token}`;
     const colorArray = [
-      "yellow",
-      "blue",
-      "teal",
-      "cyan",
-      "light-blue",
-      "red",
-      "pink",
-      "purple",
-      "green",
-      "light-green",
-      "deep-purple",
-      "indigo",
-      "lime",
-      "amber",
-      "orange",
-      "deep-orange",
-      "brown",
-      "grey",
-      "blue-grey",
-      "white"
+      "#4caf50", //green
+      "#2196f3", //blue
+      "#009688" //teal
     ];
     let randomNumber = Math.floor(Math.random() * colorArray.length);
     const payload = {

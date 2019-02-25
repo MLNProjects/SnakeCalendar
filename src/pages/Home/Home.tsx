@@ -47,51 +47,18 @@ class Home extends React.Component<IHomeProps, IHomeState> {
 
   public render() {
     let allSnakes = <Spinner />;
-    if (!this.props.loading) {
-      const colorArray = [
-        "yellow",
-        "blue",
-        "teal",
-        "cyan",
-        "light-blue",
-        "red",
-        "pink",
-        "purple",
-        "green",
-        "light-green",
-        "deep-purple",
-        "indigo",
-        "lime",
-        "amber",
-        "orange",
-        "deep-orange",
-        "brown",
-        "grey",
-        "blue-grey",
-        "white"
-      ];
 
+    if (!this.props.loading) {
       allSnakes = this.props.snakes.map((snake: any) => {
-        let randomNumber = Math.floor(Math.random() * colorArray.length);
         return (
-          <div
-            className={styles.zoomable}
-            style={{ display: "inline" }}
-            onClick={() =>
-              this.props.history.push({
-                pathname: "/snake/" + snake.id,
-                state: { snake: snake }
-              })
-            }
+          <SnakeCard
+            title={snake.snakeName}
             key={snake.id}
-          >
-            <SnakeCard
-              styles={snake.color || colorArray[randomNumber]}
-              title={snake.snakeName}
-              key={snake.id}
-              date={new Date(snake.created).toDateString()}
-            />
-          </div>
+            date={new Date(snake.created).toDateString()}
+            id={snake.id}
+            history={this.props.history}
+            color={snake.color}
+          />
         );
       });
     }

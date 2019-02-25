@@ -1,23 +1,35 @@
 import * as React from "react";
-import { CardPanel } from "react-materialize";
 import * as styles from "./snakeCard.scss";
 
 interface ISnakeCCardProps {
-  // snake: { title?: string };
-  styles: string;
   title: string;
   date: any;
+  history: any;
+  id: string;
+  color: string;
 }
+
 // State is never set so we use the '{}' type.
-const SnakeCard: React.SFC<ISnakeCCardProps> = props => {
-  return (
-    <div className={styles.snakeCard}>
-      <CardPanel className={props.styles}>
-        <span>{props.title}</span> <br />
-        <span>Created on: {props.date}</span>
-      </CardPanel>
-    </div>
-  );
-};
+class SnakeCard extends React.Component<ISnakeCCardProps, {}> {
+  public onClickHandler: React.MouseEventHandler<HTMLDivElement> = e => {
+    // do something
+    this.props.history.push({
+      pathname: "/snake/" + this.props.id
+    });
+  };
+
+  public render() {
+    return (
+      <div
+        onClick={this.onClickHandler}
+        className={styles.card}
+        style={{ background: this.props.color }}
+      >
+        <span className={styles.cardTitle}>{this.props.title}</span> <br />
+        <span className={styles.cardDate}>Created on: {this.props.date}</span>
+      </div>
+    );
+  }
+}
 
 export default SnakeCard;
