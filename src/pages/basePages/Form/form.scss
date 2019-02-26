@@ -1,16 +1,27 @@
-#formPage{
+#formPage {
   width: 100%;
   height: 100%;
 }
 
-#formWrapper{
+#formWrapper {
   position: absolute;
   right: 10%;
-  height: 70%;
   width: 30%;
   top: 15%;
 }
 
-.navDiv{
+.navDiv {
   display: block;
+}
+
+@media screen and (max-width: 600px) {
+  #formWrapper {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    top: 15%;
+  }
 }

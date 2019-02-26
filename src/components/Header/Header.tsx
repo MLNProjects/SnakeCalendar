@@ -33,20 +33,22 @@ class Header extends React.Component<IHeaderProps, {}> {
       return (
         <div className={styles.headerItemsWrapper}>
           <div id="SignUp" className={styles.headerItem}>
-            <Link to="/signUp" replace>Sign Up</Link>
+            <Link to="/signUp" replace>
+              Sign Up
+            </Link>
           </div>
           <div id="SignIn" className={styles.headerItem}>
-            <Link to="/signIn" replace>Sign In</Link>
+            <Link to="/signIn" replace>
+              Sign In
+            </Link>
           </div>
         </div>
       );
     } else {
       return (
         <div className={styles.headerItemsWrapper}>
-          {/* <div id={styles.username} className={styles.headerItem}> */}
           <Chip>{this.props.username}</Chip>
 
-          {/* </div> */}
           <div
             id={styles.logout}
             className={styles.headerItem}
