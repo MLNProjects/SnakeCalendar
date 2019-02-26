@@ -15,19 +15,19 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
   };
 
   const generateSnakeTail = () => {
-    return <SnakeChunk type={"Tail"} />;
+    return <SnakeChunk key={"tail"} type={"Tail"} />;
   };
 
   const generateSnakeBody = (snakeLength: number) => {
     const snakeBodyArray = [];
     for (let i = 0; i < snakeLength; i++) {
-      snakeBodyArray.push(<SnakeChunk type={"Body"} />);
+      snakeBodyArray.push(<SnakeChunk key={"body" + i} type={"Body"} />);
     }
     return snakeBodyArray;
   };
 
   const generateSnakeHead = () => {
-    return <SnakeChunk type={"Head"} />;
+    return <SnakeChunk type={"Head"} key={"head"} />;
   };
 
   return (

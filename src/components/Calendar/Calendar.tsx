@@ -27,14 +27,9 @@ interface ICalendarProps {
   match: any;
   snake: any;
 }
-interface ICalendarState {
-  bajs: string;
-}
+
 // State is never set so we use the '{}' type.
-class Calendar extends React.Component<ICalendarProps, ICalendarState> {
-  public state = {
-    bajs: "bajs"
-  };
+class Calendar extends React.Component<ICalendarProps, {}> {
   componentDidMount = () => {
     if (this.props.token !== "") {
       this.props.getOneSnake(
@@ -56,7 +51,6 @@ class Calendar extends React.Component<ICalendarProps, ICalendarState> {
   public render() {
     return (
       <>
-        {/* <h1>{this.props.snake.snakeName}</h1> */}
         <Snake snake={this.props.snake} />
       </>
     );

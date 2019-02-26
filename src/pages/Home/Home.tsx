@@ -66,7 +66,7 @@ class Home extends React.Component<IHomeProps, IHomeState> {
       <div id={styles.homeWrapper}>
         <div id={styles.snakesWrapper}>
           {allSnakes}
-          <PrivateSnakeCreator />
+          {/* <PrivateSnakeCreator /> */}
         </div>
       </div>
     );
