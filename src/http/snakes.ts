@@ -48,6 +48,18 @@ class Snakes {
   public delete(title: string) {
     return;
   }
+
+  public logDate(
+    token: string,
+    userId: string,
+    snakeId: string,
+    comment: string
+  ) {
+    const URL = `${
+      this.baseURL
+    }/users/${userId}/snakes/${snakeId}/dateLog/${Date.now()}.json?auth=${token}`;
+    return httpClient.put(URL, { comment });
+  }
 }
 
 const snakeClient = new Snakes();

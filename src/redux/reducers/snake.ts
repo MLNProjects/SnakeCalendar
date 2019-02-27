@@ -5,16 +5,12 @@ interface InitialStateInterface {
   createSnakeError: string;
   getSnakesLoading: boolean;
   snakes: Array<Object>;
-  getOneSnakeLoading: boolean;
-  oneSnake: any;
 }
 const initialState: InitialStateInterface = {
   createSnakeLoading: false,
   createSnakeError: "",
   getSnakesLoading: false,
-  snakes: [],
-  getOneSnakeLoading: false,
-  oneSnake: {}
+  snakes: []
 };
 
 const createSnakeStart = (state: InitialStateInterface, action: any) => {
@@ -56,20 +52,6 @@ const getSnakesSuccess = (state: InitialStateInterface, action: any) => {
   });
 };
 
-const getOneSnakeStart = (state: InitialStateInterface, action: any) => {
-  return Object.assign({}, state, {
-    getOneSnakeLoading: true,
-    oneSnake: {}
-  });
-};
-
-const getOneSnakeSuccess = (state: InitialStateInterface, action: any) => {
-  return Object.assign({}, state, {
-    oneSnake: action.snake,
-    getOneSnakeLoading: false
-  });
-};
-
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
     case actionTypes.CREATE_SNAKE_START:
@@ -84,10 +66,6 @@ const reducer = (state = initialState, action: any) => {
       return getSnakesStart(state, action);
     case actionTypes.GET_SNAKES_SUCCESS:
       return getSnakesSuccess(state, action);
-    case actionTypes.GET_ONE_SNAKE_START:
-      return getOneSnakeStart(state, action);
-    case actionTypes.GET_ONE_SNAKE_SUCCESS:
-      return getOneSnakeSuccess(state, action);
     default:
       return state;
   }

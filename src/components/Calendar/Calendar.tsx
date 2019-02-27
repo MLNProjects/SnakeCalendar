@@ -8,7 +8,7 @@ const mapStateToProps = (state: any) => {
   return {
     token: state.auth.token,
     userId: state.auth.userId,
-    snake: state.snake.oneSnake
+    snake: state.oneSnake.oneSnake
   };
 };
 
@@ -51,7 +51,10 @@ class Calendar extends React.Component<ICalendarProps, {}> {
   public render() {
     return (
       <>
-        <Snake snake={this.props.snake} />
+        <Snake
+          snake={this.props.snake}
+          snakeId={this.props.match.params.snakeId}
+        />
       </>
     );
   }
