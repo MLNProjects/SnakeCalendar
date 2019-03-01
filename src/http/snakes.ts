@@ -45,8 +45,11 @@ class Snakes {
     return httpClient.post(URL, payload);
   }
 
-  public delete(title: string) {
-    return;
+  public deleteSnake(token: string, userId: string, snakeId: string) {
+    const URL = `${
+      this.baseURL
+    }/users/${userId}/snakes/${snakeId}.json?auth=${token}`;
+    return httpClient.delete(URL);
   }
 
   public logDate(

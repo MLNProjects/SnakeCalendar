@@ -4,7 +4,7 @@
   "description": "Improve.",
   "main": "index.tsx",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open --host 0.0.0.0" ,
+    "dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
     "lint": "tslint --project tsconfig.json 'src/**/*.{ts,tsx}'",
     "lint-fix": "tslint --project tsconfig.json 'src/**/*.{ts,tsx}' --fix",

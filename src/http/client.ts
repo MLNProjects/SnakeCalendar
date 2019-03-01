@@ -21,9 +21,9 @@ class HttpClient {
   public put(url: string, body: any) {
     return axios.put(url, body);
   }
-  // public delete(url: string) {
-  //   return axios.post(`${this.baseUrl}${url}`);
-  // }
+  public delete(url: string) {
+    return axios.delete(url);
+  }
 
   // public put(url: string, body: any) {
   //   return axios.post(`${this.baseUrl}${url}`, body);

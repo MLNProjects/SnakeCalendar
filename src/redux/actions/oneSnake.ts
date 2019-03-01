@@ -55,3 +55,28 @@ export const logDate = (
       .catch(err => console.log(err));
   };
 };
+
+const deleteSnakeStart = () => {
+  return {
+    type: actionTypes.DELETE_SNAKE_START
+  };
+};
+
+const deleteSnakeSuccess = () => {
+  return {
+    type: actionTypes.DELETE_SNAKE_SUCCESS
+  };
+};
+
+export const deleteSnake = (token: string, userId: string, snakeId: string) => {
+  return (dispatch: any) => {
+    dispatch(deleteSnakeStart());
+    snakeClient.deleteSnake(token, userId, snakeId);
+    // .then((res: any) => {
+    //   dispatch(deleteSnakeSuccess());
+    // })
+    // .catch((err: any) => {
+    //   console.log(err);
+    // });
+  };
+};

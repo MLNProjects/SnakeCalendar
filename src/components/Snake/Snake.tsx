@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import SnakeChunk from "../SnakeChunk/SnakeChunk";
 import * as styles from "./Snake.scss";
-import { Button } from "react-materialize";
+import { Button, Collection, CollectionItem, Icon } from "react-materialize";
 import snakeClient from "../../http/snakes";
 import * as actions from "../../redux/actions/index";
 
@@ -19,7 +19,9 @@ const mapDispatchToProps = (dispatch: any) => {
       userId: string,
       snakeId: string,
       comment: string
-    ) => dispatch(actions.logDate(token, userId, snakeId, comment))
+    ) => dispatch(actions.logDate(token, userId, snakeId, comment)),
+    deleteSnake: (token: string, userId: string, snakeId: string) =>
+      dispatch(actions.deleteSnake(token, userId, snakeId))
   };
 };
 
@@ -29,31 +31,32 @@ interface ISnakeProps {
   token: string;
   userId: string;
   logDate: any;
+  deleteSnake: any;
 }
 const snake: React.SFC<ISnakeProps> = (props: any) => {
-  const generateSnake = (snakeLength: number) => {
-    const snakeArray = [];
-    snakeArray.push(generateSnakeTail());
-    snakeArray.push(...generateSnakeBody(snakeLength));
-    snakeArray.push(generateSnakeHead());
-    return snakeArray;
-  };
+  // const generateSnake = (snakeLength: number) => {
+  //   const snakeArray = [];
+  //   snakeArray.push(generateSnakeTail());
+  //   snakeArray.push(...generateSnakeBody(snakeLength));
+  //   snakeArray.push(generateSnakeHead());
+  //   return snakeArray;
+  // };
 
-  const generateSnakeTail = () => {
-    return <SnakeChunk key={"tail"} type={"Tail"} />;
-  };
+  // const generateSnakeTail = () => {
+  //   return <SnakeChunk key={"tail"} type={"Tail"} />;
+  // };
 
-  const generateSnakeBody = (snakeLength: number) => {
-    const snakeBodyArray = [];
-    for (let i = 0; i < snakeLength; i++) {
-      snakeBodyArray.push(<SnakeChunk key={"body" + i} type={"Body"} />);
-    }
-    return snakeBodyArray;
-  };
+  // const generateSnakeBody = (snakeLength: number) => {
+  //   const snakeBodyArray = [];
+  //   for (let i = 0; i < snakeLength; i++) {
+  //     snakeBodyArray.push(<SnakeChunk key={"body" + i} type={"Body"} />);
+  //   }
+  //   return snakeBodyArray;
+  // };
 
-  const generateSnakeHead = () => {
-    return <SnakeChunk type={"Head"} key={"head"} />;
-  };
+  // const generateSnakeHead = () => {
+  //   return <SnakeChunk type={"Head"} key={"head"} />;
+  // };
 
   const logHandler = () => {
     if (props.snake.dateLog) {
@@ -79,7 +82,7 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
       } else if (noLog) {
         console.log("THIS DATE ALREADY EXIST DUMMY!");
       }
-    } else {
+    } else if (props.snake.snakeName) {
       props.logDate(
         props.token,
         props.userId,
@@ -93,14 +96,13 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     if (props.snake.dateLog) {
       text = Object.keys(props.snake.dateLog).map(date => {
         return (
-          <span key={date}>
-            This task was logged on: {new Date(Number(date)).toDateString()}{" "}
-            <br />
-          </span>
+          <CollectionItem key={date}>
+            Logged On: {new Date(Number(date)).toDateString()}
+          </CollectionItem>
         );
       });
     }
-    return text;
+    return <Collection>{text}</Collection>;
   };
   return (
     <>
@@ -111,11 +113,17 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
         </h6>
         <div>
           <Button onClick={logHandler}>LOG TODAY</Button>
+          <Button
+            onClick={() => {
+              props.deleteSnake(props.token, props.userId, props.snakeId);
+            }}
+          >
+            DELETE ME{" "}
+          </Button>
         </div>
         <div className={styles.Log}>{showLog()}</div>
       </div>
-
-      <div className={styles.Snake}>{generateSnake(5)}</div>
+      {/* <div className={styles.Snake}>{generateSnake(5)}</div> */}
     </>
   );
 };
