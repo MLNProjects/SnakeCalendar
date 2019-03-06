@@ -18,6 +18,8 @@ bower_components
 *.orig
 .vscode
 *.iml
+*.css
+*.css.map
 
 # IDE - VSCode
 .vscode/*

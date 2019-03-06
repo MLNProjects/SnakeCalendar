@@ -1,5 +1,7 @@
+@import '../../globals/variables.scss';
+
 #header {
-  height: 10%;
+  height: 80px;
   width: 100%;
   padding: 8px;
   display: flex;
@@ -9,13 +11,20 @@
 
 .headerItemsWrapper {
   color: black;
+  padding: 15px 10px;
 }
 
 .headerItem {
   display: inline-block;
-  padding: 15px 20px 15px 20px;
+  padding-left: 15px;
   a {
-    color: black !important;
+    color: black;
+    padding: 15px 30px;
+    border-radius: 5px;
+    background-color: $primary-color;
+    &:hover {
+      background-color: $primary-color-dark;
+    }
   }
 }
 
