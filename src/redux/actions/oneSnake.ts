@@ -38,6 +38,14 @@ const logDateSuccess = () => {
   };
 };
 
+const addLogToSnake = (dateNow: number, comment: string) => {
+  return {
+    type: actionTypes.ADD_LOG_TO_SNAKE,
+    dateNow,
+    comment
+  };
+};
+
 export const logDate = (
   token: string,
   userId: string,
@@ -45,12 +53,14 @@ export const logDate = (
   comment: string
 ) => {
   return (dispatch: any) => {
+    const dateNow: number = Date.now();
     dispatch(logDateStart());
     snakeClient
-      .logDate(token, userId, snakeId, comment)
+      .logDate(token, userId, snakeId, dateNow, comment)
       .then(res => {
         dispatch(logDateSuccess());
-        dispatch(getOneSnake(token, userId, snakeId));
+        dispatch(addLogToSnake(dateNow, comment));
+        //dispatch(getOneSnake(token, userId, snakeId)); // Istället: addLogToSnake
       })
       .catch(err => console.log(err));
   };

@@ -3,15 +3,14 @@ import { connect } from "react-redux";
 import Snake from "../Snake/Snake";
 import * as styles from "./calendar.scss";
 import * as actions from "../../redux/actions/index";
-import Spinner from "../UI/Spinner/Spinner";
+import CenteredSpinner from "../UI/CenteredSpinner/CenteredSpinner";
 
 const mapStateToProps = (state: any) => {
   return {
     token: state.auth.token,
     userId: state.auth.userId,
     snake: state.oneSnake.oneSnake,
-    loadingGet: state.oneSnake.getOneSnakeLoading,
-    loadingLog: state.oneSnake.logDateLoading
+    loadingGet: state.oneSnake.getOneSnakeLoading
   };
 };
 
@@ -30,7 +29,6 @@ interface ICalendarProps {
   match: any;
   snake: any;
   loadingGet: boolean;
-  loadingLog: boolean;
 }
 
 // State is never set so we use the '{}' type.
@@ -54,8 +52,8 @@ class Calendar extends React.Component<ICalendarProps, {}> {
     }
   };
   public render() {
-    let snake = <Spinner />;
-    if (!this.props.loadingGet && !this.props.loadingLog) {
+    let snake = <CenteredSpinner />;
+    if (!this.props.loadingGet) {
       snake = (
         <Snake
           snake={this.props.snake}

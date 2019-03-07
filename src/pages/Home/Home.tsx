@@ -4,7 +4,7 @@ import SnakeCard from "../../components/SnakeCard/SnakeCard";
 import PrivateSnakeCreator from "../../components/PrivateSnakeCreator/PrivateSnakeCreator";
 import * as styles from "./home.scss";
 import * as actions from "../../redux/actions/index";
-import Spinner from "../../components/UI/Spinner/Spinner";
+import CenteredSpinner from "../../components/UI/CenteredSpinner/CenteredSpinner";
 
 const mapStateToProps = (state: any) => {
   return {
@@ -46,7 +46,7 @@ class Home extends React.Component<IHomeProps, IHomeState> {
   };
 
   public render() {
-    let allSnakes = <Spinner />;
+    let allSnakes = <CenteredSpinner />;
 
     if (!this.props.loading) {
       allSnakes = this.props.snakes.map((snake: any) => {

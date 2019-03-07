@@ -56,11 +56,12 @@ class Snakes {
     token: string,
     userId: string,
     snakeId: string,
+    dateNow: number,
     comment: string
   ) {
     const URL = `${
       this.baseURL
-    }/users/${userId}/snakes/${snakeId}/dateLog/${Date.now()}.json?auth=${token}`;
+    }/users/${userId}/snakes/${snakeId}/dateLog/${dateNow}.json?auth=${token}`;
     return httpClient.put(URL, { comment });
   }
 }

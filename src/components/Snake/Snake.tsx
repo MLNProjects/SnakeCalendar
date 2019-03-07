@@ -34,30 +34,6 @@ interface ISnakeProps {
   deleteSnake: any;
 }
 const snake: React.SFC<ISnakeProps> = (props: any) => {
-  // const generateSnake = (snakeLength: number) => {
-  //   const snakeArray = [];
-  //   snakeArray.push(generateSnakeTail());
-  //   snakeArray.push(...generateSnakeBody(snakeLength));
-  //   snakeArray.push(generateSnakeHead());
-  //   return snakeArray;
-  // };
-
-  // const generateSnakeTail = () => {
-  //   return <SnakeChunk key={"tail"} type={"Tail"} />;
-  // };
-
-  // const generateSnakeBody = (snakeLength: number) => {
-  //   const snakeBodyArray = [];
-  //   for (let i = 0; i < snakeLength; i++) {
-  //     snakeBodyArray.push(<SnakeChunk key={"body" + i} type={"Body"} />);
-  //   }
-  //   return snakeBodyArray;
-  // };
-
-  // const generateSnakeHead = () => {
-  //   return <SnakeChunk type={"Head"} key={"head"} />;
-  // };
-
   const logHandler = () => {
     if (props.snake.dateLog) {
       const dates: any = props.snake.dateLog;
@@ -67,7 +43,8 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
         const thisDate = new Date(Number(date));
         if (
           thisDate.getDate() === new Date().getDate() &&
-          thisDate.getMonth() === new Date().getMonth()
+          thisDate.getMonth() === new Date().getMonth() &&
+          thisDate.getFullYear() === new Date().getFullYear()
         ) {
           noLog = true;
         }
@@ -91,8 +68,9 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
       );
     }
   };
+
   const showLog = () => {
-    let text = null;
+    let text: Array<any> = [];
     if (props.snake.dateLog) {
       text = Object.keys(props.snake.dateLog).map(date => {
         return (
@@ -102,8 +80,9 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
         );
       });
     }
-    return <Collection>{text}</Collection>;
+    return <Collection>{text.reverse()}</Collection>;
   };
+
   return (
     <>
       <div className={styles.Container}>
@@ -123,7 +102,6 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
         </div>
         <div className={styles.Log}>{showLog()}</div>
       </div>
-      {/* <div className={styles.Snake}>{generateSnake(5)}</div> */}
     </>
   );
 };

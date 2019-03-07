@@ -52,6 +52,14 @@ const deleteSnakeSuccess = (state: InitialStateInterface, action: any) => {
   });
 };
 
+const addLogToSnake = (state: InitialStateInterface, action: any) => {
+  const newSnake = { ...state.oneSnake.dateLog };
+  newSnake[action.dateNow] = { comment: action.comment };
+  return Object.assign({}, state, {
+    oneSnake: { ...state.oneSnake, dateLog: newSnake }
+  });
+};
+
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
     case actionTypes.GET_ONE_SNAKE_START:
@@ -66,6 +74,8 @@ const reducer = (state = initialState, action: any) => {
       return deleteSnakeStart(state, action);
     case actionTypes.DELETE_SNAKE_SUCCESS:
       return deleteSnakeSuccess(state, action);
+    case actionTypes.ADD_LOG_TO_SNAKE:
+      return addLogToSnake(state, action);
     default:
       return state;
   }
