@@ -48,13 +48,12 @@ class Header extends React.Component<IHeaderProps, {}> {
       return (
         <div className={styles.headerItemsWrapper}>
           <Chip>{this.props.username}</Chip>
-
           <div
             id={styles.logout}
             className={styles.headerItem}
             onClick={this.logout}
           >
-            Logout
+            <span>Logout</span>
           </div>
         </div>
       );
@@ -63,8 +62,10 @@ class Header extends React.Component<IHeaderProps, {}> {
 
   public render() {
     return <div id={styles.header}>
-              <div className={styles.logoWrapper}>
-                <div className={styles.logoImage}></div>
+              <div className={styles.headerItemsWrapper}>
+                <Link to="/" replace>
+                  <div className={styles.logoImage}></div>
+                </Link>
                 <p>SnakeCalendar</p>
               </div>
               {this.getHeader()}
