@@ -62,7 +62,13 @@ class Header extends React.Component<IHeaderProps, {}> {
   }
 
   public render() {
-    return <div id={styles.header}>{this.getHeader()}</div>;
+    return <div id={styles.header}>
+              <div className={styles.logoWrapper}>
+                <div className={styles.logoImage}></div>
+                <p>SnakeCalendar</p>
+              </div>
+              {this.getHeader()}
+            </div>;
   }
 }
 

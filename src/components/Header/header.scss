@@ -5,13 +5,32 @@
   width: 100%;
   padding: 8px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
+}
+
+.logoImage {
+  margin-right: 15px;
+  height: 40px;
+  width: 40px;
+  background: url('../../assets/Snake.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  p {
+    font-size: 1.2rem;
+  }
 }
 
 .headerItemsWrapper {
   color: black;
-  padding: 15px 10px;
+  padding: 15px 20px;
 }
 
 .headerItem {
@@ -20,6 +39,7 @@
   a {
     color: black;
     padding: 15px 30px;
+    border: 3px solid black;
     border-radius: 5px;
     background-color: $primary-color;
     &:hover {
