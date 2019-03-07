@@ -10,7 +10,8 @@ const mapStateToProps = (state: any) => {
     token: state.auth.token,
     userId: state.auth.userId,
     snake: state.oneSnake.oneSnake,
-    loading: state.oneSnake.getOneSnakeLoading
+    loadingGet: state.oneSnake.getOneSnakeLoading,
+    loadingLog: state.oneSnake.logDateLoading
   };
 };
 
@@ -28,7 +29,8 @@ interface ICalendarProps {
   location: any;
   match: any;
   snake: any;
-  loading: boolean;
+  loadingGet: boolean;
+  loadingLog: boolean;
 }
 
 // State is never set so we use the '{}' type.
@@ -53,7 +55,7 @@ class Calendar extends React.Component<ICalendarProps, {}> {
   };
   public render() {
     let snake = <Spinner />;
-    if (!this.props.loading) {
+    if (!this.props.loadingGet && !this.props.loadingLog) {
       snake = (
         <Snake
           snake={this.props.snake}
