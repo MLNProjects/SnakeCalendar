@@ -17,10 +17,27 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+
   &:hover {
+    animation-name: pivot;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
     cursor: pointer;
-    opacity: 0.8;
+
   }
+}
+
+@keyframes pivot {
+
+  40% {
+    transform: scale(0.95, 1.05);
+    filter: saturate(120%);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+
 }
 
 
@@ -29,6 +46,7 @@
   padding: 15px 20px;
   display: flex;
   align-items: center;
+
   p {
     font-size: 1.4rem;
   }
@@ -36,13 +54,16 @@
 
 .headerItem {
   padding-left: 15px;
-  a, span {
+
+  a,
+  span {
     font-size: 1rem;
     color: black;
     padding: 15px 30px;
-    border: 3px solid black;
+    border: 3px solid rgb(158, 155, 155);
     border-radius: 5px;
     background-color: $primary-color;
+
     &:hover {
       background-color: $primary-color-dark;
       cursor: pointer;
@@ -51,5 +72,5 @@
 }
 
 #logout {
-  color: black;
+  color: rgb(163, 158, 158);
 }
