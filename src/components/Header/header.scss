@@ -17,32 +17,57 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+
   &:hover {
+    animation-name: pivot;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
     cursor: pointer;
-    opacity: 0.8;
+
   }
 }
 
+@keyframes pivot {
+
+  40% {
+    transform: scale(0.95, 1.05);
+    filter: saturate(120%);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+
+}
 
 .headerItemsWrapper {
   color: black;
   padding: 15px 20px;
   display: flex;
   align-items: center;
-  p {
+  .appName {
     font-size: 1.4rem;
   }
 }
 
+.userName {
+  font-size: 1rem; 
+  background: $secondary-color;
+  border: 2px solid black; 
+  border-radius: 40px;
+  padding: 10px 15px; 
+}
+
 .headerItem {
-  padding-left: 15px;
-  a, span {
+  padding-left: 10px;
+  a, .ctaButton {
     font-size: 1rem;
     color: black;
-    padding: 15px 30px;
-    border: 3px solid black;
-    border-radius: 5px;
+    padding: 10px 15px;
+    border: 2px solid black;
+    border-radius: 40px;
     background-color: $primary-color;
+
     &:hover {
       background-color: $primary-color-dark;
       cursor: pointer;
@@ -50,6 +75,24 @@
   }
 }
 
-#logout {
-  color: black;
+@media only screen and (max-width: 600px) {
+  .appName {
+    display: none;
+  }
+  .logoImage {
+    margin: 0;
+  }
+  .userName {
+    font-size: 0px;
+    background: none;
+    border: none;
+    padding: 0
+  }
+  .userName::first-letter {
+    font-size: 1rem;
+    background: $secondary-color;
+    border: 2px solid black; 
+    border-radius: 50%;
+    padding: 10px 15px; 
+  }
 }
