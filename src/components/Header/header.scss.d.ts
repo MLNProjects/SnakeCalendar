@@ -1,4 +1,5 @@
 export const header: string;
+export const drop: string;
 export const logoImage: string;
 export const pivot: string;
 export const headerItemsWrapper: string;

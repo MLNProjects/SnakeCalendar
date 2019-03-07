@@ -4,7 +4,16 @@
   top: 50%;
   left: 50%;
   width: 200px;
+  animation-name: fadeIn;
+  animation-timing-function: ease-in;
+  animation-duration: 1.2s;
 }
+
+@keyframes fadeIn{
+  0%{opacity: 0}
+  100%{opacity: 1}
+}
+
 
 .input{
   height: 2rem !important;

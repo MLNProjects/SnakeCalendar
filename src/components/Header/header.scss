@@ -7,6 +7,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  animation-name: drop;
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0, 0.7, 0.9, 1);
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(-10rem);
+  }
+
+  100% {
+    transform: translateY(0rem);
+  }
 }
 
 .logoImage {
@@ -45,22 +58,25 @@
   padding: 15px 20px;
   display: flex;
   align-items: center;
+
   .appName {
     font-size: 1.4rem;
   }
 }
 
 .userName {
-  font-size: 1rem; 
+  font-size: 1rem;
   background: $secondary-color;
-  border: 2px solid black; 
+  border: 2px solid black;
   border-radius: 40px;
-  padding: 10px 15px; 
+  padding: 10px 15px;
 }
 
 .headerItem {
   padding-left: 10px;
-  a, .ctaButton {
+
+  a,
+  .ctaButton {
     font-size: 1rem;
     color: black;
     padding: 10px 15px;
@@ -79,20 +95,23 @@
   .appName {
     display: none;
   }
+
   .logoImage {
     margin: 0;
   }
+
   .userName {
     font-size: 0px;
     background: none;
     border: none;
     padding: 0
   }
+
   .userName::first-letter {
     font-size: 1rem;
     background: $secondary-color;
-    border: 2px solid black; 
+    border: 2px solid black;
     border-radius: 50%;
-    padding: 10px 15px; 
+    padding: 10px 15px;
   }
 }
