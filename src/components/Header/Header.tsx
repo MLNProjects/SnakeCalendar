@@ -47,13 +47,14 @@ class Header extends React.Component<IHeaderProps, {}> {
     } else {
       return (
         <div className={styles.headerItemsWrapper}>
-          <Chip>{this.props.username}</Chip>
+          <div className={styles.headerItem}>
+            <p className={styles.userName}>{this.props.username}</p>
+          </div>
           <div
-            id={styles.logout}
             className={styles.headerItem}
             onClick={this.logout}
           >
-            <span>Logout</span>
+            <span className={styles.ctaButton}>Logout</span>
           </div>
         </div>
       );
@@ -66,7 +67,7 @@ class Header extends React.Component<IHeaderProps, {}> {
                 <Link to="/" replace>
                   <div className={styles.logoImage}></div>
                 </Link>
-                <p>SnakeCalendar</p>
+                <p className={styles.appName}>SnakeCalendar</p>
               </div>
               {this.getHeader()}
             </div>;
