@@ -33,12 +33,12 @@ class Header extends React.Component<IHeaderProps, {}> {
       return (
         <div className={styles.headerItemsWrapper}>
           <div id="SignUp" className={styles.headerItem}>
-            <Link to="/signUp" replace>
+            <Link className={styles.ctaButton} to="/signUp" replace>
               Sign Up
             </Link>
           </div>
           <div id="SignIn" className={styles.headerItem}>
-            <Link to="/signIn" replace>
+            <Link className={styles.ctaButton} to="/signIn" replace>
               Sign In
             </Link>
           </div>
@@ -48,7 +48,9 @@ class Header extends React.Component<IHeaderProps, {}> {
       return (
         <div className={styles.headerItemsWrapper}>
           <div className={styles.headerItem}>
-            <p className={styles.userName}>{this.props.username}</p>
+            <a className={styles.userName}>
+              {this.props.username}
+            </a>  
           </div>
           <div
             className={styles.headerItem}
