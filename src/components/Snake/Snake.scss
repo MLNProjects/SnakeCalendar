@@ -16,6 +16,10 @@
   margin-top: 32px;
 }
 
+.DeleteButton {
+  border: 1px solid black;
+}
+
 @media screen and (max-width: 600px) {
   .Snake,
   .Container {

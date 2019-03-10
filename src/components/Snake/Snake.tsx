@@ -1,15 +1,17 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import SnakeChunk from "../SnakeChunk/SnakeChunk";
 import * as styles from "./Snake.scss";
 import { Button, Collection, CollectionItem, Icon } from "react-materialize";
-import snakeClient from "../../http/snakes";
 import * as actions from "../../redux/actions/index";
+import DeleteSnakeButton from "./DeleteSnakeButton/DeleteSnakeButton";
 
 const mapStateToProps = (state: any) => {
   return {
     token: state.auth.token,
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    deleteSnakeSuccess: state.oneSnake.deleteSnakeSuccess
   };
 };
 const mapDispatchToProps = (dispatch: any) => {
@@ -32,6 +34,7 @@ interface ISnakeProps {
   userId: string;
   logDate: any;
   deleteSnake: any;
+  deleteSnakeSuccess: boolean;
 }
 const snake: React.SFC<ISnakeProps> = (props: any) => {
   const logHandler = () => {
@@ -83,8 +86,16 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     return <Collection>{text.reverse()}</Collection>;
   };
 
+  const displayAll = () => {
+    if (props.deleteSnakeSuccess) {
+      return <Redirect to="/home" />;
+    }
+    return null;
+  };
+
   return (
     <>
+      {displayAll()}
       <div className={styles.Container}>
         <h1>{props.snake.snakeName}</h1>
         <h6>
@@ -92,13 +103,11 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
         </h6>
         <div>
           <Button onClick={logHandler}>LOG TODAY</Button>
-          <Button
-            onClick={() => {
+          <DeleteSnakeButton
+            delete={() => {
               props.deleteSnake(props.token, props.userId, props.snakeId);
             }}
-          >
-            DELETE ME{" "}
-          </Button>
+          />
         </div>
         <div className={styles.Log}>{showLog()}</div>
       </div>

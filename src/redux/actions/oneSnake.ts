@@ -60,7 +60,6 @@ export const logDate = (
       .then(res => {
         dispatch(logDateSuccess());
         dispatch(addLogToSnake(dateNow, comment));
-        //dispatch(getOneSnake(token, userId, snakeId)); // Istället: addLogToSnake
       })
       .catch(err => console.log(err));
   };
@@ -81,12 +80,19 @@ const deleteSnakeSuccess = () => {
 export const deleteSnake = (token: string, userId: string, snakeId: string) => {
   return (dispatch: any) => {
     dispatch(deleteSnakeStart());
-    snakeClient.deleteSnake(token, userId, snakeId);
-    // .then((res: any) => {
-    //   dispatch(deleteSnakeSuccess());
-    // })
-    // .catch((err: any) => {
-    //   console.log(err);
-    // });
+    snakeClient
+      .deleteSnake(token, userId, snakeId)
+      .then((res: any) => {
+        dispatch(deleteSnakeSuccess());
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  };
+};
+
+export const deleteSnakeReset = () => {
+  return {
+    type: actionTypes.DELETE_SNAKE_RESET
   };
 };

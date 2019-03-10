@@ -19,7 +19,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getSnakes: (token: string, userId: string) =>
-      dispatch(actions.getSnakes(token, userId))
+      dispatch(actions.getSnakes(token, userId)),
+    deleteSnakeReset: () => dispatch(actions.deleteSnakeReset())
   };
 };
 
@@ -31,6 +32,7 @@ interface IHomeProps {
   loading: boolean;
   snakes: any;
   history: any;
+  deleteSnakeReset: any;
 }
 
 interface IHomeState {
@@ -43,6 +45,7 @@ class Home extends React.Component<IHomeProps, IHomeState> {
   };
   componentDidMount = () => {
     this.props.getSnakes(this.props.token, this.props.userId);
+    this.props.deleteSnakeReset();
   };
 
   public render() {
