@@ -49,8 +49,9 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
     this.setState(newState);
   };
 
-  public handleSubmit = () => {
+  public handleSubmit = (e: any) => {
     this.props.onAuth(this.state.email, this.state.password);
+    e.preventDefault();
   };
 
   private spinnerHandler = () => {
@@ -69,8 +70,9 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
   };
   public render() {
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <Input
+          autoFocus
           type="email"
           name="email"
           value={this.state.email}
@@ -84,7 +86,7 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
           onChange={this.handleChange}
           label="Password"
         />
-        <Button onClick={this.handleSubmit} type="button">
+        <Button onClick={this.handleSubmit} type="submit">
           Log in!
         </Button>
         <div className={styles.navDiv}>

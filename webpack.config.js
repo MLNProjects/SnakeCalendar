@@ -47,8 +47,8 @@ module.exports = (env, argv) => {
           use: "url-loader?limit=10000"
         },
         {
-          test: /\.(jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/,
-          use: "file-loader"
+          test: /\.(ico|jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/,
+          use: "file-loader?name=[name].[ext]"
         },
         // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
         {

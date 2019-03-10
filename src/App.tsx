@@ -9,6 +9,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/Home/Home";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Calendar from "./components/Calendar/Calendar";
+require("./assets/favicon.ico");
 
 interface IAppProps {
   isAuthenticated: boolean;

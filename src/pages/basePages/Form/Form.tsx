@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as styles from "./form.scss";
 
-export class Form extends React.Component<{},{}> {
+export class Form extends React.Component<{ onSubmit: any }, {}> {
   public render() {
     return (
       <div id={styles.formPage}>
-        <div id={styles.formWrapper}>
+        <form onSubmit={this.props.onSubmit} id={styles.formWrapper}>
           {this.props.children}
-        </div>
+        </form>
       </div>
     );
   }

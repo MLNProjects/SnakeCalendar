@@ -48,7 +48,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
     displayPasswordMismatchError: false
   };
 
-  private signUpHandler = () => {
+  private signUpHandler = (e: any) => {
     if (this.state.password === this.state.password2) {
       this.props.onSignUp(
         this.state.email,
@@ -62,6 +62,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
       };
       this.setState(newState);
     }
+    e.preventDefault();
   };
 
   private onChangeHandler = (event: any) => {
@@ -108,11 +109,13 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
     return (
       <>
         {this.redirectToHome()}
-        <Form>
+        <Form onSubmit={this.signUpHandler}>
           <Input
+            autoFocus
+            type="email"
+            name="email"
             onChange={this.onChangeHandler}
             value={this.state.email}
-            name="email"
             label="E-Mail"
           />
 
@@ -139,7 +142,9 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
             label="Confirm password"
           />
 
-          <Button onClick={this.signUpHandler}>Submit</Button>
+          <Button onClick={this.signUpHandler} type="submit">
+            Submit
+          </Button>
           <div className={styles.navDiv}>
             <p>Already a member?</p>
             <Link to="/signIn">Sign In</Link>

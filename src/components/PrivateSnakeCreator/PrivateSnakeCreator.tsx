@@ -46,7 +46,7 @@ class PrivateSnakeCreator extends React.Component<
     newSnake: ""
   };
 
-  public addClickHandler = () => {
+  public addClickHandler = (e: any) => {
     this.props.removeError();
     if (this.state.isInputDisplayed && this.state.newSnake !== "") {
       this.props.createSnake(
@@ -67,6 +67,7 @@ class PrivateSnakeCreator extends React.Component<
         isInputDisplayed: !this.state.isInputDisplayed
       });
     }
+    e.preventDefault();
   };
   public handleChange = (event: any) => {
     const newState: IPrivateSnakeCreatorState = {
@@ -89,14 +90,15 @@ class PrivateSnakeCreator extends React.Component<
     let inputBox;
     if (this.state.isInputDisplayed || this.props.error) {
       inputBox = (
-        <div className={styles.input}>
+        <form onSubmit={this.addClickHandler} className={styles.input}>
           <Input
+            autoFocus
             type="text"
             name="newSnake"
             label="New Snake"
             onChange={this.handleChange}
           />
-        </div>
+        </form>
       );
     }
     return inputBox;
