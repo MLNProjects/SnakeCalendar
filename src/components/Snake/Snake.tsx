@@ -6,12 +6,14 @@ import * as styles from "./Snake.scss";
 import { Button, Collection, CollectionItem, Icon } from "react-materialize";
 import * as actions from "../../redux/actions/index";
 import DeleteSnakeButton from "./DeleteSnakeButton/DeleteSnakeButton";
+import Spinner from "../UI/Spinner/Spinner";
 
 const mapStateToProps = (state: any) => {
   return {
     token: state.auth.token,
     userId: state.auth.userId,
-    deleteSnakeSuccess: state.oneSnake.deleteSnakeSuccess
+    deleteSnakeSuccess: state.oneSnake.deleteSnakeSuccess,
+    loading: state.oneSnake.deleteSnakeLoading
   };
 };
 const mapDispatchToProps = (dispatch: any) => {
@@ -35,6 +37,7 @@ interface ISnakeProps {
   logDate: any;
   deleteSnake: any;
   deleteSnakeSuccess: boolean;
+  loading: boolean;
 }
 const snake: React.SFC<ISnakeProps> = (props: any) => {
   const logHandler = () => {
@@ -86,16 +89,24 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     return <Collection>{text.reverse()}</Collection>;
   };
 
-  const displayAll = () => {
+  const redirectWhenDeleted = () => {
     if (props.deleteSnakeSuccess) {
       return <Redirect to="/home" />;
     }
     return null;
   };
 
+  const displaySpinner = () => {
+    let loading = null;
+    if (props.loading) {
+      loading = <Spinner />;
+    }
+    return loading;
+  };
+
   return (
     <>
-      {displayAll()}
+      {redirectWhenDeleted()}
       <div className={styles.Container}>
         <h1>{props.snake.snakeName}</h1>
         <h6>
@@ -108,6 +119,7 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
               props.deleteSnake(props.token, props.userId, props.snakeId);
             }}
           />
+          {displaySpinner()}
         </div>
         <div className={styles.Log}>{showLog()}</div>
       </div>
