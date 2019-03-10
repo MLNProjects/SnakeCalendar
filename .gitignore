@@ -43,3 +43,5 @@ testem.log
 Thumbs.db
 target
 
+# Firebase Files
+.firebase
