@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Form } from "../basePages/Form/Form";
 import * as styles from "./signUp.scss";
-import { Input, Button, CardPanel } from "react-materialize";
+import { CardPanel } from "react-materialize";
 import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import * as actions from "../../redux/actions/index";
@@ -109,49 +109,53 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
     return (
       <>
         {this.redirectToHome()}
-        <Form onSubmit={this.signUpHandler}>
-          <Input
+        <form 
+          onSubmit={this.signUpHandler}
+          className={styles.signupForm} >
+          <h4>Sign up, it's free!</h4>
+          <input
             autoFocus
             type="email"
             name="email"
             onChange={this.onChangeHandler}
             value={this.state.email}
-            label="E-Mail"
+            placeholder="E-Mail"
           />
 
-          <Input
+          <input
             onChange={this.onChangeHandler}
             value={this.state.username}
+            type="text"
             name="username"
-            label="Username"
+            placeholder="Username"
           />
 
-          <Input
+          <input
             onChange={this.onChangeHandler}
             value={this.state.password}
             type="password"
             name="password"
-            label="Password"
+            placeholder="Password"
           />
 
-          <Input
+          <input
             onChange={this.onChangeHandler}
             value={this.state.password2}
             type="password"
             name="password2"
-            label="Confirm password"
+            placeholder="Confirm password"
           />
 
-          <Button onClick={this.signUpHandler} type="submit">
+          <button onClick={this.signUpHandler} type="submit">
             Submit
-          </Button>
+          </button>
           <div className={styles.navDiv}>
             <p>Already a member?</p>
             <Link to="/signIn">Sign In</Link>
           </div>
           {this.spinnerHandler()}
           {this.errorHandler()}
-        </Form>
+        </form>
       </>
     );
   }

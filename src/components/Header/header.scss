@@ -74,7 +74,10 @@
 }
 
 .headerItem {
-  padding-left: 10px;
+  &:first-child {
+    padding-right: 10px;
+  }
+  
   .ctaButton {
     font-size: 1rem;
     color: black;
@@ -82,7 +85,7 @@
     border: 2px solid black;
     border-radius: 40px;
     background-color: $primary-color;
-
+    
     &:hover {
       background-color: $primary-color-dark;
       cursor: pointer;
@@ -105,6 +108,7 @@
     background: none;
     border: none;
     padding: 0;
+    width: 45px;
   }
 
   .userName::first-letter {

@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { Form } from "../basePages/Form/Form";
 import * as styles from "./signIn.scss";
-import { Input, Button, CardPanel } from "react-materialize";
+import { CardPanel } from "react-materialize";
 import * as actions from "../../redux/actions/index";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import ErrorMessage from "../../components/UI/ErrorMessage/ErrorMessage";
@@ -70,32 +69,36 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
   };
   public render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Input
+      <form 
+        onSubmit={this.handleSubmit}
+        className={styles.signinForm}
+        >
+        <h4>Welcome back!</h4>
+        <input
           autoFocus
           type="email"
           name="email"
           value={this.state.email}
           onChange={this.handleChange}
-          label="E-Mail"
+          placeholder="E-Mail"
         />
-        <Input
+        <input
           type="password"
           name="password"
           value={this.state.password}
           onChange={this.handleChange}
-          label="Password"
+          placeholder="Password"
         />
-        <Button onClick={this.handleSubmit} type="submit">
+        <button onClick={this.handleSubmit} type="submit">
           Log in!
-        </Button>
+        </button>
         <div className={styles.navDiv}>
           <p>New to this service?</p>
           <Link to="/signUp">Sign Up</Link>
         </div>
         {this.spinnerHandler()}
         {this.errorHandler()}
-      </Form>
+      </form>
     );
   }
 }

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as styles from "./header.scss";
 import * as actions from "../../redux/actions/index";
-import { Chip } from "react-materialize";
 
 const mapStateToProps = (state: any) => {
   return {
