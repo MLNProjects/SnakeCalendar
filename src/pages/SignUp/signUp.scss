@@ -1,73 +1,73 @@
 @import "../basePages/Form/form";
-@import '../../../src/globals/variables';
+@import "../../../src/globals/variables";
 
 .signupForm {
-    width: 500px;
-    margin: auto;
-    margin-top: 5%;
-    padding: 20px;
+  width: 500px;
+  margin: auto;
+  margin-top: 5%;
+  padding: 20px;
 
-    .navDiv {
-        display: flex;
-        align-items: center;
-        padding-top: 10px;
+  .navDiv {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
 
-        p {
-            margin: 0;
-            padding-right: 10px;
-        }
+    p {
+      margin: 0;
+      padding-right: 10px;
+    }
+  }
+
+  a {
+    color: $purple-color-cards;
+    font-weight: bold;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  h4 {
+    padding-bottom: 10px;
+  }
+
+  button {
+    margin: 10px 0px;
+    font-size: 1rem;
+    color: black;
+    padding: 10px 40px;
+    border: 2px solid black;
+    border-radius: 40px;
+    background-color: $primary-color;
+
+    &:hover {
+      background-color: $primary-color-dark;
+      cursor: pointer;
     }
 
-    a {
-        color: $secondary-color-dark;
-        font-weight: bold;
-
-        &:hover {
-            color: $secondary-color;
-        }
+    &:focus {
+      outline: 0;
     }
-  
-    h4 {
-        padding-bottom: 10px;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+
+    &:focus:not([readonly]) {
+      border-bottom: 2px solid rgba(0, 0, 0, 0.6);
+      box-shadow: none;
     }
 
-    button {
-        margin: 10px 0px;
-        font-size: 1rem;
-        color: black;
-        padding: 10px 40px;
-        border: 2px solid black;
-        border-radius: 40px;
-        background-color: $primary-color;
-    
-        &:hover {
-            background-color: $primary-color-dark;
-            cursor: pointer;
-        }
-    
-        &:focus {
-            outline: 0;
-        }
+    &::placeholder {
+      color: grey;
     }
-    
-    input[type=email],
-    input[type=password],
-    input[type=text] {
-        border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-
-        &:focus:not([readonly]) {
-            border-bottom: 2px solid rgba(0, 0, 0, 0.6);
-            box-shadow: none;
-        }
-
-        &::placeholder {
-            color: grey;
-        }
-    }
+  }
 }
-  
+
 @media only screen and (max-width: 600px) {
-    .signupForm {
-        width: 90%;
-    }
+  .signupForm {
+    width: 90%;
+  }
 }
