@@ -5,7 +5,10 @@ import * as styles from "./Snake.scss";
 import { Button, Collection, CollectionItem, Icon } from "react-materialize";
 import snakeClient from "../../http/snakes";
 import * as actions from "../../redux/actions/index";
+
+// @ts-ignore
 import SnakeVis from "../SnakeVis/SnakeVis";
+
 
 const mapStateToProps = (state: any) => {
   return {
@@ -84,7 +87,7 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     return <Collection>{text.reverse()}</Collection>;
   };
 
-  const showVis = props.snake.dateLog?<SnakeVis {...props.snake}/>:''
+  const showVis = <div>{props.snake.dateLog?<SnakeVis dateLog={props.snake.dateLog}/>:''}</div>
 
 
   return (
@@ -104,7 +107,7 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
             DELETE ME{" "}
           </Button>
         </div>
-        <div className={styles.Log}>{showLog()}</div>
+        {/* <div className={styles.Log}>{showLog()}</div> */}
         {showVis}
       </div>
     </>
