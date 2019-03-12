@@ -14,7 +14,6 @@ class LandingPage extends React.Component<{}, {}> {
     // .then((res) => console.log(JSON.stringify(res.data)));
     return (
       <div id={styles.landingPageWrapper}>
-        {console.log("DIN MAMMA ÄR SNUT")}
         <QuickSnakeCreator />
       </div>
     );
