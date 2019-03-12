@@ -7,11 +7,6 @@ import { connect } from "tls";
 // State is never set so we use the '{}' type.
 class LandingPage extends React.Component<{}, {}> {
   public render() {
-    // snakes.create("lololo")
-    // .then((res) => console.log(JSON.stringify(res)));
-
-    // snakes.get()
-    // .then((res) => console.log(JSON.stringify(res.data)));
     return (
       <div id={styles.landingPageWrapper}>
         <QuickSnakeCreator />
