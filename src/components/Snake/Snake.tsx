@@ -7,7 +7,7 @@ import snakeClient from "../../http/snakes";
 import * as actions from "../../redux/actions/index";
 
 // @ts-ignore
-import SnakeVis from "../SnakeVis/SnakeVis";
+import SnakeVis2 from "../SnakeVis/SnakeVis2";
 
 
 const mapStateToProps = (state: any) => {
@@ -87,7 +87,7 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     return <Collection>{text.reverse()}</Collection>;
   };
 
-  const showVis = <div>{props.snake.dateLog?<SnakeVis dateLog={props.snake.dateLog}/>:''}</div>
+  const showVis = <div>{props.snake.dateLog?<SnakeVis2 dateLog={props.snake.dateLog}/>:''}</div>
 
 
   return (

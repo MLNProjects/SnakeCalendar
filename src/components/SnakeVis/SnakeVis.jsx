@@ -37,22 +37,22 @@ class SnakeVis extends React.Component {
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
 
-    var light = new THREE.PointLight(0x22a221, 10, 100);
+    var light = new THREE.PointLight(0x7d75ab, 10, 100);
     light.position.set(1, 1, 1);
     scene.add(light);
 
-    var light2 = new THREE.PointLight(0x68a391, 10, 100);
-    light2.position.set(-1, -1, -1);
+    var light2 = new THREE.PointLight(0x26a69a, 10, 100);
+    light2.position.set(1, -1, 1);
     scene.add(light2);
 
     var group = new THREE.Group();
     scene.add(group);
 
     let cubes = normDays.map(day => {
-      let geometry = new THREE.BoxGeometry(0.2, 0.1, 0.2);
+      let geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
       let material = new THREE.MeshStandardMaterial({ color: '#433F81' });
       let cube = new THREE.Mesh(geometry, material);
-      cube.position.y = day - 0.5;
+      cube.position.x = (day - 0.5)*10;
       cube.rotation.y = (day * 3.14) / 30;
       return cube;
     });
@@ -60,7 +60,7 @@ class SnakeVis extends React.Component {
     cubes.forEach(cube => group.add(cube));
 
     camera.position.z = 4;
-    renderer.setClearColor('#f1f');
+    renderer.setClearColor('#fff');
     renderer.setSize(width, height);
 
     this.scene = scene;
@@ -101,12 +101,14 @@ class SnakeVis extends React.Component {
     
     var intersects = raycaster.intersectObjects( this.group.children );
 
-    intersects.forEach(i=>i.object.rotation.z+=0.1);
+    intersects.forEach(i=>i.object.rotation.y+=0.1);
 
-    this.group.rotation.y += 0.01;
+    this.group.rotation.y = -3.14/90;
     this.camera.position.z = Math.sin(new Date().getTime() / 1000) * 0.05 + 5;
     let z = 0;
-    this.cubes.forEach(cube => (cube.position.x = Math.sin((new Date().getTime() + 300 * z++) / 1000)));
+    this.cubes.forEach(cube => (cube.position.z = Math.sin((new Date().getTime() + 300 * z++) / 1000)));
+
+    this.cubes.forEach(cube => (cube.rotation.x = Math.sin((new Date().getTime()+ 30000 * z++) / 1000)/3.14));
 
     this.renderScene();
     this.frameId = window.requestAnimationFrame(this.animate);
