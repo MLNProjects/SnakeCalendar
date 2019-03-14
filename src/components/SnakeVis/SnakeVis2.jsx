@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as THREE from 'three';
 import { createVariableStatement } from 'typescript';
+import { Mesh } from 'three';
 
 class SnakeVis2 extends React.Component {
   constructor(props) {
@@ -32,29 +33,46 @@ class SnakeVis2 extends React.Component {
 
     camera.position.z = 30;
     camera.position.y = 0;
-    camera.rotation.z+=1.57;
+    camera.rotation.z += 1.57;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
 
-    
     let lights = [];
-    lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
-    lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
-    lights[ 2 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+    lights[0] = new THREE.PointLight(0xffffff, 4, 0);
+    lights[1] = new THREE.PointLight(0xffffff, 4, 0);
+    lights[2] = new THREE.PointLight(0xffffff, 4, 0);
 
-    lights[ 0 ].position.set( 0, 200, 0 );
-    lights[ 1 ].position.set( 100, 200, 100 );
-    lights[ 2 ].position.set( - 100, - 200, - 100 );
+    lights[0].position.set(0, 0, 200);
+    lights[1].position.set(50, 50, 20);
+    lights[2].position.set(-10, -200, -10);
 
-    scene.add( lights[ 0 ] );
-    scene.add( lights[ 1 ] );
-    scene.add( lights[ 2 ] );
+    scene.add(lights[0]);
+    scene.add(lights[1]);
+    scene.add(lights[2]);
 
-    var mesh = initBones(days.length*4);
+    // use to debug texture
+
+    // var texture = new THREE.TextureLoader().load("scalse.jpg");
+    // texture.wrapT = THREE.RepeatWrapping;
+    // texture.wrapS = THREE.RepeatWrapping;
+    // texture.repeat.set(2, 2);
+
+    // var crate=new THREE.Mesh(
+    //   new THREE.BoxGeometry(10,10,10),
+    //   new THREE.MeshPhongMaterial({
+    //     map:texture
+    //   })
+    // )
+
+    // scene.add(crate);
+
+
+    var mesh = initBones(days.length * 4);
     scene.add(mesh);
 
-    this.mesh=mesh;
+    this.mesh = mesh;
     //////
+
 
     renderer.setClearColor('#fff');
     renderer.setSize(width, height);
@@ -62,7 +80,6 @@ class SnakeVis2 extends React.Component {
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
-
 
     this.mount.appendChild(this.renderer.domElement);
     this.start();
@@ -84,20 +101,22 @@ class SnakeVis2 extends React.Component {
   }
 
   animate() {
-    var raycaster = new THREE.Raycaster(); // create once
-    var mouse = new THREE.Vector2(this.state.x, this.state.y); // create once
+    // var raycaster = new THREE.Raycaster(); // create once
+    // var mouse = new THREE.Vector2(this.state.x, this.state.y); // create once
 
-    raycaster.setFromCamera(mouse, this.camera);
+    // raycaster.setFromCamera(mouse, this.camera);
 
-    var intersects = raycaster.intersectObjects(this.mesh);
+    // var intersects = raycaster.intersectObjects(this.mesh);
 
-    let z=0;
 
-    intersects.forEach(i => (i.object.rotation.y += 0.1));
 
-    this.mesh.skeleton.bones.forEach(bone=>{
-      let offset=Math.sin((new Date().getTime() + 300 * z++) / 1000);
-      bone.position.x=offset;
+    // intersects.forEach(i => (i.object.rotation.y += 0.1));
+
+    let z = 0;
+
+    this.mesh.skeleton.bones.forEach(bone => {
+      let offset = Math.sin((new Date().getTime() + 300 * z++) / 1000);
+      bone.position.x = offset;
       // bone.position.z=offset/4;
     });
 
@@ -183,12 +202,17 @@ function createBones(sizing) {
 }
 
 function createMesh(geometry, bones) {
+  var texture = new THREE.TextureLoader().load("jackma.jpg");
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.repeat.set(2, 2);
+
   var material = new THREE.MeshPhongMaterial({
     skinning: true,
-    color: 0x156289,
-    emissive: 0x072534,
-    side: THREE.DoubleSide,
-    flatShading: true,
+    color: 0xfffff,
+    //emissive:0x777777,
+    side: THREE.FrontSide,
+    map : texture,
   });
 
   var mesh = new THREE.SkinnedMesh(geometry, material);
