@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import { createVariableStatement } from 'typescript';
 import { Mesh } from 'three';
 
-
 class SnakeVis2 extends React.Component {
   constructor(props) {
     super(props);
@@ -54,11 +53,9 @@ class SnakeVis2 extends React.Component {
     var mesh = initBones(days.length * 4);
     scene.add(mesh);
 
-    this.mesh=mesh;
+    this.mesh = mesh;
 
-    
     //////
-
 
     renderer.setClearColor('#fff');
     renderer.setSize(width, height);
@@ -93,8 +90,6 @@ class SnakeVis2 extends React.Component {
     // raycaster.setFromCamera(mouse, this.camera);
 
     // var intersects = raycaster.intersectObjects(this.mesh);
-
-
 
     // intersects.forEach(i => (i.object.rotation.y += 0.1));
 
@@ -191,17 +186,18 @@ function createBones(sizing) {
 }
 
 function createMesh(geometry, bones) {
-  var texture = new THREE.TextureLoader().load("textures/jackma.jpg");
+  var texture = new THREE.TextureLoader().load('textures/jackma.jpg');
   texture.wrapT = THREE.RepeatWrapping;
   texture.wrapS = THREE.RepeatWrapping;
   texture.repeat.set(2, 2);
 
   var material = new THREE.MeshPhongMaterial({
     skinning: true,
-    color: 0xfffff,
     //emissive:0x777777,
     side: THREE.FrontSide,
-    map : texture,
+    map: buildMap(),
+    displacementMap:buildBumpMap(),
+    displacementScale :9
   });
 
   var mesh = new THREE.SkinnedMesh(geometry, material);
@@ -233,6 +229,55 @@ function initBones(segments) {
 
   mesh.scale.multiplyScalar(1);
   return mesh;
+}
+
+function buildMap() {
+  // create a buffer with color data
+  var width=400;
+  var height=400;
+  var size = width * height;
+  var data = new Uint8Array(3 * size);
+  var color={r:0.9,g:0.01,b:0.01};
+
+  var r = Math.floor(color.r * 255);
+  var g = Math.floor(color.g * 255);
+  var b = Math.floor(color.b * 255);
+
+  for (var i = 0; i < height; i++) {
+    for (var j = 0; j < width; j++) {
+     let stride=(i*width+j)*3;
+     data[stride] = 0.2*255*(Math.sin(3.14*24*i/height)+1)/2;
+     data[stride+1] = 0.01*255*(Math.sin(3.14*6*i/height)+1)/2;
+     data[stride+2] = 0.02*255*(Math.sin(3.14*12*i/height)+1)/2;
+
+    }
+  }
+
+  // used the buffer to create a DataTexture
+
+  var texture = new THREE.DataTexture(data, width, height, THREE.RGBFormat);
+  texture.needsUpdate = true;
+  return texture;
+}
+
+function buildBumpMap() {
+  // create a buffer with color data
+  var width=20;
+  var height=20;
+  var size = width * height;
+  var data = new Uint8Array(size);
+
+  for (var i = 0; i < height; i++) {
+    for (var j = 0; j < width; j++) {
+     data[i*width+j] = Math.sin(i/10)*255;
+    }
+  }
+
+  // used the buffer to create a DataTexture
+
+  var texture = new THREE.DataTexture(data, width, height, THREE.AlphaFormat);
+  texture.needsUpdate = true;
+  return texture;
 }
 
 export default SnakeVis2;
