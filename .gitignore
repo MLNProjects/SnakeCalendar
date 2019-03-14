@@ -45,3 +45,6 @@ target
 
 # Firebase Files
 .firebase
+
+#API KEY for project
+src/http/API_KEY.ts

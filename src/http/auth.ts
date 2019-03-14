@@ -1,7 +1,8 @@
 import httpClient from "./client";
+import { API_KEY } from "./API_KEY";
 
 class Auth {
-  private API_KEY: string = "AIzaSyCyMmgE2hbIVmSJSjZKMkGCs0jn4tHMRJo";
+  private API_KEY: string = API_KEY;
   public signUp(email: string, password: string) {
     const baseUrl =
       "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?" +
