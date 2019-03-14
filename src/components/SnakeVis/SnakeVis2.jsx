@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { createVariableStatement } from 'typescript';
 import { Mesh } from 'three';
 
+
 class SnakeVis2 extends React.Component {
   constructor(props) {
     super(props);
@@ -50,27 +51,12 @@ class SnakeVis2 extends React.Component {
     scene.add(lights[1]);
     scene.add(lights[2]);
 
-    // use to debug texture
-
-    // var texture = new THREE.TextureLoader().load("scalse.jpg");
-    // texture.wrapT = THREE.RepeatWrapping;
-    // texture.wrapS = THREE.RepeatWrapping;
-    // texture.repeat.set(2, 2);
-
-    // var crate=new THREE.Mesh(
-    //   new THREE.BoxGeometry(10,10,10),
-    //   new THREE.MeshPhongMaterial({
-    //     map:texture
-    //   })
-    // )
-
-    // scene.add(crate);
-
-
     var mesh = initBones(days.length * 4);
     scene.add(mesh);
 
-    this.mesh = mesh;
+    this.mesh=mesh;
+
+    
     //////
 
 
@@ -111,6 +97,9 @@ class SnakeVis2 extends React.Component {
 
 
     // intersects.forEach(i => (i.object.rotation.y += 0.1));
+
+    // this.crate.rotation.x+=0.01;
+    // this.crate.rotation.z+=0.01;
 
     let z = 0;
 
@@ -202,7 +191,7 @@ function createBones(sizing) {
 }
 
 function createMesh(geometry, bones) {
-  var texture = new THREE.TextureLoader().load("jackma.jpg");
+  var texture = new THREE.TextureLoader().load("textures/jackma.jpg");
   texture.wrapT = THREE.RepeatWrapping;
   texture.wrapS = THREE.RepeatWrapping;
   texture.repeat.set(2, 2);
