@@ -1,12 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import SnakeChunk from "../SnakeChunk/SnakeChunk";
 import * as styles from "./Snake.scss";
-import { Button, Collection, CollectionItem, Icon } from "react-materialize";
+import { Collection, CollectionItem } from "react-materialize";
 import * as actions from "../../redux/actions/index";
 import DeleteSnakeButton from "./DeleteSnakeButton/DeleteSnakeButton";
 import Spinner from "../UI/Spinner/Spinner";
+import Button from "../UI/Button/Button";
 
 const mapStateToProps = (state: any) => {
   return {
@@ -103,7 +103,6 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     }
     return loading;
   };
-
   return (
     <>
       {redirectWhenDeleted()}
@@ -113,7 +112,7 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
           This snake was created: {new Date(props.snake.created).toDateString()}
         </h6>
         <div>
-          <Button onClick={logHandler}>LOG TODAY</Button>
+          <Button clicked={logHandler}>LOG TODAY</Button>
           <DeleteSnakeButton
             delete={() => {
               props.deleteSnake(props.token, props.userId, props.snakeId);

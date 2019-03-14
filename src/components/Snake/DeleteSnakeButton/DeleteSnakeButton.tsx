@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "react-materialize";
+import Button from "../../UI/Button/Button";
 import * as styles from "./DeleteSnakeButton.scss";
 
 interface IDeleteSnakeButtonProps {
@@ -23,7 +23,7 @@ class DeleteSnakeButton extends React.Component<
     return (
       <div className={styles.Confirm}>
         <span>are you sure</span>
-        <Button onClick={this.props.delete}>DELETE FOR REALZ</Button>
+        <Button clicked={this.props.delete}>DELETE FOR REALZ</Button>
       </div>
     );
   };
@@ -31,7 +31,7 @@ class DeleteSnakeButton extends React.Component<
   public render() {
     return (
       <>
-        <Button onClick={this.displayDelete}> DELETE ME! </Button>
+        <Button clicked={this.displayDelete}> DELETE ME! </Button>
         {this.state.displayDelete ? this.displayConfirm() : null}
       </>
     );
