@@ -21,6 +21,11 @@ const authFail = (error: string) => {
     error
   };
 };
+export const clearAuthFail = () => {
+  return {
+    type: actionTypes.CLEAR_AUTH_FAIL
+  };
+};
 
 const updateProfile = (displayName: string) => {
   return {
@@ -79,7 +84,7 @@ export const signIn = (email: string, password: string) => {
             dispatch(authSuccess(res.data.idToken, res.data.localId));
             dispatch(checkAuthTimeout(res.data.expiresIn));
           })
-          .catch(err2 => console.log(err2));
+          .catch();
       })
       .catch(err => {
         dispatch(authFail(err.response.data.error.message));
@@ -105,7 +110,6 @@ export const signUp = (email: string, password: string, userName: string) => {
             );
             dispatch(authSuccess(res.data.idToken, res.data.localId));
             dispatch(checkAuthTimeout(res.data.expiresIn));
-            console.log(res2);
           })
           .catch();
       })

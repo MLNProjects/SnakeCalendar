@@ -2,10 +2,10 @@ import * as React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as styles from "./signIn.scss";
-import { CardPanel } from "react-materialize";
 import * as actions from "../../redux/actions/index";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import ErrorMessage from "../../components/UI/ErrorMessage/ErrorMessage";
+import Button from "../../components/UI/Button/Button";
 
 interface ISignInState {
   email: string;
@@ -17,6 +17,7 @@ interface ISignInProps {
   onAuth: any;
   loading: boolean;
   error: string;
+  clearAuthFail: any;
 }
 
 const mapStateToProps = (state: any) => {
@@ -30,7 +31,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     onAuth: (email: string, password: string) =>
-      dispatch(actions.signIn(email, password))
+      dispatch(actions.signIn(email, password)),
+    clearAuthFail: () => dispatch(actions.clearAuthFail())
   };
 };
 
@@ -39,7 +41,9 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
     email: "",
     password: ""
   };
-
+  componentDidMount() {
+    this.props.clearAuthFail();
+  }
   public handleChange = (event: any) => {
     const newState: ISignInState = {
       ...this.state,
@@ -69,10 +73,7 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
   };
   public render() {
     return (
-      <form 
-        onSubmit={this.handleSubmit}
-        className={styles.signinForm}
-        >
+      <form onSubmit={this.handleSubmit} className={styles.signinForm}>
         <h4>Welcome back!</h4>
         <input
           autoFocus
@@ -89,9 +90,7 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
           onChange={this.handleChange}
           placeholder="Password"
         />
-        <button onClick={this.handleSubmit} type="submit">
-          Log in!
-        </button>
+        <Button clicked={this.handleSubmit}>Log in!</Button>
         <div className={styles.navDiv}>
           <p>New to this service?</p>
           <Link to="/signUp">Sign Up</Link>

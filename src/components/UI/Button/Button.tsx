@@ -9,7 +9,7 @@ interface IButtonProps {
 const spinner: React.SFC<IButtonProps | React.HTMLProps<HTMLButtonElement>> = (
   props: any
 ) => (
-  <button className={styles.Button} onClick={props.clicked}>
+  <button className={styles.Button} onClick={props.clicked} type="submit">
     {props.children}
   </button>
 );

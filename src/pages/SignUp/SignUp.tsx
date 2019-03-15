@@ -1,12 +1,11 @@
 import * as React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { Form } from "../basePages/Form/Form";
 import * as styles from "./signUp.scss";
-import { CardPanel } from "react-materialize";
 import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import * as actions from "../../redux/actions/index";
 import ErrorMessage from "../../components/UI/ErrorMessage/ErrorMessage";
+import Button from "../../components/UI/Button/Button";
 
 interface ISignUpState {
   username: string;
@@ -21,6 +20,7 @@ interface ISignUpProps {
   onSignUp: any;
   token: string;
   error: string;
+  clearAuthFail: any;
 }
 
 const mapStateToProps = (state: any) => {
@@ -34,7 +34,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     onSignUp: (email: string, password: string, userName: string) =>
-      dispatch(actions.signUp(email, password, userName))
+      dispatch(actions.signUp(email, password, userName)),
+    clearAuthFail: () => dispatch(actions.clearAuthFail())
   };
 };
 
@@ -47,7 +48,9 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
     email: "",
     displayPasswordMismatchError: false
   };
-
+  componentDidMount() {
+    this.props.clearAuthFail();
+  }
   private signUpHandler = (e: any) => {
     if (this.state.password === this.state.password2) {
       this.props.onSignUp(
@@ -109,9 +112,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
     return (
       <>
         {this.redirectToHome()}
-        <form 
-          onSubmit={this.signUpHandler}
-          className={styles.signupForm} >
+        <form onSubmit={this.signUpHandler} className={styles.signupForm}>
           <h4>Sign up, it's free!</h4>
           <input
             autoFocus
@@ -146,9 +147,7 @@ class SignUp extends React.Component<ISignUpProps, ISignUpState> {
             placeholder="Confirm password"
           />
 
-          <button onClick={this.signUpHandler} type="submit">
-            Submit
-          </button>
+          <Button clicked={this.signUpHandler}>Submit</Button>
           <div className={styles.navDiv}>
             <p>Already a member?</p>
             <Link to="/signIn">Sign In</Link>

@@ -52,6 +52,13 @@ const authLogout = (state: InitialStateInterface, action: any) => {
     username: ""
   });
 };
+
+const clearAuthFail = (state: InitialStateInterface, action: any) => {
+  return Object.assign({}, state, {
+    error: ""
+  });
+};
+
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -64,6 +71,8 @@ const reducer = (state = initialState, action: any) => {
       return updateProfile(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
+    case actionTypes.CLEAR_AUTH_FAIL:
+      return clearAuthFail(state, action);
     default:
       return state;
   }

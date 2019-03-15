@@ -1,4 +1,4 @@
-export { signUp, signIn, logout, checkLocalState } from "./auth";
+export { signUp, signIn, logout, checkLocalState, clearAuthFail } from "./auth";
 export { createSnake, createSnakeRemoveError, getSnakes } from "./snake";
 
 export {
