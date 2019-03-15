@@ -3,5 +3,9 @@
 .Confirm {
   display: inline-block;
   color: $error-color;
-  padding: 0px;
+  margin: 0px 8px;
+}
+span {
+  margin: 0px 8px;
+  font-size: 1.1rem;
 }

@@ -112,7 +112,7 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
           This snake was created: {new Date(props.snake.created).toDateString()}
         </h6>
         <div>
-          <Button clicked={logHandler}>LOG TODAY</Button>
+          <Button clicked={logHandler}>LOG DATE</Button>
           <DeleteSnakeButton
             delete={() => {
               props.deleteSnake(props.token, props.userId, props.snakeId);
