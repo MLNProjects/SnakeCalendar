@@ -5,7 +5,7 @@ import * as styles from "./Snake.scss";
 import { Collection, CollectionItem } from "react-materialize";
 import * as actions from "../../redux/actions/index";
 import DeleteSnakeButton from "./DeleteSnakeButton/DeleteSnakeButton";
-import Spinner from "../UI/Spinner/Spinner";
+import CenteredSpinner from "../UI/CenteredSpinner/CenteredSpinner";
 import Button from "../UI/Button/Button";
 
 const mapStateToProps = (state: any) => {
@@ -13,7 +13,8 @@ const mapStateToProps = (state: any) => {
     token: state.auth.token,
     userId: state.auth.userId,
     deleteSnakeSuccess: state.oneSnake.deleteSnakeSuccess,
-    loading: state.oneSnake.deleteSnakeLoading
+    loading: state.oneSnake.deleteSnakeLoading,
+    logLoading: state.oneSnake.logDateLoading
   };
 };
 const mapDispatchToProps = (dispatch: any) => {
@@ -38,6 +39,7 @@ interface ISnakeProps {
   deleteSnake: any;
   deleteSnakeSuccess: boolean;
   loading: boolean;
+  logLoading: boolean;
 }
 const snake: React.SFC<ISnakeProps> = (props: any) => {
   const logHandler = () => {
@@ -86,7 +88,14 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
         );
       });
     }
-    return <Collection>{text.reverse()}</Collection>;
+    return (
+      <Collection>
+        <CollectionItem>
+          {props.logLoading ? <div className={styles.LogLoader} /> : null}
+        </CollectionItem>
+        {text.reverse()}
+      </Collection>
+    );
   };
 
   const redirectWhenDeleted = () => {
@@ -99,7 +108,7 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
   const displaySpinner = () => {
     let loading = null;
     if (props.loading) {
-      loading = <Spinner />;
+      loading = <CenteredSpinner />;
     }
     return loading;
   };
