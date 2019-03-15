@@ -19,5 +19,5 @@ export const onSnakeCreate = functions.database
   });
 
 function addSnek(text: string): string {
-  return text.replace(/\bsnek\b/g, "🐍");
+  return text.replace(/snek/g, "🐍");
 }

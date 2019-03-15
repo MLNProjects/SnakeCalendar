@@ -82,19 +82,19 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     if (props.snake.dateLog) {
       text = Object.keys(props.snake.dateLog).map(date => {
         return (
-          <CollectionItem key={date}>
+          <li className={styles.CollectionItem} key={date}>
             Logged On: {new Date(Number(date)).toDateString()}
-          </CollectionItem>
+          </li>
         );
       });
     }
     return (
-      <Collection>
-        <CollectionItem>
+      <ul className={styles.Collection}>
+        <li className={styles.CollectionItem}>
           {props.logLoading ? <div className={styles.LogLoader} /> : null}
-        </CollectionItem>
+        </li>
         {text.reverse()}
-      </Collection>
+      </ul>
     );
   };
 

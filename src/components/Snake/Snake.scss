@@ -30,8 +30,8 @@
 
 .LogLoader {
   height: 21px;
-  margin: 10px;
-  animation: pulse 1s infinite ease-in-out;
+  margin: 10px 0px;
+  animation: pulse 0.5s infinite ease-in-out;
   width: 200px;
 }
 
@@ -45,4 +45,17 @@
   100% {
     background-color: rgba(165, 165, 165, 0.1);
   }
+}
+
+// Collection
+ul.Collection {
+  margin: 0.5rem 0 1rem 0;
+  overflow: hidden;
+  position: relative;
+}
+.CollectionItem {
+  background-color: #fff;
+  line-height: 1.5rem;
+  margin: 8px 16px;
+  list-style-type: none;
 }
