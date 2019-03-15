@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as THREE from 'three';
 import { createVariableStatement } from 'typescript';
-import { Mesh } from 'three';
+import { Mesh, BoxGeometry, MeshBasicMaterial } from 'three';
+import SimplexNoise from "simplex-noise";
 
 class SnakeVis2 extends React.Component {
   constructor(props) {
@@ -54,6 +55,13 @@ class SnakeVis2 extends React.Component {
     scene.add(mesh);
 
     this.mesh = mesh;
+
+    var cube=new THREE.Mesh(
+      new THREE.BoxGeometry(20,20,20),
+      new THREE.MeshBasicMaterial({map:buildBumpMap()})
+    )
+
+    scene.add(cube);
 
     //////
 
@@ -134,8 +142,8 @@ class SnakeVis2 extends React.Component {
 
 function createGeometry(sizing) {
   var geometry = new THREE.CylinderBufferGeometry(
-    1, // radiusTop
-    0.1, // radiusBottom
+    3, // radiusTop
+    0.3, // radiusBottom
     sizing.height, // height
     32, // radiusSegments
     sizing.segmentCount * 3, // heightSegments
@@ -186,18 +194,20 @@ function createBones(sizing) {
 }
 
 function createMesh(geometry, bones) {
-  var texture = new THREE.TextureLoader().load('textures/jackma.jpg');
+  var texture = new THREE.TextureLoader().load('textures/scales.jpg');
   texture.wrapT = THREE.RepeatWrapping;
   texture.wrapS = THREE.RepeatWrapping;
-  texture.repeat.set(2, 2);
+  texture.repeat.set(100, 100);
 
   var material = new THREE.MeshPhongMaterial({
     skinning: true,
     //emissive:0x777777,
+     color:0xfff,
     side: THREE.FrontSide,
-    map: buildMap(),
+    // map: buildMap(),
     displacementMap:buildBumpMap(),
-    displacementScale :9
+    displacementScale:0.5,
+    bumpMap:buildBumpMap()
   });
 
   var mesh = new THREE.SkinnedMesh(geometry, material);
@@ -233,51 +243,70 @@ function initBones(segments) {
 
 function buildMap() {
   // create a buffer with color data
-  var width=400;
-  var height=400;
-  var size = width * height;
-  var data = new Uint8Array(3 * size);
-  var color={r:0.9,g:0.01,b:0.01};
+ // create a buffer with color data
+ var width=40;
+ var height=200;
+ var size = width * height;
+ var data = new Uint8Array(3 * size);
+ var color={r:0.9,g:0.01,b:0.01};
 
-  var r = Math.floor(color.r * 255);
-  var g = Math.floor(color.g * 255);
-  var b = Math.floor(color.b * 255);
+ var r = Math.floor(color.r * 255);
+ var g = Math.floor(color.g * 255);
+ var b = Math.floor(color.b * 255);
 
-  for (var i = 0; i < height; i++) {
-    for (var j = 0; j < width; j++) {
-     let stride=(i*width+j)*3;
-     data[stride] = 0.2*255*(Math.sin(3.14*24*i/height)+1)/2;
-     data[stride+1] = 0.01*255*(Math.sin(3.14*6*i/height)+1)/2;
-     data[stride+2] = 0.02*255*(Math.sin(3.14*12*i/height)+1)/2;
+ var simplex=new SimplexNoise();
 
-    }
-  }
+ for (var i = 0; i < height; i++) {
+   for (var j = 0; j < width; j++) {
+    let stride=(i*width+j)*3;
+    let res=10;
+    let value=255-(125/(res)*(((i+j)/2%res))+125/(res)*(((((i-j+width+height)/2))%res)))+simplex.noise2D(i/100,j/100)*40;
+    data[stride] = value;
+    data[stride+1] = 0;
+    data[stride+2] =  255-value;
 
-  // used the buffer to create a DataTexture
+   }
+ }
 
-  var texture = new THREE.DataTexture(data, width, height, THREE.RGBFormat);
-  texture.needsUpdate = true;
-  return texture;
+ // used the buffer to create a DataTexture
+
+ var texture = new THREE.DataTexture(data, width, height, THREE.RGBFormat);
+ texture.needsUpdate = true;
+ return texture;
 }
 
 function buildBumpMap() {
   // create a buffer with color data
-  var width=20;
-  var height=20;
-  var size = width * height;
-  var data = new Uint8Array(size);
+ // create a buffer with color data
+ var width=40;
+ var height=200;
+ var size = width * height;
+ var data = new Uint8Array(3 * size);
+ var color={r:0.9,g:0.01,b:0.01};
 
-  for (var i = 0; i < height; i++) {
-    for (var j = 0; j < width; j++) {
-     data[i*width+j] = Math.sin(i/10)*255;
-    }
-  }
+ var r = Math.floor(color.r * 255);
+ var g = Math.floor(color.g * 255);
+ var b = Math.floor(color.b * 255);
 
-  // used the buffer to create a DataTexture
+ var simplex=new SimplexNoise();
 
-  var texture = new THREE.DataTexture(data, width, height, THREE.AlphaFormat);
-  texture.needsUpdate = true;
-  return texture;
+ for (var i = 0; i < height; i++) {
+   for (var j = 0; j < width; j++) {
+    let stride=(i*width+j)*3;
+    let res=10;
+    let value=255-(125/(res)*(((i+j)/2%res))+125/(res)*(((((i-j+width+height)/2))%res)))+simplex.noise2D(i/100,j/100)*40;
+    data[stride] = value;
+    data[stride+1] = value;
+    data[stride+2] =  value;
+
+   }
+ }
+
+ // used the buffer to create a DataTexture
+
+ var texture = new THREE.DataTexture(data, width, height, THREE.RGBFormat);
+ texture.needsUpdate = true;
+ return texture;
 }
 
 export default SnakeVis2;
