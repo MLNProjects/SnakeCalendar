@@ -1,4 +1,6 @@
 import * as functions from "firebase-functions";
+const admin = require("firebase-admin");
+admin.initializeApp();
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
@@ -21,3 +23,15 @@ export const onSnakeCreate = functions.database
 function addSnek(text: string): string {
   return text.replace(/snek/g, "🐍");
 }
+
+export const checkSnake = functions.https.onRequest((req, res) => {
+  const currentTime = new Date();
+  console.log(
+    `This is a cron job, the time is now ${currentTime.getHours()}:${currentTime.getMinutes()}`
+  );
+  return res
+    .status(200)
+    .send(
+      `The time is now ${currentTime.getHours()}:${currentTime.getMinutes()}`
+    );
+});
