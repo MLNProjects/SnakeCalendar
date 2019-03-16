@@ -74,21 +74,29 @@
 }
 
 .headerItem {
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  
   &:first-child {
     padding-right: 10px;
+  }
+
+  &:hover {
+    transform: scale(1.02, 1.02) perspective(1px)
   }
   
   .ctaButton {
     font-size: 1rem;
     color: black;
     padding: 10px 15px;
-    border: 2px solid black;
     border-radius: 40px;
     background-color: $primary-color;
+    border: 2px solid black;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     
     &:hover {
-      background-color: $primary-color-dark;
       cursor: pointer;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
     }
   }
 }
