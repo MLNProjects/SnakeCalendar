@@ -2,12 +2,6 @@ import * as functions from "firebase-functions";
 const admin = require("firebase-admin");
 admin.initializeApp();
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
 export const onSnakeCreate = functions.database
   .ref("/users/{userId}/snakes/{snakeId}")
   .onCreate((snapshot: any, context) => {
@@ -37,8 +31,10 @@ export const checkSnake = functions.https.onRequest((req, res) => {
       `The time is now ${currentTime.getHours()}:${currentTime.getMinutes()}`
     );
 });
+let listOfSnakeToDeprecate: Array<any> = [];
 
 function gotData(data: any) {
+  listOfSnakeToDeprecate = [];
   const users = data.val();
   const keys = Object.keys(users);
   const currentTime = Date.now();
@@ -58,18 +54,36 @@ function gotData(data: any) {
         const dateLogArray = keysDateLog.map(Number);
         const latestLog = Math.max(...dateLogArray);
         const timeDifference = currentTime - latestLog;
-        const shouldDelete = timeDifference > 86400000 ? true : false;
-
-        console.log(
-          `The user ${k.slice(0, 4)}...'s snake "${snakes[k2].snakeName}" ${
-            shouldDelete ? "should be delete." : "is fine."
-          }`
-        );
+        const shouldDelete = timeDifference > 86400000 ? true : false; // 86400000 is a day in milliseconds
+        if (shouldDelete) {
+          listOfSnakeToDeprecate.push([k, k2]);
+        }
       }
     }
   }
+  deprecateSnakes(listOfSnakeToDeprecate);
 }
 
 function errData(err: any) {
   console.log(`Error! \n ${err}`);
+}
+
+function deprecateSnakes(listOfSnakes: Array<any>) {
+  console.log(`deprecatedSnakes is running 🐍🐍🐍🐍🐍🐍🐍🐍🐍`);
+  const db = admin.database();
+  for (let i = 0; i < listOfSnakes.length; i++) {
+    const snakeRef = db.ref(
+      `users/${listOfSnakes[i][0]}/snakes/${listOfSnakes[i][1]}`
+    );
+    snakeRef
+      .update({ deprecated: true })
+      .then(() => {
+        console.log(
+          `Deprecated snake ${listOfSnakes[i][1]} from user ${
+            listOfSnakes[i][0]
+          }`
+        );
+      })
+      .catch((err: any) => console.log(err));
+  }
 }
