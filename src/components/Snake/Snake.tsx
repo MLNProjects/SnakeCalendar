@@ -112,6 +112,15 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     }
     return loading;
   };
+
+  const showDeprecated = () => {
+    let deprecated = null;
+    if (props.snake.deprecated && props.snake.deprecated === true) {
+      deprecated = <p style={{ color: "red" }}>This snake is deprecated</p>;
+    }
+    return deprecated;
+  };
+
   return (
     <>
       {redirectWhenDeleted()}
@@ -129,6 +138,7 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
           />
           {displaySpinner()}
         </div>
+        {showDeprecated()}
         <div className={styles.Log}>{showLog()}</div>
       </div>
     </>
