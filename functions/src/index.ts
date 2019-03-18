@@ -86,4 +86,5 @@ function deprecateSnakes(listOfSnakes: Array<any>) {
       })
       .catch((err: any) => console.log(err));
   }
+  listOfSnakeToDeprecate = [];
 }
