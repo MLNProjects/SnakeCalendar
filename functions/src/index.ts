@@ -23,7 +23,7 @@ export const checkSnake = functions.https.onRequest((req, res) => {
   console.log(`CRON job ran at ${currentTime}`);
   const db = admin.database();
   const ref = db.ref("users");
-  ref.on("value", gotData, errData);
+  ref.once("value", gotData, errData);
 
   return res
     .status(200)
