@@ -1,3 +1,4 @@
 export const card: string;
-export const cardTitle: string;
-export const cardDate: string;
+export const formWrapper: string;
+export const inputWrapper: string;
+export const createSnakeButton: string;

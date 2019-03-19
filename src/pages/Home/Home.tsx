@@ -1,10 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import SnakeCard from "../../components/SnakeCard/SnakeCard";
-import PrivateSnakeCreator from "../../components/PrivateSnakeCreator/PrivateSnakeCreator";
 import * as styles from "./home.scss";
 import * as actions from "../../redux/actions/index";
 import CenteredSpinner from "../../components/UI/CenteredSpinner/CenteredSpinner";
+import SnakeCardButton from "../../components/SnakeCard/SnakeCardButton/SnakeCardButton";
 
 const mapStateToProps = (state: any) => {
   return {
@@ -43,13 +43,13 @@ class Home extends React.Component<IHomeProps, IHomeState> {
   public state = {
     bajs: "bajs"
   };
-  componentDidMount = () => {
+  public componentDidMount = () => {
     this.props.getSnakes(this.props.token, this.props.userId);
     this.props.deleteSnakeReset();
   };
 
   public render() {
-    let allSnakes = <CenteredSpinner />;
+    let allSnakes: any = <CenteredSpinner />;
 
     if (!this.props.loading) {
       allSnakes = this.props.snakes.map((snake: any) => {
@@ -64,12 +64,12 @@ class Home extends React.Component<IHomeProps, IHomeState> {
           />
         );
       });
+      allSnakes = [<SnakeCardButton key="SnakeCardButton"/>, ...allSnakes];
     }
     return (
       <div id={styles.homeWrapper}>
         <div id={styles.snakesWrapper}>
           {allSnakes}
-          <PrivateSnakeCreator />
         </div>
       </div>
     );

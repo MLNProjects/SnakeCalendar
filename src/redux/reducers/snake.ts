@@ -4,7 +4,7 @@ interface InitialStateInterface {
   createSnakeLoading: boolean;
   createSnakeError: string;
   getSnakesLoading: boolean;
-  snakes: Array<Object>;
+  snakes: any;
 }
 const initialState: InitialStateInterface = {
   createSnakeLoading: false,

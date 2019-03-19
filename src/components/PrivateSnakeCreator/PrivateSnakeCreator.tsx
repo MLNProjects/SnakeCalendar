@@ -9,6 +9,7 @@ import Spinner from "../UI/Spinner/Spinner";
 interface IPrivateSnakeCreatorState {
   isInputDisplayed: boolean;
   newSnake: string;
+  rule: number;
 }
 
 interface IPrivateSnakeCreatorProps {
@@ -31,8 +32,12 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    createSnake: (token: string, userId: string, snakeName: string) =>
-      dispatch(actions.createSnake(token, userId, snakeName)),
+    createSnake: (
+      token: string,
+      userId: string,
+      snakeName: string,
+      rule: number
+    ) => dispatch(actions.createSnake(token, userId, snakeName, rule)),
     removeError: () => dispatch(actions.createSnakeRemoveError())
   };
 };
@@ -43,7 +48,8 @@ class PrivateSnakeCreator extends React.Component<
 > {
   public state = {
     isInputDisplayed: false,
-    newSnake: ""
+    newSnake: "",
+    rule: 1
   };
 
   public addClickHandler = (e: any) => {
@@ -52,7 +58,8 @@ class PrivateSnakeCreator extends React.Component<
       this.props.createSnake(
         this.props.token,
         this.props.userId,
-        this.state.newSnake
+        this.state.newSnake,
+        Number(this.state.rule)
       );
       this.setState({
         ...this.state,
@@ -96,6 +103,12 @@ class PrivateSnakeCreator extends React.Component<
             type="text"
             name="newSnake"
             label="New Snake"
+            onChange={this.handleChange}
+          />
+          <Input
+            type="number"
+            name="rule"
+            label="rule"
             onChange={this.handleChange}
           />
         </form>

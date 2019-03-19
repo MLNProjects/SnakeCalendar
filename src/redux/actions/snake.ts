@@ -29,12 +29,13 @@ export const createSnakeRemoveError = () => {
 export const createSnake = (
   token: string,
   userId: string,
-  snakeName: string
+  snakeName: string,
+  rule: number
 ) => {
   return (dispatch: any) => {
     dispatch(createSnakeStart());
     snakeClient
-      .create(token, userId, snakeName)
+      .create(token, userId, snakeName, rule)
       .then(res => {
         dispatch(createSnakeSuccess());
         dispatch(getSnakes(token, userId));
