@@ -20,14 +20,6 @@
   border: 1px solid black;
 }
 
-@media screen and (max-width: 600px) {
-  .Snake,
-  .Container {
-    width: 80%;
-    text-align: center;
-  }
-}
-
 .LogLoader {
   height: 21px;
   margin: 10px 0px;
@@ -58,4 +50,16 @@ ul.Collection {
   line-height: 1.5rem;
   margin: 8px 16px;
   list-style-type: none;
+}
+
+@media screen and (max-width: 600px) {
+  .Snake,
+  .Container {
+    width: 80%;
+    text-align: center;
+  }
+  .LogLoader {
+    text-align: center;
+    margin: auto;
+  }
 }

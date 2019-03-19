@@ -6,6 +6,7 @@ interface InitialStateInterface {
   logDateLoading: boolean;
   deleteSnakeLoading: boolean;
   deleteSnakeSuccess: boolean;
+  error: string;
 }
 
 const initialState: InitialStateInterface = {
@@ -13,20 +14,30 @@ const initialState: InitialStateInterface = {
   oneSnake: {},
   logDateLoading: false,
   deleteSnakeLoading: false,
-  deleteSnakeSuccess: false
+  deleteSnakeSuccess: false,
+  error: ""
 };
 
 const getOneSnakeStart = (state: InitialStateInterface, action: any) => {
   return Object.assign({}, state, {
     getOneSnakeLoading: true,
     oneSnake: {},
-    deleteSnakeSuccess: false
+    deleteSnakeSuccess: false,
+    error: ""
   });
 };
 
 const getOneSnakeSuccess = (state: InitialStateInterface, action: any) => {
   return Object.assign({}, state, {
     oneSnake: action.snake,
+    getOneSnakeLoading: false,
+    error: ""
+  });
+};
+
+const getOneSnakeError = (state: InitialStateInterface, action: any) => {
+  return Object.assign({}, state, {
+    error: action.error,
     getOneSnakeLoading: false
   });
 };
@@ -89,6 +100,8 @@ const reducer = (state = initialState, action: any) => {
       return deleteSnakeReset(state, action);
     case actionTypes.ADD_LOG_TO_SNAKE:
       return addLogToSnake(state, action);
+    case actionTypes.GET_ONE_SNAKE_ERROR:
+      return getOneSnakeError(state, action);
     default:
       return state;
   }

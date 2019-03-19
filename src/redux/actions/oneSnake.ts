@@ -14,6 +14,13 @@ const getOneSnakeSuccess = (snake: Object) => {
   };
 };
 
+const getOneSnakeError = (err: string) => {
+  return {
+    type: actionTypes.GET_ONE_SNAKE_ERROR,
+    error: err
+  };
+};
+
 export const getOneSnake = (token: string, userId: string, snakeId: string) => {
   return (dispatch: any) => {
     dispatch(getOneSnakeStart());
@@ -22,7 +29,7 @@ export const getOneSnake = (token: string, userId: string, snakeId: string) => {
       .then(res => {
         dispatch(getOneSnakeSuccess(res.data));
       })
-      .catch(err => console.log(err.response));
+      .catch(err => dispatch(getOneSnakeError(err.response.statusText)));
   };
 };
 
