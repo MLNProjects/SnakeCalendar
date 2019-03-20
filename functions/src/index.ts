@@ -31,10 +31,9 @@ export const checkSnake = functions.https.onRequest((req, res) => {
       `The time is now ${currentTime.getHours()}:${currentTime.getMinutes()}`
     );
 });
-let listOfSnakeToDeprecate: Array<any> = [];
 
 function gotData(data: any) {
-  listOfSnakeToDeprecate = [];
+  let listOfSnakeToDeprecate: Array<any> = [];
   const users = data.val();
   const keys = Object.keys(users);
   const currentTime = Date.now();
@@ -54,7 +53,8 @@ function gotData(data: any) {
         const dateLogArray = keysDateLog.map(Number);
         const latestLog = Math.max(...dateLogArray);
         const timeDifference = currentTime - latestLog;
-        const shouldDelete = timeDifference > 86400000 ? true : false; // 86400000 is a day in milliseconds
+        const shouldDelete =
+          timeDifference > 86400000 * snakes[k2].rule ? true : false; // 86400000 is a day in milliseconds and rule is # of days between logs
         if (shouldDelete) {
           listOfSnakeToDeprecate.push([k, k2]);
         }
@@ -67,7 +67,7 @@ function gotData(data: any) {
 function errData(err: any) {
   console.log(`Error! \n ${err}`);
 }
-
+// The database actions should happen here
 function deprecateSnakes(listOfSnakes: Array<any>) {
   console.log(`deprecatedSnakes is running 🐍🐍🐍🐍🐍🐍🐍🐍🐍`);
   const db = admin.database();
@@ -86,5 +86,4 @@ function deprecateSnakes(listOfSnakes: Array<any>) {
       })
       .catch((err: any) => console.log(err));
   }
-  listOfSnakeToDeprecate = [];
 }

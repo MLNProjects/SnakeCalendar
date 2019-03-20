@@ -47,14 +47,9 @@ class Header extends React.Component<IHeaderProps, {}> {
       return (
         <div className={styles.headerItemsWrapper}>
           <div className={styles.headerItem}>
-            <a className={styles.userName}>
-              {this.props.username}
-            </a>  
+            <a className={styles.userName}>{this.props.username}</a>
           </div>
-          <div
-            className={styles.headerItem}
-            onClick={this.logout}
-          >
+          <div className={styles.headerItem} onClick={this.logout}>
             <span className={styles.ctaButton}>Logout</span>
           </div>
         </div>
@@ -63,15 +58,20 @@ class Header extends React.Component<IHeaderProps, {}> {
   }
 
   public render() {
-    return <div id={styles.header}>
-              <div className={styles.headerItemsWrapper}>
-                <Link to="/" replace>
-                  <div className={styles.logoImage}></div>
-                </Link>
-                <p className={styles.appName}>SnakeCalendar</p>
-              </div>
-              {this.getHeader()}
-            </div>;
+    return (
+      <div id={styles.header}>
+        <div className={styles.headerItemsWrapper}>
+          <Link to="/" replace>
+            <div className={styles.logoImage} />
+          </Link>
+          <p className={styles.appName}>SnakeCalendar</p>
+          <Link to="/about" replace>
+            <p>About</p>
+          </Link>
+        </div>
+        {this.getHeader()}
+      </div>
+    );
   }
 }
 

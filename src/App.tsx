@@ -9,6 +9,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/Home/Home";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Calendar from "./components/Calendar/Calendar";
+import About from "./pages/About/About";
 require("./assets/favicon.ico");
 
 interface IAppProps {
@@ -43,6 +44,7 @@ class App extends React.Component<IAppProps, {}> {
           path={"/snake/:snakeId"}
           component={Calendar}
         />
+        <Route path={"/about"} component={About} />
         <Route exact path={"/"} component={LandingPage} />
         <Redirect to="/" />
       </Switch>
@@ -57,6 +59,7 @@ class App extends React.Component<IAppProps, {}> {
             path={"/snake/:snakeId"}
             component={Calendar}
           />
+          <Route path={"/about"} component={About} />
           <Redirect to="/home" />
         </Switch>
       );
