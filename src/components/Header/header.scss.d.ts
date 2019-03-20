@@ -7,3 +7,4 @@ export const appName: string;
 export const userName: string;
 export const headerItem: string;
 export const ctaButton: string;
+export const aboutLink: string;

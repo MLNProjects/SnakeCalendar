@@ -1,3 +1,19 @@
 .aboutPageWrapper {
   width: 80%;
+  margin: auto;
+}
+.headWrapper {
+  text-align: center;
+  margin: auto;
+}
+.contentWrapper {
+  width: 60%;
+  margin: 40px auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .contentWrapper {
+    width: 80%;
+    margin: 40px auto;
+  }
 }

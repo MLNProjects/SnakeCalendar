@@ -1,4 +1,4 @@
-@import '../../globals/variables.scss';
+@import "../../globals/variables.scss";
 
 #header {
   height: 80px;
@@ -26,7 +26,7 @@
   margin-right: 15px;
   height: 55px;
   width: 55px;
-  background: url('../../assets/Snake.png');
+  background: url("../../assets/Snake.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -36,12 +36,10 @@
     animation-duration: 0.3s;
     animation-timing-function: ease-in-out;
     cursor: pointer;
-
   }
 }
 
 @keyframes pivot {
-
   40% {
     transform: scale(0.95, 1.05);
     filter: saturate(120%);
@@ -50,7 +48,6 @@
   100% {
     transform: scale(1, 1);
   }
-
 }
 
 .headerItemsWrapper {
@@ -75,15 +72,15 @@
 
 .headerItem {
   transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  
+
   &:first-child {
     padding-right: 10px;
   }
 
   &:hover {
-    transform: scale(1.02, 1.02) perspective(1px)
+    transform: scale(1.02, 1.02) perspective(1px);
   }
-  
+
   .ctaButton {
     font-size: 1rem;
     color: black;
@@ -93,7 +90,7 @@
     border: 2px solid black;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-    
+
     &:hover {
       cursor: pointer;
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
@@ -101,6 +98,16 @@
   }
 }
 
+.aboutLink {
+  margin-left: 16px;
+  padding: 8px;
+  font-size: 1.2rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+a {
+  color: #444;
+}
 @media only screen and (max-width: 600px) {
   .appName {
     display: none;
