@@ -108,7 +108,7 @@ class SnakeCardButton extends React.Component<
               onChange={this.handleChange}
               name="rule"
               placeholder="Rule"
-              type="text"
+              type="number"
             />
           </div>
           <button className={styles.createSnakeButton} onClick={this.onSubmit}>
