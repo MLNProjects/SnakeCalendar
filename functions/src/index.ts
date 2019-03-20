@@ -56,7 +56,14 @@ function gotData(data: any) {
         const shouldDelete =
           timeDifference > 86400000 * snakes[k2].rule ? true : false; // 86400000 is a day in milliseconds and rule is # of days between logs
         if (shouldDelete) {
-          listOfSnakeToDeprecate.push([k, k2]);
+          const startDate = Math.min(...dateLogArray);
+          listOfSnakeToDeprecate.push([
+            k,
+            k2,
+            latestLog,
+            startDate,
+            dateLogArray
+          ]);
         }
       }
     }
@@ -72,18 +79,27 @@ function deprecateSnakes(listOfSnakes: Array<any>) {
   console.log(`deprecatedSnakes is running 🐍🐍🐍🐍🐍🐍🐍🐍🐍`);
   const db = admin.database();
   for (let i = 0; i < listOfSnakes.length; i++) {
-    const snakeRef = db.ref(
-      `users/${listOfSnakes[i][0]}/snakes/${listOfSnakes[i][1]}`
+    const snakeHistoryRef = db.ref(
+      `users/${listOfSnakes[i][0]}/snakes/${listOfSnakes[i][1]}/history`
     );
-    snakeRef
-      .update({ deprecated: true })
-      .then(() => {
-        console.log(
-          `Deprecated snake ${listOfSnakes[i][1]} from user ${
-            listOfSnakes[i][0]
-          }`
-        );
+    const newHistoryRef = snakeHistoryRef.push();
+    newHistoryRef
+      .set({
+        endDate: listOfSnakes[i][2],
+        startDate: listOfSnakes[i][3],
+        dateLog: listOfSnakes[i][4]
       })
-      .catch((err: any) => console.log(err));
+      .then((res: any) => {
+        const snakeDateLogRef = db.ref(
+          `users/${listOfSnakes[i][0]}/snakes/${listOfSnakes[i][1]}/dateLog`
+        );
+        snakeDateLogRef.remove().then((res: any) => {
+          console.log(
+            `🐍:${listOfSnakes[i][1]} from user ${
+              listOfSnakes[i][0]
+            } was deprecated `
+          );
+        });
+      });
   }
 }
