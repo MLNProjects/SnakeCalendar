@@ -6,3 +6,4 @@ export const LogLoader: string;
 export const pulse: string;
 export const Collection: string;
 export const CollectionItem: string;
+export const snakeInfo: string;

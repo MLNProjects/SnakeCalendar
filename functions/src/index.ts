@@ -33,7 +33,7 @@ export const checkSnake = functions.https.onRequest((req, res) => {
 });
 
 function gotData(data: any) {
-  let listOfSnakeToDeprecate: Array<any> = [];
+  const listOfSnakeToDeprecate: Array<any> = [];
   const users = data.val();
   const keys = Object.keys(users);
   const currentTime = Date.now();
@@ -89,11 +89,11 @@ function deprecateSnakes(listOfSnakes: Array<any>) {
         startDate: listOfSnakes[i][3],
         dateLog: listOfSnakes[i][4]
       })
-      .then((res: any) => {
+      .then(() => {
         const snakeDateLogRef = db.ref(
           `users/${listOfSnakes[i][0]}/snakes/${listOfSnakes[i][1]}/dateLog`
         );
-        snakeDateLogRef.remove().then((res: any) => {
+        snakeDateLogRef.remove().then(() => {
           console.log(
             `🐍:${listOfSnakes[i][1]} from user ${
               listOfSnakes[i][0]
