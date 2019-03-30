@@ -1,4 +1,36 @@
-#landingPageWrapper{
+#landingPageWrapper {
   height: 100%;
-  width: 100%;
+  width: 70%;
+  text-align: center;
+  margin: auto;
+  margin-top: 88px;
+}
+.infoWrapper {
+  width: 60%;
+  margin: auto;
+}
+.aboutLink {
+  margin-top: 88px;
+  color: #7d75ab;
+  &:hover {
+    color: #cc8181;
+  }
+}
+.signupLink {
+  color: #7d75ab;
+  &:hover {
+    color: #cc8181;
+  }
+}
+.aboutLinkWrapper {
+  margin: auto;
+  width: 72px;
+}
+@media only screen and (max-width: 600px) {
+  #landingPageWrapper {
+    width: 100%;
+  }
+  .infoWrapper {
+    width: 70%;
+  }
 }

@@ -24,11 +24,6 @@ class snakeInfo extends React.Component<ISnakeInfoProps, ISnakeInfoState> {
 
   private snakeTries = () => {
     const timesDied = Object.keys(this.props.history).length;
-    //   <span>
-    //     {" "}
-    //     This snake has died{" "}
-    //     {timesDied > 1 ? `${timesDied} times.` : `${timesDied} time.`}
-    //   </span>
     return timesDied;
   };
 
@@ -52,8 +47,14 @@ class snakeInfo extends React.Component<ISnakeInfoProps, ISnakeInfoState> {
   public render() {
     return (
       <div className={styles.card}>
-        <span>{this.state.snakeTries}</span>
-        <span>{this.state.maxLength}</span>
+        <p className={styles.infoText}>
+          This snake has died {this.state.snakeTries}{" "}
+          {this.state.snakeTries > 1 ? `times` : `time`}.
+        </p>
+        <p className={styles.infoText}>
+          Longest streak was {this.state.maxLength}{" "}
+          {this.state.maxLength > 1 ? `days` : `day`}.
+        </p>
       </div>
     );
   }

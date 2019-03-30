@@ -25,7 +25,7 @@ class DeleteSnakeButton extends React.Component<
         <span>
           <strong>Are you sure?</strong>
         </span>
-        <Button clicked={this.props.delete}>Delete</Button>
+        <Button clicked={this.props.delete}>DELETE</Button>
       </div>
     );
   };

@@ -107,8 +107,9 @@ class SnakeCardButton extends React.Component<
             <input
               onChange={this.handleChange}
               name="rule"
-              placeholder="Rule"
+              placeholder="Days between logs"
               type="number"
+              min="1"
             />
           </div>
           <button className={styles.createSnakeButton} onClick={this.onSubmit}>

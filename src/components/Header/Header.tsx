@@ -65,9 +65,6 @@ class Header extends React.Component<IHeaderProps, {}> {
             <div className={styles.logoImage} />
           </Link>
           <p className={styles.appName}>SnakeCalendar</p>
-          <Link to="/about" replace>
-            <span className={styles.aboutLink}>About</span>
-          </Link>
         </div>
         {this.getHeader()}
       </div>

@@ -87,17 +87,18 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
           </li>
         );
       });
+      return (
+        <div className={styles.Log}>
+          <ul className={styles.Collection}>
+            <li className={styles.CollectionItem}>
+              {props.logLoading ? <div className={styles.LogLoader} /> : null}
+            </li>
+            {text.reverse()}
+          </ul>
+        </div>
+      );
     }
-    return (
-      <>
-        <ul className={styles.Collection}>
-          <li className={styles.CollectionItem}>
-            {props.logLoading ? <div className={styles.LogLoader} /> : null}
-          </li>
-          {text.reverse()}
-        </ul>
-      </>
-    );
+    return null;
   };
 
   const redirectWhenDeleted = () => {
@@ -142,7 +143,7 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
         </div>
         <div className={styles.snakeInfo} />
         {displayInfo()}
-        <div className={styles.Log}>{showLog()}</div>
+        {showLog()}
       </div>
     </>
   );
