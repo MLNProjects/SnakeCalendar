@@ -2,11 +2,11 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as styles from "./Snake.scss";
-import { Collection, CollectionItem } from "react-materialize";
 import * as actions from "../../redux/actions/index";
 import DeleteSnakeButton from "./DeleteSnakeButton/DeleteSnakeButton";
 import CenteredSpinner from "../UI/CenteredSpinner/CenteredSpinner";
 import Button from "../UI/Button/Button";
+import SnakeInfo from "./SnakeInfo/SnakeInfo";
 
 const mapStateToProps = (state: any) => {
   return {
@@ -115,45 +115,14 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     return loading;
   };
 
-  const snakeTries = () => {
-    let tries = null;
+  const displayInfo = () => {
+    let info = null;
     if (props.snake.history) {
-      const timesDied = Object.keys(props.snake.history).length;
-      tries = (
-        <span>
-          {" "}
-          This snake has died{" "}
-          {timesDied > 1 ? `${timesDied} times.` : `${timesDied} time.`}
-        </span>
-      );
+      info = <SnakeInfo history={props.snake.history} />;
     }
-    return tries;
+    return info;
   };
 
-  const maxLength = () => {
-    let maxLength = null;
-    if (props.snake.history) {
-      let maxLengthNum = 0;
-      const keys = Object.keys(props.snake.history);
-      for (const key of keys) {
-        maxLengthNum = Math.max(
-          Math.ceil(
-            (props.snake.history[key].endDate -
-              props.snake.history[key].startDate) /
-              (1000 * 60 * 60 * 24)
-          ) + 1,
-          maxLengthNum
-        );
-      }
-      maxLength = (
-        <span>
-          Longest streak was{" "}
-          {maxLengthNum > 1 ? `${maxLengthNum} days.` : `${maxLengthNum} day.`}
-        </span>
-      );
-    }
-    return maxLength;
-  };
   return (
     <>
       {redirectWhenDeleted()}
@@ -171,10 +140,8 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
           />
           {displaySpinner()}
         </div>
-        <div className={styles.snakeInfo}>
-          {snakeTries()}
-          {maxLength()}{" "}
-        </div>
+        <div className={styles.snakeInfo} />
+        {displayInfo()}
         <div className={styles.Log}>{showLog()}</div>
       </div>
     </>
