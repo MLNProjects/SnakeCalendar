@@ -124,11 +124,41 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     return info;
   };
 
+  const displayRule = () => {
+    switch (props.snake.rule) {
+      case 1:
+        return (
+          <h6>
+            Log this snake <strong>everyday</strong>
+          </h6>
+        );
+      case 2:
+        return (
+          <h6>
+            Log this snake every <strong>second day</strong>
+          </h6>
+        );
+      case 3:
+        return (
+          <h6>
+            Log this snake every <strong>third day</strong>
+          </h6>
+        );
+      default:
+        return (
+          <h6>
+            Log this snake every <strong>{props.snake.rule}th day</strong>
+          </h6>
+        );
+    }
+  };
+
   return (
     <>
       {redirectWhenDeleted()}
       <div className={styles.Container}>
         <h1>{props.snake.snakeName}</h1>
+        {displayRule()}
         <h6>
           This snake was created: {new Date(props.snake.created).toDateString()}
         </h6>
