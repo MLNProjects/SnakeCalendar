@@ -1,19 +1,23 @@
 .aboutPageWrapper {
-  width: 80%;
+  width: 60%;
   margin: auto;
 }
 .headWrapper {
-  text-align: center;
+  h1 {
+    text-align: center;
+  }
+  a {
+    color: #7d75ab;
+  }
   margin: auto;
 }
-.contentWrapper {
-  width: 60%;
-  margin: 40px auto;
+.contentWrapper,
+.nameWrapper {
+  margin: 32px 0px;
 }
 
 @media only screen and (max-width: 600px) {
-  .contentWrapper {
+  .aboutPageWrapper {
     width: 80%;
-    margin: 40px auto;
   }
 }
