@@ -17,7 +17,6 @@ class snakeInfo extends React.Component<ISnakeInfoProps, ISnakeInfoState> {
   };
 
   componentDidMount() {
-    console.log(this.props.history);
     this.setState({ snakeTries: this.snakeTries() });
     this.setState({ maxLength: this.maxLength() });
   }

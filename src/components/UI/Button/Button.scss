@@ -1,20 +1,25 @@
 @import "../../../globals/variables";
 
 .Button {
-  margin: 10px 0px;
+  margin: 10px 10px;
   font-size: 1rem;
   color: black;
   padding: 10px 40px;
-  border: 2px solid black;
-  border-radius: 40px;
-  background-color: $primary-color;
+  // border: 2px solid black;
+  border-radius: 8px;
+  background-color: #eee;
+  border: none;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 
   &:hover {
-    background-color: $primary-color-dark;
-    cursor: pointer;
+    background-color: #aaa;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   }
 
   &:focus {
     outline: 0;
+    background-color: #aaa;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   }
 }

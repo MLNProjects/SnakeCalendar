@@ -64,9 +64,8 @@
 .userName {
   color: black;
   font-size: 1rem;
-  background: #eee;
-  // border: 2px solid black;
-  border-radius: 8px;
+  background: #d1e3de;
+  border-radius: 1em;
   padding: 10px 15px;
 }
 
@@ -125,9 +124,8 @@ a {
 
   .userName::first-letter {
     font-size: 1rem;
-    background: #eee;
-    // border: 2px solid black;
-    border-radius: 8px;
+    background: #d1e3de;
+    border-radius: 16px;
     padding: 10px 15px;
   }
 }
