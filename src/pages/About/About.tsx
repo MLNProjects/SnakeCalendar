@@ -58,6 +58,14 @@ class About extends React.Component<{}, {}> {
             <strong>Firebase, Firebase functions</strong> and{" "}
             <strong>cron-jobs</strong>.
           </p>
+          <p>
+            <a
+              href="https://github.com/MLNProjects/SnakeCalendar"
+              target="_blank"
+            >
+              Source
+            </a>
+          </p>
         </div>
       </div>
     );

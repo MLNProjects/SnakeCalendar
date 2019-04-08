@@ -6,14 +6,16 @@
   h1 {
     text-align: center;
   }
-  a {
-    color: #7d75ab;
-  }
+
   margin: auto;
 }
 .contentWrapper,
 .nameWrapper {
   margin: 32px 0px;
+}
+
+a {
+  color: #7d75ab;
 }
 
 @media only screen and (max-width: 600px) {
