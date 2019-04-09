@@ -1,16 +1,18 @@
 .Snake {
-  width: 50%;
+  width: 80%;
   display: grid;
   grid-template-columns: repeat(auto-fill, 80px);
   grid-gap: 10px;
   margin: auto;
   cursor: default;
+  text-align: center;
 }
 
 .Container {
   width: 50%;
   margin: auto;
   margin-bottom: 32px;
+  text-align: center;
 }
 .Log {
   margin-top: 8px;
@@ -66,7 +68,6 @@ ul.Collection {
   .Snake,
   .Container {
     width: 80%;
-    text-align: center;
   }
   .LogLoader {
     text-align: center;

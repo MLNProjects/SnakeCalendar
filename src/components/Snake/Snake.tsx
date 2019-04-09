@@ -7,6 +7,7 @@ import DeleteSnakeButton from "./DeleteSnakeButton/DeleteSnakeButton";
 import CenteredSpinner from "../UI/CenteredSpinner/CenteredSpinner";
 import Button from "../UI/Button/Button";
 import SnakeInfo from "./SnakeInfo/SnakeInfo";
+import Timeline from "./Timeline/Timeline";
 
 const mapStateToProps = (state: any) => {
   return {
@@ -153,6 +154,13 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
     }
   };
 
+  const displayTimeline = () => {
+    let timeline = null;
+    if (props.snake.dateLog) {
+      timeline = <Timeline dates={props.snake.dateLog} />;
+    }
+    return timeline;
+  };
   return (
     <>
       {redirectWhenDeleted()}
@@ -171,9 +179,9 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
           />
           {displaySpinner()}
         </div>
-        <div className={styles.snakeInfo} />
         {displayInfo()}
-        {showLog()}
+        {/* {showLog()} */}
+        {displayTimeline()}
       </div>
     </>
   );
