@@ -126,23 +126,30 @@ const snake: React.SFC<ISnakeProps> = (props: any) => {
   };
 
   const displayRule = () => {
-    switch (props.snake.rule) {
+    if (props.snake.rule === 1) {
+      return (
+        <h6>
+          Log this snake <strong>everyday</strong>
+        </h6>
+      );
+    }
+    switch (props.snake.rule % 10) {
       case 1:
         return (
           <h6>
-            Log this snake <strong>everyday</strong>
+            Log this snake <strong>{props.snake.rule}st day</strong>
           </h6>
         );
       case 2:
         return (
           <h6>
-            Log this snake every <strong>second day</strong>
+            Log this snake every <strong>{props.snake.rule}nd day</strong>
           </h6>
         );
       case 3:
         return (
           <h6>
-            Log this snake every <strong>third day</strong>
+            Log this snake every <strong>{props.snake.rule}rd day</strong>
           </h6>
         );
       default:
