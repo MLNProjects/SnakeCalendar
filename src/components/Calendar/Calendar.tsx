@@ -33,7 +33,7 @@ interface ICalendarProps {
 
 // State is never set so we use the '{}' type.
 class Calendar extends React.Component<ICalendarProps, {}> {
-  componentDidMount = () => {
+  public componentDidMount = () => {
     if (this.props.token !== "") {
       this.props.getOneSnake(
         this.props.token,
@@ -42,7 +42,7 @@ class Calendar extends React.Component<ICalendarProps, {}> {
       );
     }
   };
-  componentDidUpdate = (prevProps: any, prevState: any, snapshot: any) => {
+  public componentDidUpdate = (prevProps: any, prevState: any, snapshot: any) => {
     if (prevProps.token !== this.props.token) {
       this.props.getOneSnake(
         this.props.token,

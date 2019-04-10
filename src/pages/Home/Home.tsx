@@ -64,7 +64,7 @@ class Home extends React.Component<IHomeProps, IHomeState> {
           />
         );
       });
-      allSnakes = [<SnakeCardButton key="SnakeCardButton"/>, ...allSnakes];
+      allSnakes = [<SnakeCardButton key="SnakeCardButton"/>, ...allSnakes.reverse()];
     }
     return (
       <div id={styles.homeWrapper}>
