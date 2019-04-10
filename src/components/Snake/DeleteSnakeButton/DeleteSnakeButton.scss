@@ -1,11 +1,18 @@
 @import "../../../globals/variables";
 
-.Confirm {
+.deleteWrapper {
+  position: relative;
   display: inline-block;
-  color: $error-color;
-  margin: 0px 8px;
+  margin: 0px 0px 40px 0px;
 }
-span {
-  margin: 0px 8px;
-  font-size: 1.1rem;
+.Confirm {
+  position: absolute;
+  top: -20px;
+  left: 160px;
+}
+@media screen and (max-width: 600px) {
+  .Confirm {
+    top: 60px;
+    left: 0px;
+  }
 }

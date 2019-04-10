@@ -22,9 +22,7 @@ class DeleteSnakeButton extends React.Component<
   private displayConfirm = () => {
     return (
       <div className={styles.Confirm}>
-        <span>
-          <strong>Are you sure?</strong>
-        </span>
+        <span>Are you sure?</span>
         <Button clicked={this.props.delete}>DELETE</Button>
       </div>
     );
@@ -33,8 +31,10 @@ class DeleteSnakeButton extends React.Component<
   public render() {
     return (
       <>
-        <Button clicked={this.displayDelete}> DELETE ME </Button>
-        {this.state.displayDelete ? this.displayConfirm() : null}
+        <div className={styles.deleteWrapper}>
+          <Button clicked={this.displayDelete}> DELETE ME </Button>
+          {this.state.displayDelete ? this.displayConfirm() : null}
+        </div>
       </>
     );
   }
