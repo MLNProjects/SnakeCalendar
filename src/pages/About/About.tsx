@@ -11,9 +11,9 @@ class About extends React.Component<{}, {}> {
           <h1>About</h1>
           <h5>
             SnakeCalender is an web application that helps you track your goals.
-            You give your snake the name of what you want to do and set how
-            often you want to do that. If you fail to do it, your snake dies and
-            you have to start over all over again.
+            You give your snake a name and set how often you want to do that. If
+            you fail to do it, your snake dies and you have to start over all
+            over again.
           </h5>
           <div className={styles.nameWrapper}>
             <h6>

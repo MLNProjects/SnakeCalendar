@@ -35,14 +35,10 @@ interface IHomeProps {
   deleteSnakeReset: any;
 }
 
-interface IHomeState {
-  bajs: string;
-}
+interface IHomeState {}
 
 class Home extends React.Component<IHomeProps, IHomeState> {
-  public state = {
-    bajs: "bajs"
-  };
+  public state = {};
   public componentDidMount = () => {
     this.props.getSnakes(this.props.token, this.props.userId);
     this.props.deleteSnakeReset();
@@ -64,13 +60,14 @@ class Home extends React.Component<IHomeProps, IHomeState> {
           />
         );
       });
-      allSnakes = [<SnakeCardButton key="SnakeCardButton"/>, ...allSnakes.reverse()];
+      allSnakes = [
+        <SnakeCardButton key="SnakeCardButton" />,
+        ...allSnakes.reverse()
+      ];
     }
     return (
       <div id={styles.homeWrapper}>
-        <div id={styles.snakesWrapper}>
-          {allSnakes}
-        </div>
+        <div id={styles.snakesWrapper}>{allSnakes}</div>
       </div>
     );
   }

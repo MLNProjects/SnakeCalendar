@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as styles from "./signIn.scss";
 import * as actions from "../../redux/actions/index";
@@ -53,8 +53,13 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
   };
 
   public handleSubmit = (e: any) => {
-    this.props.onAuth(this.state.email, this.state.password);
+    if (this.state.email !== "") {
+      this.props.onAuth(this.state.email, this.state.password);
+    }
     e.preventDefault();
+  };
+  private guestLogin = () => {
+    this.props.onAuth("guestuser@gmail.com", "guest1");
   };
 
   private spinnerHandler = () => {
@@ -91,6 +96,7 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
           placeholder="Password"
         />
         <Button clicked={this.handleSubmit}>Log in!</Button>
+        <Button clicked={this.guestLogin}>Log in as guest</Button>
         <div className={styles.navDiv}>
           <p>New to this service?</p>
           <Link to="/signUp">Sign Up</Link>

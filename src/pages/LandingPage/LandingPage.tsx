@@ -19,6 +19,13 @@ class LandingPage extends React.Component<{}, {}> {
               <strong className={styles.signupLink}>Signing up!</strong>
             </Link>
           </h6>
+          <h6>
+            Or{" "}
+            <Link to="/signin" replace>
+              <strong className={styles.signupLink}>Signing in!</strong>
+            </Link>{" "}
+            as a guest!
+          </h6>
         </div>
         <div className={styles.aboutLinkWrapper}>
           <Link to="/about" replace>
